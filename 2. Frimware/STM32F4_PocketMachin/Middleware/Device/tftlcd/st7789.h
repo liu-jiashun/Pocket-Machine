@@ -136,40 +136,25 @@ extern SPI_HandleTypeDef ST7789_SPI_PORT;
 
 #ifdef USING_240X320
 
-	#if ST7789_ROTATION == 0
-        #define ST7789_WIDTH 170
-        #define ST7789_HEIGHT 320
-        #define X_SHIFT 35
-        #define Y_SHIFT 0
-    #endif
+    #define ST7789_WIDTH 320
+    #define ST7789_HEIGHT 240
 
-    #if ST7789_ROTATION == 1
-        #define ST7789_WIDTH 320
-        #define ST7789_HEIGHT 170
-        #define X_SHIFT 0
-        #define Y_SHIFT 35
-    #endif
-
-    #if ST7789_ROTATION == 2
-        #define ST7789_WIDTH 170
-        #define ST7789_HEIGHT 320
-        #define X_SHIFT 35
-        #define Y_SHIFT 0
-    #endif
-
-    #if ST7789_ROTATION == 3
-        #define ST7789_WIDTH 320
-        #define ST7789_HEIGHT 170
-        #define X_SHIFT 0
-        #define Y_SHIFT 35
-    #endif
-	
-		    #if ST7789_ROTATION == 4
-        #define ST7789_WIDTH 320
-        #define ST7789_HEIGHT 240
-        #define X_SHIFT 0
-        #define Y_SHIFT 0
-    #endif
+		#if ST7789_ROTATION == 0
+			#define X_SHIFT 0
+			#define Y_SHIFT 0
+		#elif ST7789_ROTATION == 1
+			#define X_SHIFT 0
+			#define Y_SHIFT 0
+		#elif ST7789_ROTATION == 2
+			#define X_SHIFT 0
+			#define Y_SHIFT 0
+		#elif ST7789_ROTATION == 3
+			#define X_SHIFT 0
+			#define Y_SHIFT 0
+		#elif ST7789_ROTATION == 4
+			#define X_SHIFT 0
+			#define Y_SHIFT 0
+		#endif
 
 #endif
 
@@ -249,18 +234,18 @@ extern SPI_HandleTypeDef ST7789_SPI_PORT;
 #define ST7789_RDID4   0xDD
 
 /* Advanced options */
-#define ST7789_COLOR_MODE_16bit 0x55    //  RGB565 (16bit)
+#define ST7789_COLOR_MODE_16bit 0x65    //  RGB565 (16bit)
 #define ST7789_COLOR_MODE_18bit 0x66    //  RGB666 (18bit)
 
 /* Basic operations */
-#define ST7789_RST_Clr() HAL_GPIO_WritePin(LCD_RST_GPIO_Port, LCD_RST_Pin, GPIO_PIN_RESET)
-#define ST7789_RST_Set() HAL_GPIO_WritePin(LCD_RST_GPIO_Port, LCD_RST_Pin, GPIO_PIN_SET)
+#define ST7789_RST_Clr() HAL_GPIO_WritePin(ST7789_RST_PORT, ST7789_RST_PIN, GPIO_PIN_RESET)
+#define ST7789_RST_Set() HAL_GPIO_WritePin(ST7789_RST_PORT, ST7789_RST_PIN, GPIO_PIN_SET)
 
-#define ST7789_DC_Clr() HAL_GPIO_WritePin(LCD_DC_GPIO_Port, LCD_DC_Pin, GPIO_PIN_RESET)
-#define ST7789_DC_Set() HAL_GPIO_WritePin(LCD_DC_GPIO_Port, LCD_DC_Pin, GPIO_PIN_SET)
+#define ST7789_DC_Clr() HAL_GPIO_WritePin(ST7789_DC_PORT, ST7789_DC_PIN, GPIO_PIN_RESET)
+#define ST7789_DC_Set() HAL_GPIO_WritePin(ST7789_DC_PORT, ST7789_DC_PIN, GPIO_PIN_SET)
 #ifndef CFG_NO_CS
-#define ST7789_Select() HAL_GPIO_WritePin(LCD_CS_GPIO_Port, LCD_CS_Pin, GPIO_PIN_RESET)
-#define ST7789_UnSelect() HAL_GPIO_WritePin(LCD_CS_GPIO_Port, LCD_CS_Pin, GPIO_PIN_SET)
+#define ST7789_Select() HAL_GPIO_WritePin(ST7789_CS_PORT, ST7789_CS_PIN, GPIO_PIN_RESET)
+#define ST7789_UnSelect() HAL_GPIO_WritePin(ST7789_CS_PORT, ST7789_CS_PIN, GPIO_PIN_SET)
 #else
 #define ST7789_Select() asm("nop")
 #define ST7789_UnSelect() asm("nop")
@@ -272,7 +257,7 @@ extern SPI_HandleTypeDef ST7789_SPI_PORT;
 void ST7789_Init(void);
 void ST7789_SetRotation(uint8_t m);
 void ST7789_Fill_Color(uint16_t color);
-void ST7789_DrawPixel(int16_t x, int16_t y, uint16_t color);
+void ST7789_DrawPixel(uint16_t x, uint16_t y, uint16_t color);
 void ST7789_Fill(uint16_t xSta, uint16_t ySta, uint16_t xEnd, uint16_t yEnd, uint16_t color);
 void ST7789_DrawPixel_4px(uint16_t x, uint16_t y, uint16_t color);
 

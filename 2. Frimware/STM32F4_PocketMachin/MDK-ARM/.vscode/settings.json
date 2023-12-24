@@ -14,6 +14,10 @@
     "st7789.h": "c",
     "tirpod.h": "c",
     "algorithm": "c",
-    "malloc.h": "c"
+    "malloc.h": "c",
+    "string.h": "c",
+    "matrixkey.h": "c",
+    "ringbuffer.h": "c",
+    "stdarg.h": "c"
   }
 }

@@ -1,4 +1,7 @@
 #include "app.h"
+
+#include "tim.h"
+
 #include ".\SmartTimer\smarttimer.h"
 #include ".\MALLOC\malloc.h"
 
@@ -11,6 +14,8 @@
 #include ".\diwenlcd\diwenlcd.h"
 #include ".\tirpod\tirpod.h"
 
+#include <stdio.h>
+
 #define Debug
 
 /**
@@ -22,6 +27,8 @@ void sys_task(void)
 	static uint8_t flag = 0;
 	led_ctl(LED0, flag ? ON : OFF);
 	flag = !flag;
+
+	HAL_GPIO_TogglePin(MINI_LED0_GPIO_Port, MINI_LED0_Pin);
 }
 
 /**
@@ -40,6 +47,11 @@ void button_task(void)
 void debug_task(void)
 {
 	dgus_recv_data(); // 接收迪文屏数据
+
+	//	if(HAL_GPIO_ReadPin(TOUCH_KEY_A_GPIO_Port,TOUCH_KEY_A_Pin) == 0)
+	//	{
+	//		HAL_GPIO_WritePin(MINI_LED1_GPIO_Port,MINI_LED1_Pin,GPIO_PIN_RESET);
+	//	}
 }
 
 /**
@@ -60,22 +72,17 @@ void system_start_task(void)
  * @brief     :系统硬件初始化
  * @attention :
  */
-void System_Start(void)
+void stim_start_task(void)
 {
-	uint8_t sys_start_task_id = 0;
-
 	// 设备驱动初始化
+	led_init();					 /* 口袋机LED初始化 */
+	beep_init();				 /* 口袋机蜂鸣器初始化 */
+	touchkey_init();		 /* 口袋机触摸按键初始化 */
+	matrixkey_init();		 /* 5 x 4 矩阵键盘初始化 */
+	ST7789_Init();			 /* TFTLCD初始化 */
+	diwenlcd_init();		 /* 迪文屏初始化 */
+	my_mem_init(SRAMIN); /* 内部SRAM内存池初始化*/
 
-	led_init();
-	beep_init();
-	touchkey_init();
-	matrixkey_init();
-	ST7789_Init();
-	diwenlcd_init();
-
-	my_mem_init(SRAMIN); /* 初始化内部SRAM内存池 */
-
-	// 系统启动
-	sys_start_task_id = stim_runlater(100, system_start_task); // 硬件初始化完成 100ms后启动任务
-	stim_remove_event(sys_start_task_id);											 // 当系统启动任务完成后，取消该任务
+	// 任务调度系统启动
+	stim_runlater(100, system_start_task); // 100 ms后启动任务全部任务
 }

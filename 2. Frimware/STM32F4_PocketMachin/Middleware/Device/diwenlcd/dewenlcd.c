@@ -1,8 +1,8 @@
 #include "diwenlcd.h"
-#include "usart.h"
-#include ".\MALLOC\malloc.h"
 
-#define DIWENLCD_UART_USE_DMA // 串口发送接收使用DMA方式
+char recv_byte;      // 接收字节
+uint8_t recv_cnt;    // 接收字节计数
+ring uart_ring_buff; // 环形缓冲接收区
 
 /**
  * @brief     :MAX485 初始化
@@ -27,16 +27,13 @@ HAL_StatusTypeDef max485_send(const uint8_t *pData, uint16_t Size)
 
   MAX485_DR(MAX485_SEND); // send enable
 
-#ifndef DIWENLCD_UART_USE_DMA
-  status = HAL_UART_Transmit(&huart5, pData, Size, HAL_MAX_DELAY);
-#else
-  status = HAL_UART_Transmit_DMA(&huart5, pData, Size);
-#endif
+  status = HAL_UART_Transmit_IT(&huart5, pData, Size);
 
   MAX485_DR(MAX485_RECEIVE); // receive enable
 
   return status;
 }
+
 /**
  * @brief     :MAX485 接收一定量的数据
  * @param     pData :接收的数据
@@ -46,17 +43,15 @@ HAL_StatusTypeDef max485_send(const uint8_t *pData, uint16_t Size)
  */
 HAL_StatusTypeDef max485_receive(uint8_t *pData, uint16_t Size)
 {
-  HAL_StatusTypeDef status;
+  int byte;
 
-  MAX485_DR(MAX485_RECEIVE); // receive enable
+  byte = ring_buff_get(uart_ring_buff); // 从缓冲区接收一个字节
+  if (byte == -2)                       // 如读到为空，则将字节计数清零
+    recv_cnt = 0;
+  else
+    *pData = (uint8_t)byte;
 
-#ifndef DIWENLCD_UART_USE_DMA
-  status = HAL_UART_Receive(&huart5, pData, Size, HAL_MAX_DELAY);
-#else
-  HAL_UART_Receive_DMA(&huart5, pData, Size);
-#endif
-
-  return status;
+  return HAL_OK;
 }
 
 /**
@@ -70,14 +65,13 @@ void dgus_delay(uint16_t ms)
 }
 
 /**
- * @brief     :可用字节数回调函数
- * @return    :uint8_t 可用字节数（default 32）
+ * @brief     :获取可从串行端口读取的字节（字符）数回掉
+ * @return    :uint8_t 可用字节数
  * @attention :
  */
 uint8_t _serial_bytes_available()
 {
-  uint8_t Size = 32;
-  return Size;
+  return recv_cnt;
 }
 /**
  * @brief     :串口接收回调
@@ -87,7 +81,7 @@ uint8_t _serial_bytes_available()
 char _serial_recv_byte()
 {
   char c;
-  max485_receive((void *)&c, 1);
+  max485_receive((uint8_t *)&c, 1);
   return c;
 }
 /**
@@ -111,11 +105,13 @@ void _serial_send_data(char *data, size_t len)
  */
 void _a_recv_handler(char *data, uint8_t cmd, uint8_t len, uint16_t addr, uint8_t bytelen)
 {
-  if (addr == 0x6060 && data[len] == 0x01) // 上一页
+  if (addr == 0x6060 && (uint16_t) * (uint16_t *)data == 0x01) // 上一页
   {
+    printf("上一页\n");
   }
-  else if (addr == 0x6062 && data[len] == 0x02) // 下一页
+  else if (addr == 0x6062 && (uint16_t) * (uint16_t *)data == 0x02) // 下一页
   {
+    printf("下一页\n");
   }
 }
 
@@ -132,16 +128,16 @@ void diwenlcd_init(void)
   // dgus_get_page(2);
 
   // clear full diwenlcd display
-  dgus_set_var(0x6000, 0);
-  dgus_set_var(0x6002, 0);
-  dgus_set_var(0x6004, 0);
-  dgus_set_var(0x6006, 0);
-  dgus_set_var(0x6008, 0);
-  dgus_set_var(0x6020, 0);
-  dgus_set_var(0x600A, 0);
-  dgus_set_var(0x600C, 0);
-  dgus_set_text_padded(0x0081, "        ", 8);
-  dgus_set_text_padded(0x0082, "          ", 10);
+  // dgus_set_var(0x6000, 0);
+  // dgus_set_var(0x6002, 0);
+  // dgus_set_var(0x6004, 0);
+  // dgus_set_var(0x6006, 0);
+  // dgus_set_var(0x6008, 0);
+  // dgus_set_var(0x6020, 0);
+  // dgus_set_var(0x600A, 0);
+  // dgus_set_var(0x600C, 0);
+  // dgus_set_text_padded(0x0081, "        ", 10);
+  // dgus_set_text_padded(0x0082, "          ", 12);
 }
 
 /**
@@ -162,23 +158,6 @@ void diwenlcd_time_show(uint32_t times)
  */
 void diwenlcd_write(char *str, int len)
 {
-  // static last_line_addr;
-  // uint8_t line_count;                     // 列计数
-  // uint16_t row_count;                     // 行字节计数
-  // uint16_t addr = 0x5000;                 // 文本框基地址
-  // char *buff = mymalloc(SRAMIN, 2048);    // 申请一段内存，作为迪文屏终端显存
-  // strncpy(buff, str, len); // 复制一行的数据到申请的内存
-  // while (len--)
-  // {
-  //   row_count++;
-  //   if (buff[len] == '\n' || row_count >= DIWENLCD_MAX_SIZES) // 换行
-  //   {
-  //     line_count++;
-  //     row_count = 0;
-  //     addr += 0x20; // 文本框地址递增
-  //   }
-  //   dgus_set_text_padded(addr, buff, DIWENLCD_MAX_SIZES); // 迪文屏文本框显示全部数据
-  // }
   static uint8_t line_count;
   static uint16_t addr = 0x5000;                                          // 文本框基地址
   char *buff = mymalloc(SRAMIN, DIWENLCD_MAX_LINES * DIWENLCD_MAX_SIZES); // 申请一段内存，作为迪文屏终端显存
@@ -198,7 +177,7 @@ void diwenlcd_write(char *str, int len)
   {
   }
 
-  line_count ++;
+  line_count++;
 
   myfree(SRAMIN, buff); // 释放内存
 }
@@ -264,16 +243,16 @@ void diwenlcd_mode_show(diwenlcd_mode mode)
   switch (mode)
   {
   case DIWENLCD_MANUAL_MODE:
-    dgus_set_text_padded(0x0081, "手动模式", 8); // 手动模式
+    dgus_set_text_padded(0x0081, "手动模式", 10); // 手动模式
     break;
   case DIWENLCD_STATIC_MODE:
-    dgus_set_text_padded(0x0081, "静态模式", 8); // 静态模式
+    dgus_set_text_padded(0x0081, "静态模式", 10); // 静态模式
     break;
   case DIWENLCD_SLOW_MODE:
-    dgus_set_text_padded(0x0081, "慢速模式", 8); // 慢速模式
+    dgus_set_text_padded(0x0081, "慢速模式", 10); // 慢速模式
     break;
   case DIWENLCD_FAST_MODE:
-    dgus_set_text_padded(0x0081, "快速模式", 8); // 快速模式
+    dgus_set_text_padded(0x0081, "快速模式", 10); // 快速模式
     break;
   default:
     break;
@@ -288,7 +267,7 @@ void diwenlcd_mode_show(diwenlcd_mode mode)
 void diwenlcd_objects_type(char *str)
 {
   uint8_t len = strlen(str);
-  dgus_set_text_padded(0x0082, str, len); // 快速模式
+  dgus_set_text_padded(0x0082, str, len + 2); // 快速模式
 }
 
 /**

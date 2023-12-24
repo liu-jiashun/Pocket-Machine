@@ -77,6 +77,10 @@ void Error_Handler(void);
 #define LED1_GPIO_Port GPIOF
 #define LED0_Pin GPIO_PIN_8
 #define LED0_GPIO_Port GPIOF
+#define MINI_LED0_Pin GPIO_PIN_9
+#define MINI_LED0_GPIO_Port GPIOF
+#define MINI_LED1_Pin GPIO_PIN_10
+#define MINI_LED1_GPIO_Port GPIOF
 #define LCD_CS_Pin GPIO_PIN_2
 #define LCD_CS_GPIO_Port GPIOC
 #define LCD_DC_Pin GPIO_PIN_3

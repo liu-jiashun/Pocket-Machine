@@ -3,6 +3,6 @@
 
 #include "main.h"
 
-void System_Start(void);
+void stim_start_task(void);
 
 #endif

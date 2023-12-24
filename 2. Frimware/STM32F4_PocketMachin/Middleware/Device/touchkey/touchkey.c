@@ -1,4 +1,5 @@
 #include "touchkey.h"
+#include <stdio.h>
 #include <string.h>
 
 static flex_button_t touch_button[TOUCH_BUTTON_MAX];
@@ -13,7 +14,7 @@ void touchkey_init(void)
 
   int i;
 
-  memset(&touch_button[0], 0x0, sizeof(touch_button));
+  memset(&touch_button[0], 0x00, sizeof(touch_button));
 
   for (i = 0; i < TOUCH_BUTTON_MAX; i++)
   {
@@ -117,8 +118,10 @@ static void touch_combination_btn_event(flex_button_t *btn)
     case FLEX_BTN_PRESS_DOWN:
       break;
     case FLEX_BTN_PRESS_CLICK:
+			printf("TOUCH_BUTTON_UP\n");
       break;
     case FLEX_BTN_PRESS_DOUBLE_CLICK:
+      printf("TOUCH_BUTTON_UP x2\n");
       break;
     }
     break;

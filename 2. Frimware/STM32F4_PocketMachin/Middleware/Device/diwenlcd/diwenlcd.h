@@ -5,10 +5,17 @@
 #include <string.h>
 #include <stdarg.h>
 #include "main.h"
+#include "usart.h"
+#include ".\MALLOC\malloc.h"
 #include ".\libdgus_ii\dgus.h"
+#include ".\RingBuffer\ringbuffer.h"
 
 #define DIWENLCD_MAX_LINES 17 // 迪文屏打印终端最大行数
 #define DIWENLCD_MAX_SIZES 48 // 迪文屏一行最大字节数
+
+extern char recv_byte;      // 接收字节
+extern uint8_t recv_cnt;    // 接收字节计数
+extern ring uart_ring_buff; // 环形缓冲接收区
 
 /**
  * @brief     :diwenlcd show work mode
