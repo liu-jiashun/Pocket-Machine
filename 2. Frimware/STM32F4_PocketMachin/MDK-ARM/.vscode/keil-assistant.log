@@ -1,0 +1,29 @@
+[info] Log at : 2023/12/22|00:31:26|GMT+0800
+
+[info] Log at : 2023/12/22|00:31:31|GMT+0800
+
+[info] Log at : 2023/12/22|14:01:18|GMT+0800
+
+[info] Log at : 2023/12/22|14:01:24|GMT+0800
+
+[SyntaxError: Unexpected end of JSON input
+	at JSON.parse (<anonymous>)
+	at F.updateCppProperties (c:\Users\admin\.vscode\extensions\cl.keil-assistant-1.7.0\dist\extension.js:1:10911)
+	at F.<anonymous> (c:\Users\admin\.vscode\extensions\cl.keil-assistant-1.7.0\dist\extension.js:1:12641)
+	at Generator.next (<anonymous>)
+	at c:\Users\admin\.vscode\extensions\cl.keil-assistant-1.7.0\dist\extension.js:1:4542
+	at new Promise (<anonymous>)
+	at r (c:\Users\admin\.vscode\extensions\cl.keil-assistant-1.7.0\dist\extension.js:1:4287)
+	at F.load (c:\Users\admin\.vscode\extensions\cl.keil-assistant-1.7.0\dist\extension.js:1:11372)
+	at w.<anonymous> (c:\Users\admin\.vscode\extensions\cl.keil-assistant-1.7.0\dist\extension.js:1:8799)
+	at Generator.next (<anonymous>)
+	at a (c:\Users\admin\.vscode\extensions\cl.keil-assistant-1.7.0\dist\extension.js:1:4344)
+	at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]
+[info] Log at : 2023/12/23|08:59:32|GMT+0800
+
+[info] Log at : 2023/12/23|08:59:36|GMT+0800
+
+[info] Log at : 2023/12/24|01:15:03|GMT+0800
+
+[info] Log at : 2023/12/24|11:35:02|GMT+0800
+

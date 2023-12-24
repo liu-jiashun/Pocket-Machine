@@ -1,0 +1,27 @@
+{
+    "files.associations": {
+        "*.s": "code-text-binary",
+        "led.h": "c",
+        "core.h": "c",
+        "stm32f4xx_hal.h": "c",
+        "dma.h": "c",
+        "stm32f4xx_hal_conf.h": "c",
+        "stm32f4xx_it.h": "c",
+        "usart.h": "c",
+        "vision.h": "c",
+        "main.h": "c",
+        "infared.h": "c",
+        "matrix_key.h": "c",
+        "stm32f4xx_hal_uart.h": "c",
+        "run_static.h": "c",
+        "math.h": "c",
+        "run_mode.h": "c",
+        "run_stop.h": "c",
+        "relay.h": "c",
+        "arm_math.h": "c",
+        "osci.h": "c",
+        "limits": "c",
+        "diwen_lcd.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "enabled"
+}

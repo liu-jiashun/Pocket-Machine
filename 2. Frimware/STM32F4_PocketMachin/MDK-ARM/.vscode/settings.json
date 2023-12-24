@@ -1,0 +1,19 @@
+{
+  "files.associations": {
+    "*.cjson": "jsonc",
+    "*.wxss": "css",
+    "*.wxs": "javascript",
+    "stepmotor.h": "c",
+    "diwenlcd.h": "c",
+    "main.h": "c",
+    "dgus.h": "c",
+    "string": "c",
+    "array": "c",
+    "string_view": "c",
+    "touchkey.h": "c",
+    "st7789.h": "c",
+    "tirpod.h": "c",
+    "algorithm": "c",
+    "malloc.h": "c"
+  }
+}
