@@ -18,6 +18,12 @@
     "string.h": "c",
     "matrixkey.h": "c",
     "ringbuffer.h": "c",
-    "stdarg.h": "c"
+    "stdarg.h": "c",
+    "lwrb.h": "c",
+    "deque": "c",
+    "ios": "c",
+    "vector": "c",
+    "voice.h": "c",
+    "beep.h": "c"
   }
 }

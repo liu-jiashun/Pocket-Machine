@@ -21,12 +21,14 @@
                 "e:\\Desktop\\Pocket-Machine\\2. Frimware\\STM32F4_PocketMachin\\Middleware\\Library\\FlexibleButton",
                 "e:\\Desktop\\Pocket-Machine\\2. Frimware\\STM32F4_PocketMachin\\Middleware\\Library\\libdgus_ii",
                 "e:\\Desktop\\Pocket-Machine\\2. Frimware\\STM32F4_PocketMachin\\Middleware\\Library\\RingBuffer",
+                "e:\\Desktop\\Pocket-Machine\\2. Frimware\\STM32F4_PocketMachin\\Middleware\\Library\\lwrb",
                 "e:\\Desktop\\Pocket-Machine\\2. Frimware\\STM32F4_PocketMachin\\Middleware\\Device\\led",
                 "e:\\Desktop\\Pocket-Machine\\2. Frimware\\STM32F4_PocketMachin\\Middleware\\Device\\beep",
                 "e:\\Desktop\\Pocket-Machine\\2. Frimware\\STM32F4_PocketMachin\\Middleware\\Device\\touchkey",
                 "e:\\Desktop\\Pocket-Machine\\2. Frimware\\STM32F4_PocketMachin\\Middleware\\Device\\matrixkey",
                 "e:\\Desktop\\Pocket-Machine\\2. Frimware\\STM32F4_PocketMachin\\Middleware\\Device\\tftlcd",
                 "e:\\Desktop\\Pocket-Machine\\2. Frimware\\STM32F4_PocketMachin\\Middleware\\Device\\diwenlcd",
+                "e:\\Desktop\\Pocket-Machine\\2. Frimware\\STM32F4_PocketMachin\\Middleware\\Device\\voice",
                 "e:\\Desktop\\Pocket-Machine\\2. Frimware\\STM32F4_PocketMachin\\Middleware\\Device\\tirpod"
             ],
             "defines": [

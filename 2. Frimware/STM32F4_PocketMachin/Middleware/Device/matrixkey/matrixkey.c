@@ -1,6 +1,7 @@
 #include "matrixkey.h"
 #include <stdio.h>
 #include <string.h>
+#include ".\voice\voice.h"
 
 static flex_button_t matrix_button[MATRIX_BUTTON_MAX];
 
@@ -227,9 +228,11 @@ static void matrix_combination_btn_event(flex_button_t *btn)
       break;
     case FLEX_BTN_PRESS_CLICK:
       printf("MATRIX_KEY_UP\n");
+      voice_say(1);
       break;
     case FLEX_BTN_PRESS_DOUBLE_CLICK:
       printf("MATRIX_KEY_UP x2\n");
+      voice_say(2);
       break;
     }
     break;
@@ -244,9 +247,11 @@ static void matrix_combination_btn_event(flex_button_t *btn)
       break;
     case FLEX_BTN_PRESS_CLICK:
       printf("MATRIX_KEY_7\n");
+      	voice_say(3);
       break;
     case FLEX_BTN_PRESS_DOUBLE_CLICK:
       printf("MATRIX_KEY_7 x2\n");
+      	voice_say(4);
       break;
     }
     break;

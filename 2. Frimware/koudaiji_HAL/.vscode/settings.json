@@ -1,5 +1,8 @@
 {
     "files.associations": {
+        "*.cjson": "jsonc",
+        "*.wxss": "css",
+        "*.wxs": "javascript",
         "*.s": "code-text-binary",
         "led.h": "c",
         "core.h": "c",
@@ -21,7 +24,8 @@
         "arm_math.h": "c",
         "osci.h": "c",
         "limits": "c",
-        "diwen_lcd.h": "c"
+        "diwen_lcd.h": "c",
+        "voice.h": "c"
     },
     "C_Cpp.errorSquiggles": "enabled"
 }

@@ -1,8 +1,8 @@
 #include "diwenlcd.h"
 
-char recv_byte;      // 接收字节
-uint8_t recv_cnt;    // 接收字节计数
-ring uart_ring_buff; // 环形缓冲接收区
+lwrb_t diwenlcd_uart_buff;      // 迪文屏接收缓冲区句柄
+char diwenlcd_recv_byte;        // 接收字节
+uint8_t diwenlcd_buff_data[64]; // 开辟一块内存用于缓冲区
 
 /**
  * @brief     :MAX485 初始化
@@ -43,14 +43,7 @@ HAL_StatusTypeDef max485_send(const uint8_t *pData, uint16_t Size)
  */
 HAL_StatusTypeDef max485_receive(uint8_t *pData, uint16_t Size)
 {
-  int byte;
-
-  byte = ring_buff_get(uart_ring_buff); // 从缓冲区接收一个字节
-  if (byte == -2)                       // 如读到为空，则将字节计数清零
-    recv_cnt = 0;
-  else
-    *pData = (uint8_t)byte;
-
+  lwrb_read(&diwenlcd_uart_buff, pData, 1);
   return HAL_OK;
 }
 
@@ -61,17 +54,17 @@ HAL_StatusTypeDef max485_receive(uint8_t *pData, uint16_t Size)
  */
 void dgus_delay(uint16_t ms)
 {
-  HAL_Delay(ms);
+  // HAL_Delay(ms);  // 发送指令，无返回，关闭超时退出
 }
 
 /**
- * @brief     :获取可从串行端口读取的字节（字符）数回掉
+ * @brief     :获取可从串行端口读取的字节（字符）数回调
  * @return    :uint8_t 可用字节数
  * @attention :
  */
 uint8_t _serial_bytes_available()
 {
-  return recv_cnt;
+  return lwrb_get_full(&diwenlcd_uart_buff);
 }
 /**
  * @brief     :串口接收回调
@@ -128,16 +121,16 @@ void diwenlcd_init(void)
   // dgus_get_page(2);
 
   // clear full diwenlcd display
-  // dgus_set_var(0x6000, 0);
-  // dgus_set_var(0x6002, 0);
-  // dgus_set_var(0x6004, 0);
-  // dgus_set_var(0x6006, 0);
-  // dgus_set_var(0x6008, 0);
-  // dgus_set_var(0x6020, 0);
-  // dgus_set_var(0x600A, 0);
-  // dgus_set_var(0x600C, 0);
-  // dgus_set_text_padded(0x0081, "        ", 10);
-  // dgus_set_text_padded(0x0082, "          ", 12);
+  dgus_set_var(0x6000, 0);
+  dgus_set_var(0x6002, 0);
+  dgus_set_var(0x6004, 0);
+  dgus_set_var(0x6006, 0);
+  dgus_set_var(0x6008, 0);
+  dgus_set_var(0x6020, 0);
+  dgus_set_var(0x600A, 0);
+  dgus_set_var(0x600C, 0);
+  dgus_set_text_padded(0x0081, "        ", 10);
+  dgus_set_text_padded(0x0082, "          ", 12);
 }
 
 /**

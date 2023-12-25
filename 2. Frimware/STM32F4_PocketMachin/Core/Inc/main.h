@@ -119,6 +119,10 @@ void Error_Handler(void);
 #define TOUCH_KEY_D_GPIO_Port GPIOG
 #define TIRPOD_X_EN_Pin GPIO_PIN_15
 #define TIRPOD_X_EN_GPIO_Port GPIOA
+#define VOICE_TX_Pin GPIO_PIN_10
+#define VOICE_TX_GPIO_Port GPIOC
+#define VOICE_RX_Pin GPIO_PIN_11
+#define VOICE_RX_GPIO_Port GPIOC
 #define MAX485_TX_Pin GPIO_PIN_12
 #define MAX485_TX_GPIO_Port GPIOC
 #define LCD_RST_Pin GPIO_PIN_0
@@ -143,6 +147,8 @@ void Error_Handler(void);
 #define TIRPOD_X_LIMIT_GPIO_Port GPIOB
 #define TIRPOD_Y_DIR_Pin GPIO_PIN_0
 #define TIRPOD_Y_DIR_GPIO_Port GPIOE
+#define VOICE_BUSY_Pin GPIO_PIN_1
+#define VOICE_BUSY_GPIO_Port GPIOE
 
 /* USER CODE BEGIN Private defines */
 #define ON  1

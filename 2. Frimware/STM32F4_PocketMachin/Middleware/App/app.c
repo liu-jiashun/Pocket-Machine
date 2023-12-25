@@ -13,6 +13,7 @@
 #include ".\tftlcd\st7789.h"
 #include ".\diwenlcd\diwenlcd.h"
 #include ".\tirpod\tirpod.h"
+#include ".\voice\voice.h"
 
 #include <stdio.h>
 
@@ -70,13 +71,14 @@ void system_start_task(void)
 void stim_start_task(void)
 {
 	// 设备驱动初始化
+	my_mem_init(SRAMIN); /* 内部SRAM内存池初始化*/
 	led_init();					 /* 口袋机LED初始化 */
 	beep_init();				 /* 口袋机蜂鸣器初始化 */
 	touchkey_init();		 /* 口袋机触摸按键初始化 */
+	ST7789_Init();			 /* 口袋机TFTLCD初始化 */
 	matrixkey_init();		 /* 5 x 4 矩阵键盘初始化 */
-	ST7789_Init();			 /* TFTLCD初始化 */
 	diwenlcd_init();		 /* 迪文屏初始化 */
-	my_mem_init(SRAMIN); /* 内部SRAM内存池初始化*/
+	voice_init();				 /* 语音初始化 */
 
 	// 任务调度系统启动
 	stim_runlater(100, system_start_task); // 100 ms后启动任务全部任务
