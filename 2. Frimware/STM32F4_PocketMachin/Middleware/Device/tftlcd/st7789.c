@@ -231,7 +231,7 @@ void ST7789_Fill_Color(uint16_t color)
  * @param color -> color of the Pixel
  * @return none
  */
-void ST7789_DrawPixel(uint16_t x, uint16_t y, uint16_t color)
+void ST7789_DrawPixel(int16_t x, int16_t y, uint16_t color)
 {
 	if ((x < 0) || (x >= ST7789_WIDTH) ||
 			(y < 0) || (y >= ST7789_HEIGHT))
@@ -253,8 +253,8 @@ void ST7789_DrawPixel(uint16_t x, uint16_t y, uint16_t color)
  */
 void ST7789_Fill(uint16_t xSta, uint16_t ySta, uint16_t xEnd, uint16_t yEnd, uint16_t color)
 {
-	if ((xEnd < 0) || (xEnd >= ST7789_WIDTH) ||
-			(yEnd < 0) || (yEnd >= ST7789_HEIGHT))
+	if ((xEnd <= 0) || (xEnd >= ST7789_WIDTH) ||
+			(yEnd <= 0) || (yEnd >= ST7789_HEIGHT))
 		return;
 	ST7789_Select();
 	uint16_t i, j;

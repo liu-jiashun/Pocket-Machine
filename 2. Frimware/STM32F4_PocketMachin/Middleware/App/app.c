@@ -47,11 +47,6 @@ void button_task(void)
 void debug_task(void)
 {
 	dgus_recv_data(); // 接收迪文屏数据
-
-	//	if(HAL_GPIO_ReadPin(TOUCH_KEY_A_GPIO_Port,TOUCH_KEY_A_Pin) == 0)
-	//	{
-	//		HAL_GPIO_WritePin(MINI_LED1_GPIO_Port,MINI_LED1_Pin,GPIO_PIN_RESET);
-	//	}
 }
 
 /**
