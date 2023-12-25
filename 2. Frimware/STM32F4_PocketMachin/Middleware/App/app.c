@@ -1,10 +1,7 @@
 #include "app.h"
-
 #include "tim.h"
-
 #include ".\SmartTimer\smarttimer.h"
 #include ".\MALLOC\malloc.h"
-
 #include ".\power\power.h"
 #include ".\led\led.h"
 #include ".\beep\beep.h"
@@ -41,13 +38,17 @@ void button_task(void)
 	flex_button_scan(); // 按键事件处理 20ms
 }
 
+void data_receive_task(void)
+{
+	dgus_recv_data(); // 接收迪文屏数据
+}
+
 /**
  * @brief     :调试单元任务
  * @attention :
  */
 void debug_task(void)
 {
-	dgus_recv_data(); // 接收迪文屏数据
 }
 
 /**
@@ -56,12 +57,15 @@ void debug_task(void)
  */
 void system_start_task(void)
 {
-	stim_loop(200, sys_task, STIM_LOOP_FOREVER);	 // 系统运行指示灯任务（200ms）
-	stim_loop(20, button_task, STIM_LOOP_FOREVER); // 按键事件处理任务（20ms）
-
 #ifdef Debug
 	stim_loop(5, debug_task, STIM_LOOP_FOREVER); // 调试单元任务
 #endif
+	stim_loop(200, sys_task, STIM_LOOP_FOREVER);				 // 系统运行指示灯任务（200ms）
+	stim_loop(20, button_task, STIM_LOOP_FOREVER);			 // 按键事件处理任务（20ms）
+	stim_loop(50, data_receive_task, STIM_LOOP_FOREVER); // 数据接收任务（50ms）
+
+	// 开始
+	voice_say(DEVICE_STARTED); // 设备启动播报
 }
 
 /**
@@ -79,6 +83,8 @@ void stim_start_task(void)
 	matrixkey_init();		 /* 5 x 4 矩阵键盘初始化 */
 	diwenlcd_init();		 /* 迪文屏初始化 */
 	voice_init();				 /* 语音初始化 */
+	tirpod_init();			 /* 云台初始化 */
+	/* 视觉识别初始化 */
 
 	// 任务调度系统启动
 	stim_runlater(100, system_start_task); // 100 ms后启动任务全部任务
