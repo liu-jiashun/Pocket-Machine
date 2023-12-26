@@ -11,6 +11,7 @@
 #include ".\diwenlcd\diwenlcd.h"
 #include ".\tirpod\tirpod.h"
 #include ".\voice\voice.h"
+#include ".\vision\vision.h"
 
 #include <stdio.h>
 
@@ -84,7 +85,7 @@ void stim_start_task(void)
 	diwenlcd_init();		 /* 迪文屏初始化 */
 	voice_init();				 /* 语音初始化 */
 	tirpod_init();			 /* 云台初始化 */
-	/* 视觉识别初始化 */
+	vision_init();			 /* 视觉识别初始化 */
 
 	// 任务调度系统启动
 	stim_runlater(100, system_start_task); // 100 ms后启动任务全部任务

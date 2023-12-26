@@ -11,7 +11,7 @@ uint8_t diwenlcd_buff_data[64]; // 开辟一块内存用于缓冲区
 void max485_init(void)
 {
   // 引脚初始化，gpio.c 文件中已完成
-  // 串口初始化，usart.c 文件中完成
+  // 串口5初始化，usart.c 文件中完成
 }
 
 /**
@@ -118,7 +118,7 @@ void diwenlcd_init(void)
   dgus_init(_serial_bytes_available, _serial_recv_byte, _serial_send_data, _a_recv_handler);
 
   // set the first page
-  // dgus_get_page(2);
+  dgus_set_page(2);
 
   // clear full diwenlcd display
   dgus_set_var(0x6000, 0);

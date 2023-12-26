@@ -8,7 +8,7 @@
 void BY8301_init(void)
 {
   // 引脚初始化，gpio.c 文件中已完成
-  // 串口初始化，usart.c 文件中完成
+  // 串口4初始化，usart.c 文件中完成
 }
 
 /**

@@ -6,7 +6,7 @@
  *    Description:  
  *
  *        Version:  1.1
- *        Created:  2016/7/14 ĞÇÆÚËÄ ÉÏÎç 10:48:35
+ *        Created:  2016/7/14   10:48:35
  *       Revision:  none
  *       Compiler:  armcc
  *

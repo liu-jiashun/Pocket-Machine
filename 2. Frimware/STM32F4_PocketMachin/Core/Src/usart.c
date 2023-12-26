@@ -24,24 +24,25 @@
 #include <stdio.h>
 
 #include ".\diwenlcd\diwenlcd.h"
+#include ".\vision\vision.h"
 
-/* ¼ÓÈëÒÔÏÂ´úÂë£¬ÒÔÔÚ²»Ê¹ÓÃMicroLIBµÄÇé¿öÏÂ£¬Ö§³Öprintfº¯Êý */
+/* åŠ å…¥ä»¥ä¸‹ä»£ç ï¼Œä»¥åœ¨ä¸ä½¿ç”¨MicroLIBçš„æƒ…å†µä¸‹ï¼Œæ”¯æŒprintfå‡½æ•° */
 #if 1
 
-#if (__ARMCC_VERSION >= 6010050)           /* Ê¹ÓÃAC6 */
-__asm(".global __use_no_semihosting\n\t"); /* ÉùÃ÷²»Ê¹ÓÃ°ëÖ÷»úÄ£Ê½ */
-__asm(".global __ARM_use_no_argv \n\t");   /* AC6ÏÂÐèÒªÉùÃ÷mainº¯ÊýÎªÎÞ²ÎÊý¸ñÊ½£¬·ñÔò²¿·ÖÀý³Ì¿ÉÄÜ³öÏÖ°ëÖ÷»úÄ£Ê½ */
-#else                                      /* Ê¹ÓÃAC5 */
-#pragma import(__use_no_semihosting)       /* ¶¨Òå²»Ê¹ÓÃ°ëÖ÷»úÄ£Ê½ */
-struct __FILE /* ¶¨Òå__FILE½á¹¹Ìå  */
+#if (__ARMCC_VERSION >= 6010050)           /* ä½¿ç”¨AC6 */
+__asm(".global __use_no_semihosting\n\t"); /* å£°æ˜Žä¸ä½¿ç”¨åŠä¸»æœºæ¨¡å¼ */
+__asm(".global __ARM_use_no_argv \n\t");   /* AC6ä¸‹éœ€è¦å£°æ˜Žmainå‡½æ•°ä¸ºæ— å‚æ•°æ ¼å¼ï¼Œå¦åˆ™éƒ¨åˆ†ä¾‹ç¨‹å¯èƒ½å‡ºçŽ°åŠä¸»æœºæ¨¡å¼ */
+#else                                      /* ä½¿ç”¨AC5 */
+#pragma import(__use_no_semihosting)       /* å®šä¹‰ä¸ä½¿ç”¨åŠä¸»æœºæ¨¡å¼ */
+struct __FILE /* å®šä¹‰__FILEç»“æž„ä½“  */
 {
   int handle;
 };
 #endif
 
-/* ²»Ê¹ÓÃ°ëÖ÷»úÄ£Ê½Ê±£¬
- * ÖÁÉÙÐèÒªÖØ¶¨Òå_ttywrch¡¢_sys_exit¡¢_sys_command_stringº¯Êý£¬
- * ÒÔÍ¬Ê±¼æÈÝAC6ºÍAC5
+/* ä¸ä½¿ç”¨åŠä¸»æœºæ¨¡å¼æ—¶ï¼Œ
+ * è‡³å°‘éœ€è¦é‡å®šä¹‰_ttywrchã€_sys_exitã€_sys_command_stringå‡½æ•°ï¼Œ
+ * ä»¥åŒæ—¶å…¼å®¹AC6å’ŒAC5
  */
 int _ttywrch(int ch)
 {
@@ -59,11 +60,11 @@ char *_sys_command_string(char *cmd, int len)
   return NULL;
 }
 
-/* ´úÌæstdio.hÀïÃæµÄ__stdout¶¨Òå. */
+/* ä»£æ›¿stdio.hé‡Œé¢çš„__stdoutå®šä¹‰. */
 FILE __stdout;
 
-/* ÖØ¶¨Òåfputcº¯Êý£¬
- * printfº¯Êý×îÖÕ»áÍ¨¹ýµ÷ÓÃfputcÊä³ö×Ö·ûµ½´®¿Ú
+/* é‡å®šä¹‰fputcå‡½æ•°ï¼Œ
+ * printfå‡½æ•°æœ€ç»ˆä¼šé€šè¿‡è°ƒç”¨fputcè¾“å‡ºå­—ç¬¦åˆ°ä¸²å£
  */
 int fputc(int ch, FILE *f)
 {
@@ -72,6 +73,7 @@ int fputc(int ch, FILE *f)
 }
 
 #endif
+
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart4;
@@ -225,6 +227,12 @@ void HAL_UART_MspInit(UART_HandleTypeDef *uartHandle)
     HAL_NVIC_EnableIRQ(UART5_IRQn);
     /* USER CODE BEGIN UART5_MspInit 1 */
 
+    HAL_UART_Receive_IT(&huart5, (uint8_t *)&diwenlcd_recv_byte, 1);                // uart5 receive enable
+    lwrb_init(&diwenlcd_uart_buff, diwenlcd_buff_data, sizeof(diwenlcd_buff_data)); // Initialize buffer
+    while (!lwrb_is_ready(&diwenlcd_uart_buff))                                     // ringbuffer is ready
+    {
+    }
+
     /* USER CODE END UART5_MspInit 1 */
   }
   else if (uartHandle->Instance == USART1)
@@ -240,19 +248,21 @@ void HAL_UART_MspInit(UART_HandleTypeDef *uartHandle)
     PA9     ------> USART1_TX
     PA10     ------> USART1_RX
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_9 | GPIO_PIN_10;
+    GPIO_InitStruct.Pin = VISION_TX_Pin | VISION_RX_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     GPIO_InitStruct.Alternate = GPIO_AF7_USART1;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+    /* USART1 interrupt Init */
+    HAL_NVIC_SetPriority(USART1_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(USART1_IRQn);
     /* USER CODE BEGIN USART1_MspInit 1 */
 
-    HAL_UART_Receive_IT(&huart5, (uint8_t *)&diwenlcd_recv_byte, 1); // uart receive enable
-
-    lwrb_init(&diwenlcd_uart_buff, diwenlcd_buff_data, sizeof(diwenlcd_buff_data)); // Initialize buffer
-    while (!lwrb_is_ready(&diwenlcd_uart_buff))
+    HAL_UART_Receive_IT(&huart1, (uint8_t *)&vision_recv_byte, 1);            // usart1 receive enable
+    lwrb_init(&vision_uart_buff, vision_buff_data, sizeof(vision_buff_data)); // Initialize buffer
+    while (!lwrb_is_ready(&vision_uart_buff))                                 // ringbuffer is ready
     {
     }
 
@@ -317,8 +327,10 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef *uartHandle)
     PA9     ------> USART1_TX
     PA10     ------> USART1_RX
     */
-    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_9 | GPIO_PIN_10);
+    HAL_GPIO_DeInit(GPIOA, VISION_TX_Pin | VISION_RX_Pin);
 
+    /* USART1 interrupt Deinit */
+    HAL_NVIC_DisableIRQ(USART1_IRQn);
     /* USER CODE BEGIN USART1_MspDeInit 1 */
 
     /* USER CODE END USART1_MspDeInit 1 */
@@ -328,10 +340,15 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef *uartHandle)
 /* USER CODE BEGIN 1 */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-  if (huart->Instance == UART5)
+  if (huart->Instance == UART5) // diwenlcd receive one byte for interrupt
   {
     lwrb_write(&diwenlcd_uart_buff, (uint8_t *)&diwenlcd_recv_byte, 1);
-    HAL_UART_Receive_IT(&huart5, (uint8_t *)&diwenlcd_recv_byte, 1); // uart receive enable
+    HAL_UART_Receive_IT(&huart5, (uint8_t *)&diwenlcd_recv_byte, 1); // uart5 receive enable
+  }
+  if (huart->Instance == USART1) // vision receive one byte for interrupt
+  {
+    lwrb_write(&diwenlcd_uart_buff, (uint8_t *)&vision_recv_byte, 1);
+    HAL_UART_Receive_IT(&huart1, (uint8_t *)&vision_recv_byte, 1); // usart1 receive enable
   }
 }
 

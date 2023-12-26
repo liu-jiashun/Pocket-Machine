@@ -25,6 +25,7 @@
     "vector": "c",
     "voice.h": "c",
     "beep.h": "c",
-    "smarttimer.h": "c"
+    "smarttimer.h": "c",
+    "vision.h": "c"
   }
 }
