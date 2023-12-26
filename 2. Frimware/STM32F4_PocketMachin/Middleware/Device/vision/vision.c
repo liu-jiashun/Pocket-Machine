@@ -1,75 +1,72 @@
 #include "vision.h"
 #include "usart.h"
 #include <string.h>
+#include <stdio.h>
 
-lwrb_t vision_uart_buff;      // è¿ªæ–‡å±æŽ¥æ”¶ç¼“å†²åŒºå¥æŸ„
-char vision_recv_byte;        // æŽ¥æ”¶å­—èŠ‚
-uint8_t vision_buff_data[64]; // å¼€è¾Ÿä¸€å—å†…å­˜ç”¨äºŽç¼“å†²åŒº
+lwrb_t vision_uart_buff;      // ÊÓ¾õÊ¶±ð½ÓÊÕ»º³åÇø¾ä±ú
+char vision_recv_byte;        // ½ÓÊÕ×Ö½Ú
+uint8_t vision_buff_data[64]; // ¿ª±ÙÒ»¿éÄÚ´æÓÃÓÚ»º³åÇø
 
 /**
- * @brief     :ç‰©å“ä¿¡æ¯è¡¨
+ * @brief     :ÎïÆ·ÐÅÏ¢±í
  * @attention :
  */
-vision_obj_typdef *vision_obj;                // å¯¹è±¡è®¿é—®æŒ‡é’ˆ
-list_t vision_object_list[VISION_OBJECT_MAX]; // è§†è§‰è¯†åˆ«å¯¹è±¡æ•°æ®è¡¨
+vision_item v_object[] = {
+    {"ºìÉ«Õý·½ÐÎ", 0x01, 0x01},
+    {"ÂÌÉ«Õý·½ÐÎ", 0x02, 0x01},
+    {"À¶É«Õý·½ÐÎ", 0x03, 0x01},
+    {"»ÆÉ«Õý·½ÐÎ", 0x04, 0x01},
+};
 
 /**
- * @brief     :è§†è§‰è¯†åˆ«åˆå§‹åŒ–
+ * @brief     :ÊÓ¾õÊ¶±ð³õÊ¼»¯
  * @attention :
  */
 void vision_init(void)
 {
-  // ä¸²å£1åˆå§‹åŒ–ï¼Œusart.c æ–‡ä»¶ä¸­å®Œæˆ
+  // ´®¿Ú1³õÊ¼»¯£¬usart.c ÎÄ¼þÖÐÍê³É
+
+  vision_requst("»ÆÉ«Õý·½ÐÎ");
 }
 
 /**
- * @brief     :å†™å…¥éœ€è¦è¯†åˆ«çš„å¯¹è±¡ä¿¡æ¯
- * @param     object :Variable
- * @return    :vision_obj_typdef* è¿”å›žå½“å‰å¯¹è±¡æŒ‡é’ˆ
+ * @brief     :ÏòÊÓ¾õÄ£×é·¢ËÍÊý¾Ý
+ * @param     dat :Êý¾Ý
+ * @param     len :³¤¶È
  * @attention :
  */
-vision_obj_typdef *vidion_object_write(vision_obj_typdef *object)
+void vision_senddata(uint8_t *data, uint8_t len)
 {
-  list_node_t *node = list_rpush(vision_object_list, list_node_new((vision_obj_typdef *)&object));
-  return node->val;
-}
-
-/**
- * @brief     :å‘è§†è§‰æ¨¡ç»„å‘é€æ•°æ®
- * @param     dat :æ•°æ®
- * @param     len :é•¿åº¦
- * @attention :
- */
-void vision_senddata(uint8_t cmd, uint8_t *dat, uint8_t len)
-{
-  uint8_t i = 0;
-  uint8_t data[32];
-
-  data[0] = (VISION_HEAD & 0xFF00) >> 8; // å¸§å¤´
-  data[1] = VISION_HEAD & 0X00FF;
-
-  data[2] = cmd; // å‘½ä»¤
-
-  while (len--)
-    data[3 + i] = dat[i]; // æ•°æ®
-
-  data[len + i + 1] = (VISION_TAIL & 0xFF00) >> 8; // å¸§å°¾
-  data[len + i + 2] = (VISION_TAIL & 0xFF00) >> 8;
-
   HAL_UART_Transmit_IT(&huart1, data, len);
 }
 
 /**
- * @brief     :è¯·æ±‚è¯†åˆ«ä¸€ä¸ªå¯¹è±¡
+ * @brief     :ÇëÇóÊ¶±ðÒ»¸ö¶ÔÏó
  * @param     object :Variable
  * @attention :
  */
-void vision_requst_obj(vision_obj_typdef *object, const char *name)
+void vision_requst(char *name)
 {
   uint8_t data[8];
 
-  data[0] = object->color; // é¢œè‰²
-  data[1] = object->type;  // ç±»åž‹
+  data[0] = 0x5A;
+  data[1] = 0x5A;
+  data[2] = 0x03;
+  data[3] = 0x01;
+  for (int i = 0; i < sizeof(v_object) / sizeof(vision_item); i++)
+  {
+    if (strcmp(v_object[i].name, name) == 0)
+    {
+      data[4] = v_object[i].color; // ÑÕÉ«
+      data[5] = v_object[i].type;  // ÀàÐÍ
+    }
+  }
+  data[6] = 0x9F;
+  data[7] = 0xF9;
 
-  vision_senddata(0x01, data, 8);
+  for (int i = 0; i < 8; i++)
+    printf("0x%x  ", data[i]);
+  printf("\r\n");
+
+  vision_senddata(data, 8);
 }

@@ -97,7 +97,7 @@ uint8_t BY8301_Busy(void)
  */
 void voice_init(void)
 {
-  BY8301_setVolume(24); // 设置音量 %80
+  BY8301_setVolume(15); // 设置音量 %50
 }
 
 /**

@@ -116,7 +116,9 @@ static DGUS_RETURN _polling_wait_for_ok()
     _delay(1);
     if (timer == 0)
     {
+#ifdef DIWEN_DEBUG
       DEBUG_PRINTF("TIMEOUT ON OK!\n");
+#endif
       return DGUS_TIMEOUT;
     }
     timer--;
@@ -133,7 +135,9 @@ DGUS_RETURN _polling_wait()
     _delay(1);
     if (timer == 0)
     {
+#ifdef DIWEN_DEBUG
       DEBUG_PRINTF("TIMEOUT!\n");
+#endif
       return DGUS_TIMEOUT;
     }
     timer--;
@@ -144,6 +148,8 @@ DGUS_RETURN _polling_wait()
 DGUS_RETURN send_data(enum command cmd, dgus_packet *p)
 {
   _prepare_header(&p->header, cmd, p->len);
+
+#ifdef DIWEN_DEBUG
   for (int i = 0; i < sizeof(p->header); i++)
   {
     DEBUG_PRINTF("0x%x ", *((uint8_t *)&p->header + i));
@@ -155,6 +161,7 @@ DGUS_RETURN send_data(enum command cmd, dgus_packet *p)
     DEBUG_PRINTF("0x%x ", *((uint8_t *)p + i + offsetof(dgus_packet, data)));
   }
   DEBUG_PRINTF("\n");
+#endif
   if (_ser_send_handler)
     _ser_send_handler((char *)p, sizeof(p->header) + p->len);
 
@@ -457,13 +464,15 @@ static int _handle_packet(char *data, uint8_t cmd, uint8_t len)
       data[i] = data[2 + i];
     }
   }
-
+  
+#ifdef DIWEN_DEBUG
   DEBUG_PRINTF("CMD 0x%02x : PLEN %d : LEN %d : ADDR 0x%02x : DATA: ", cmd, len, bytelen, addr);
   for (uint8_t i = 0; i < bytelen; i += 2)
   {
     DEBUG_PRINTF("0x%04x ", (uint16_t) * (uint16_t *)(data + i));
   }
   DEBUG_PRINTF("\n");
+#endif
 
   if (_recv_handler)
     _recv_handler(data, cmd, len, addr, bytelen);

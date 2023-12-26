@@ -26,23 +26,23 @@
 #include ".\diwenlcd\diwenlcd.h"
 #include ".\vision\vision.h"
 
-/* åŠ å…¥ä»¥ä¸‹ä»£ç ï¼Œä»¥åœ¨ä¸ä½¿ç”¨MicroLIBçš„æƒ…å†µä¸‹ï¼Œæ”¯æŒprintfå‡½æ•° */
+/* ¼ÓÈëÒÔÏÂ´úÂë£¬ÒÔÔÚ²»Ê¹ÓÃMicroLIBµÄÇé¿öÏÂ£¬Ö§³Öprintfº¯Êı */
 #if 1
 
-#if (__ARMCC_VERSION >= 6010050)           /* ä½¿ç”¨AC6 */
-__asm(".global __use_no_semihosting\n\t"); /* å£°æ˜ä¸ä½¿ç”¨åŠä¸»æœºæ¨¡å¼ */
-__asm(".global __ARM_use_no_argv \n\t");   /* AC6ä¸‹éœ€è¦å£°æ˜mainå‡½æ•°ä¸ºæ— å‚æ•°æ ¼å¼ï¼Œå¦åˆ™éƒ¨åˆ†ä¾‹ç¨‹å¯èƒ½å‡ºç°åŠä¸»æœºæ¨¡å¼ */
-#else                                      /* ä½¿ç”¨AC5 */
-#pragma import(__use_no_semihosting)       /* å®šä¹‰ä¸ä½¿ç”¨åŠä¸»æœºæ¨¡å¼ */
-struct __FILE /* å®šä¹‰__FILEç»“æ„ä½“  */
+#if (__ARMCC_VERSION >= 6010050)           /* Ê¹ÓÃAC6 */
+__asm(".global __use_no_semihosting\n\t"); /* ÉùÃ÷²»Ê¹ÓÃ°ëÖ÷»úÄ£Ê½ */
+__asm(".global __ARM_use_no_argv \n\t");   /* AC6ÏÂĞèÒªÉùÃ÷mainº¯ÊıÎªÎŞ²ÎÊı¸ñÊ½£¬·ñÔò²¿·ÖÀı³Ì¿ÉÄÜ³öÏÖ°ëÖ÷»úÄ£Ê½ */
+#else                                      /* Ê¹ÓÃAC5 */
+#pragma import(__use_no_semihosting)       /* ¶¨Òå²»Ê¹ÓÃ°ëÖ÷»úÄ£Ê½ */
+struct __FILE /* ¶¨Òå__FILE½á¹¹Ìå  */
 {
   int handle;
 };
 #endif
 
-/* ä¸ä½¿ç”¨åŠä¸»æœºæ¨¡å¼æ—¶ï¼Œ
- * è‡³å°‘éœ€è¦é‡å®šä¹‰_ttywrchã€_sys_exitã€_sys_command_stringå‡½æ•°ï¼Œ
- * ä»¥åŒæ—¶å…¼å®¹AC6å’ŒAC5
+/* ²»Ê¹ÓÃ°ëÖ÷»úÄ£Ê½Ê±£¬
+ * ÖÁÉÙĞèÒªÖØ¶¨Òå_ttywrch¡¢_sys_exit¡¢_sys_command_stringº¯Êı£¬
+ * ÒÔÍ¬Ê±¼æÈİAC6ºÍAC5
  */
 int _ttywrch(int ch)
 {
@@ -60,11 +60,11 @@ char *_sys_command_string(char *cmd, int len)
   return NULL;
 }
 
-/* ä»£æ›¿stdio.hé‡Œé¢çš„__stdoutå®šä¹‰. */
+/* ´úÌæstdio.hÀïÃæµÄ__stdout¶¨Òå. */
 FILE __stdout;
 
-/* é‡å®šä¹‰fputcå‡½æ•°ï¼Œ
- * printfå‡½æ•°æœ€ç»ˆä¼šé€šè¿‡è°ƒç”¨fputcè¾“å‡ºå­—ç¬¦åˆ°ä¸²å£
+/* ÖØ¶¨Òåfputcº¯Êı£¬
+ * printfº¯Êı×îÖÕ»áÍ¨¹ıµ÷ÓÃfputcÊä³ö×Ö·ûµ½´®¿Ú
  */
 int fputc(int ch, FILE *f)
 {

@@ -26,21 +26,28 @@ typedef struct VISION_COORD
 } vision_coord;
 
 /**
+ * @brief     :物品特征
+ * @attention :
+ */
+typedef struct VISION_ITEM
+{
+  char name[32]; // 物品名称
+  uint8_t color; // 物品颜色
+  uint8_t type;  // 物品类型
+} vision_item;
+
+/**
  * @brief     :视觉识别对象描述信息
  * @attention :
  */
 typedef struct VISION_OBJECT
 {
-  char name[32];      // 物品名称
-  uint8_t color;      // 物品颜色
-  uint8_t type;       // 物品类型
-  vision_coord coord; // 物品位置坐标值
-  void *desc;         // 物品其他特征
+  vision_item *item;   // 物品特征
+  vision_coord *coord; // 物品位置坐标值
+  void *desc;          // 物品其他特征
 } vision_obj_typdef;
 
 void vision_init(void);
-vision_obj_typdef *vidion_object_write(vision_obj_typdef *object);   // 写入预置对象
-void vision_requst_obj(vision_obj_typdef *object, const char *name); // 请求识别某个对象
-void vision_receive_obj(vision_obj_typdef *object);                  // 识别到的对象
+void vision_requst(char *name); // 请求识别的物品
 
 #endif
