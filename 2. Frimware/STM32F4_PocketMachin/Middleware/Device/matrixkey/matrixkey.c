@@ -199,6 +199,17 @@ static void matrix_btn_evt_cb(void *arg)
   // }
 }
 
+#include ".\tirpod\tirpod.h"
+
+#define V_END 300       /* 末速度 */
+#define V_START 0       /* 初速度 */
+#define ACCELTIME 3.5f  /* 加速时间 (s) */
+#define DECEELTIME 1.5f /* 减速时间 (s) */
+
+__IO uint16_t g_step_angle = 15;        /* 设置的步进步数*/
+extern __IO uint32_t g_add_pulse_count; /* 脉冲个数累计*/
+extern motor_state_typedef g_motor_sta;
+
 /**
  * @brief     :非组合按键事件处理
  * @param     btn :
@@ -228,11 +239,24 @@ static void matrix_combination_btn_event(flex_button_t *btn)
       break;
     case FLEX_BTN_PRESS_CLICK:
       printf("MATRIX_KEY_UP\n");
-      voice_say(1);
+
+      g_step_angle = g_step_angle + 1;
+      if (g_step_angle >= 50)
+        g_step_angle = 1;
+      printf("Set_Aangle:%d \r\n", g_step_angle);                /*设置的旋转位置（角度）*/
+      printf("Add_Aangle:%.2f \r\n", g_add_pulse_count * 0.225); /*累计旋转的角度*/
+
       break;
     case FLEX_BTN_PRESS_DOUBLE_CLICK:
       printf("MATRIX_KEY_UP x2\n");
-      voice_say(2);
+
+      /* 开启电机S型加减速 */
+      if (g_motor_sta == STATE_IDLE)
+      {
+        g_add_pulse_count = 0;
+        stepmotor1_move_rel(V_START, V_END, ACCELTIME, DECEELTIME, g_step_angle * SPR); /* 一次加减速运动 */
+      }
+
       break;
     }
     break;
@@ -247,11 +271,42 @@ static void matrix_combination_btn_event(flex_button_t *btn)
       break;
     case FLEX_BTN_PRESS_CLICK:
       printf("MATRIX_KEY_7\n");
-      	voice_say(3);
+
+      g_step_angle = g_step_angle - 1;
+      if (g_step_angle <= 1)
+        g_step_angle = 50;
+      printf("Set_Aangle:%d \r\n", g_step_angle);                /*设置的旋转位置（角度）*/
+      printf("Add_Aangle:%.2f \r\n", g_add_pulse_count * 0.225); /*累计旋转的角度*/
+
       break;
     case FLEX_BTN_PRESS_DOUBLE_CLICK:
       printf("MATRIX_KEY_7 x2\n");
-      	voice_say(4);
+
+      stepper_stop(STEPPER_MOTOR_1);
+      ST1_EN(EN_OFF);
+
+      break;
+    }
+    break;
+  }
+
+    /* 按键 UP */
+  case MATRIX_KEY_8:
+  {
+    switch (btn->event)
+    {
+    case FLEX_BTN_PRESS_DOWN:
+      break;
+    case FLEX_BTN_PRESS_CLICK:
+      printf("MATRIX_KEY_8\n");
+
+      stepper_star(STEPPER_MOTOR_1);
+      ST1_EN(EN_OFF);
+
+      break;
+    case FLEX_BTN_PRESS_DOUBLE_CLICK:
+      printf("MATRIX_KEY_8 x2\n");
+
       break;
     }
     break;

@@ -39,6 +39,10 @@ void button_task(void)
 	flex_button_scan(); // 按键事件处理 20ms
 }
 
+/**
+ * @brief     :数据接收处理任务
+ * @attention :
+ */
 void data_receive_task(void)
 {
 	dgus_recv_data(); // 接收迪文屏数据
@@ -66,7 +70,7 @@ void system_start_task(void)
 	stim_loop(50, data_receive_task, STIM_LOOP_FOREVER); // 数据接收任务（50ms）
 
 	// 开始
-	voice_say(DEVICE_STARTED); // 设备启动播报
+	// voice_say(DEVICE_STARTED); // 设备启动播报
 }
 
 /**

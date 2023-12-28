@@ -26,7 +26,7 @@ void vision_init(void)
 {
   // 串口1初始化，usart.c 文件中完成
 
-  vision_requst("黄色正方形");
+  // vision_requst("黄色正方形");
 }
 
 /**
@@ -63,10 +63,6 @@ void vision_requst(char *name)
   }
   data[6] = 0x9F;
   data[7] = 0xF9;
-
-  for (int i = 0; i < 8; i++)
-    printf("0x%x  ", data[i]);
-  printf("\r\n");
-
+	
   vision_senddata(data, 8);
 }

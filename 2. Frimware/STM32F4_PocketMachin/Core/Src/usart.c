@@ -106,6 +106,7 @@ void MX_UART4_Init(void)
   /* USER CODE BEGIN UART4_Init 2 */
 
   /* USER CODE END UART4_Init 2 */
+
 }
 /* UART5 init function */
 void MX_UART5_Init(void)
@@ -133,6 +134,7 @@ void MX_UART5_Init(void)
   /* USER CODE BEGIN UART5_Init 2 */
 
   /* USER CODE END UART5_Init 2 */
+
 }
 /* USART1 init function */
 
@@ -161,17 +163,18 @@ void MX_USART1_UART_Init(void)
   /* USER CODE BEGIN USART1_Init 2 */
 
   /* USER CODE END USART1_Init 2 */
+
 }
 
-void HAL_UART_MspInit(UART_HandleTypeDef *uartHandle)
+void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
 {
 
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-  if (uartHandle->Instance == UART4)
+  if(uartHandle->Instance==UART4)
   {
-    /* USER CODE BEGIN UART4_MspInit 0 */
+  /* USER CODE BEGIN UART4_MspInit 0 */
 
-    /* USER CODE END UART4_MspInit 0 */
+  /* USER CODE END UART4_MspInit 0 */
     /* UART4 clock enable */
     __HAL_RCC_UART4_CLK_ENABLE();
 
@@ -180,7 +183,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef *uartHandle)
     PC10     ------> UART4_TX
     PC11     ------> UART4_RX
     */
-    GPIO_InitStruct.Pin = VOICE_TX_Pin | VOICE_RX_Pin;
+    GPIO_InitStruct.Pin = VOICE_TX_Pin|VOICE_RX_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
@@ -190,15 +193,15 @@ void HAL_UART_MspInit(UART_HandleTypeDef *uartHandle)
     /* UART4 interrupt Init */
     HAL_NVIC_SetPriority(UART4_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(UART4_IRQn);
-    /* USER CODE BEGIN UART4_MspInit 1 */
+  /* USER CODE BEGIN UART4_MspInit 1 */
 
-    /* USER CODE END UART4_MspInit 1 */
+  /* USER CODE END UART4_MspInit 1 */
   }
-  else if (uartHandle->Instance == UART5)
+  else if(uartHandle->Instance==UART5)
   {
-    /* USER CODE BEGIN UART5_MspInit 0 */
+  /* USER CODE BEGIN UART5_MspInit 0 */
 
-    /* USER CODE END UART5_MspInit 0 */
+  /* USER CODE END UART5_MspInit 0 */
     /* UART5 clock enable */
     __HAL_RCC_UART5_CLK_ENABLE();
 
@@ -225,7 +228,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef *uartHandle)
     /* UART5 interrupt Init */
     HAL_NVIC_SetPriority(UART5_IRQn, 1, 0);
     HAL_NVIC_EnableIRQ(UART5_IRQn);
-    /* USER CODE BEGIN UART5_MspInit 1 */
+  /* USER CODE BEGIN UART5_MspInit 1 */
 
     HAL_UART_Receive_IT(&huart5, (uint8_t *)&diwenlcd_recv_byte, 1);                // uart5 receive enable
     lwrb_init(&diwenlcd_uart_buff, diwenlcd_buff_data, sizeof(diwenlcd_buff_data)); // Initialize buffer
@@ -233,13 +236,13 @@ void HAL_UART_MspInit(UART_HandleTypeDef *uartHandle)
     {
     }
 
-    /* USER CODE END UART5_MspInit 1 */
+  /* USER CODE END UART5_MspInit 1 */
   }
-  else if (uartHandle->Instance == USART1)
+  else if(uartHandle->Instance==USART1)
   {
-    /* USER CODE BEGIN USART1_MspInit 0 */
+  /* USER CODE BEGIN USART1_MspInit 0 */
 
-    /* USER CODE END USART1_MspInit 0 */
+  /* USER CODE END USART1_MspInit 0 */
     /* USART1 clock enable */
     __HAL_RCC_USART1_CLK_ENABLE();
 
@@ -248,7 +251,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef *uartHandle)
     PA9     ------> USART1_TX
     PA10     ------> USART1_RX
     */
-    GPIO_InitStruct.Pin = VISION_TX_Pin | VISION_RX_Pin;
+    GPIO_InitStruct.Pin = VISION_TX_Pin|VISION_RX_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
@@ -258,7 +261,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef *uartHandle)
     /* USART1 interrupt Init */
     HAL_NVIC_SetPriority(USART1_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(USART1_IRQn);
-    /* USER CODE BEGIN USART1_MspInit 1 */
+  /* USER CODE BEGIN USART1_MspInit 1 */
 
     HAL_UART_Receive_IT(&huart1, (uint8_t *)&vision_recv_byte, 1);            // usart1 receive enable
     lwrb_init(&vision_uart_buff, vision_buff_data, sizeof(vision_buff_data)); // Initialize buffer
@@ -266,18 +269,18 @@ void HAL_UART_MspInit(UART_HandleTypeDef *uartHandle)
     {
     }
 
-    /* USER CODE END USART1_MspInit 1 */
+  /* USER CODE END USART1_MspInit 1 */
   }
 }
 
-void HAL_UART_MspDeInit(UART_HandleTypeDef *uartHandle)
+void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 {
 
-  if (uartHandle->Instance == UART4)
+  if(uartHandle->Instance==UART4)
   {
-    /* USER CODE BEGIN UART4_MspDeInit 0 */
+  /* USER CODE BEGIN UART4_MspDeInit 0 */
 
-    /* USER CODE END UART4_MspDeInit 0 */
+  /* USER CODE END UART4_MspDeInit 0 */
     /* Peripheral clock disable */
     __HAL_RCC_UART4_CLK_DISABLE();
 
@@ -285,19 +288,19 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef *uartHandle)
     PC10     ------> UART4_TX
     PC11     ------> UART4_RX
     */
-    HAL_GPIO_DeInit(GPIOC, VOICE_TX_Pin | VOICE_RX_Pin);
+    HAL_GPIO_DeInit(GPIOC, VOICE_TX_Pin|VOICE_RX_Pin);
 
     /* UART4 interrupt Deinit */
     HAL_NVIC_DisableIRQ(UART4_IRQn);
-    /* USER CODE BEGIN UART4_MspDeInit 1 */
+  /* USER CODE BEGIN UART4_MspDeInit 1 */
 
-    /* USER CODE END UART4_MspDeInit 1 */
+  /* USER CODE END UART4_MspDeInit 1 */
   }
-  else if (uartHandle->Instance == UART5)
+  else if(uartHandle->Instance==UART5)
   {
-    /* USER CODE BEGIN UART5_MspDeInit 0 */
+  /* USER CODE BEGIN UART5_MspDeInit 0 */
 
-    /* USER CODE END UART5_MspDeInit 0 */
+  /* USER CODE END UART5_MspDeInit 0 */
     /* Peripheral clock disable */
     __HAL_RCC_UART5_CLK_DISABLE();
 
@@ -311,15 +314,15 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef *uartHandle)
 
     /* UART5 interrupt Deinit */
     HAL_NVIC_DisableIRQ(UART5_IRQn);
-    /* USER CODE BEGIN UART5_MspDeInit 1 */
+  /* USER CODE BEGIN UART5_MspDeInit 1 */
 
-    /* USER CODE END UART5_MspDeInit 1 */
+  /* USER CODE END UART5_MspDeInit 1 */
   }
-  else if (uartHandle->Instance == USART1)
+  else if(uartHandle->Instance==USART1)
   {
-    /* USER CODE BEGIN USART1_MspDeInit 0 */
+  /* USER CODE BEGIN USART1_MspDeInit 0 */
 
-    /* USER CODE END USART1_MspDeInit 0 */
+  /* USER CODE END USART1_MspDeInit 0 */
     /* Peripheral clock disable */
     __HAL_RCC_USART1_CLK_DISABLE();
 
@@ -327,13 +330,13 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef *uartHandle)
     PA9     ------> USART1_TX
     PA10     ------> USART1_RX
     */
-    HAL_GPIO_DeInit(GPIOA, VISION_TX_Pin | VISION_RX_Pin);
+    HAL_GPIO_DeInit(GPIOA, VISION_TX_Pin|VISION_RX_Pin);
 
     /* USART1 interrupt Deinit */
     HAL_NVIC_DisableIRQ(USART1_IRQn);
-    /* USER CODE BEGIN USART1_MspDeInit 1 */
+  /* USER CODE BEGIN USART1_MspDeInit 1 */
 
-    /* USER CODE END USART1_MspDeInit 1 */
+  /* USER CODE END USART1_MspDeInit 1 */
   }
 }
 
