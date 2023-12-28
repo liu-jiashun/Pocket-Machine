@@ -5,8 +5,8 @@
 #include ".\MALLOC\malloc.h"
 
 /******************************************************************************************/
-#define T1_FREQ (168000000 / 168) /* 频率ft值 */
-#define FSPR 200                  /* 步进电机单圈步数 */
+#define T1_FREQ (84000000 / 84) /* 频率ft值 */
+#define FSPR 200                      /* 步进电机单圈步数 */
 #define MICRO_STEP 8
 #define SPR (FSPR * MICRO_STEP) /* 单圈所需要的脉冲数 */
 
@@ -61,20 +61,20 @@ enum EN
 
 /******************************************************************************************/
 /* 步进电机接口序号 */
-#define STEPPER_MOTOR_1 1 
+#define STEPPER_MOTOR_1 1
 #define STEPPER_MOTOR_2 2
 #define STEPPER_MOTOR_3 3
 
 /* 步进电机引脚定义*/
 /*----------------------- 方向引脚控制 -----------------------------------*/
 /* 硬件对电平做了取反操作，所以当 x = 1 有效，x = 0时无效*/
-#define ST1_DIR(x) HAL_GPIO_WritePin(STEPPER1_DIR_GPIO_Port, STEPPER1_DIR_Pin, x == 0 ? GPIO_PIN_SET : GPIO_PIN_RESET)
-#define ST2_DIR(x) HAL_GPIO_WritePin(STEPPER2_DIR_GPIO_Port, STEPPER2_DIR_Pin, x == 0 ? GPIO_PIN_SET : GPIO_PIN_RESET);
+#define ST1_DIR(x) HAL_GPIO_WritePin(STEPPER1_DIR_GPIO_Port, STEPPER1_DIR_Pin, x ? GPIO_PIN_SET : GPIO_PIN_RESET)
+#define ST2_DIR(x) HAL_GPIO_WritePin(STEPPER2_DIR_GPIO_Port, STEPPER2_DIR_Pin, x ? GPIO_PIN_SET : GPIO_PIN_RESET);
 
 /*----------------------- 脱机引脚控制 -----------------------------------*/
 /* 硬件对电平做了取反操作，所以当 x = 1 有效，x = 0时无效*/
-#define ST1_EN(x) HAL_GPIO_WritePin(STEPPER1_EN_GPIO_Port, STEPPER1_EN_Pin, x == 0 ? GPIO_PIN_SET : GPIO_PIN_RESET)
-#define ST2_EN(x) HAL_GPIO_WritePin(STEPPER2_EN_GPIO_Port, STEPPER2_EN_Pin, x == 0 ? GPIO_PIN_SET : GPIO_PIN_RESET)
+#define ST1_EN(x) HAL_GPIO_WritePin(STEPPER1_EN_GPIO_Port, STEPPER1_EN_Pin, x == 0? GPIO_PIN_SET : GPIO_PIN_RESET)
+#define ST2_EN(x) HAL_GPIO_WritePin(STEPPER2_EN_GPIO_Port, STEPPER2_EN_Pin, x == 0? GPIO_PIN_SET : GPIO_PIN_RESET)
 
 /******************************************************************************************/
 /* 外部接口函数*/

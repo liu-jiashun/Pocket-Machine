@@ -201,10 +201,10 @@ static void matrix_btn_evt_cb(void *arg)
 
 #include ".\tirpod\tirpod.h"
 
-#define V_END 300       /* 末速度 */
+#define V_END 300      /* 末速度 */
 #define V_START 0       /* 初速度 */
-#define ACCELTIME 3.5f  /* 加速时间 (s) */
-#define DECEELTIME 1.5f /* 减速时间 (s) */
+#define ACCELTIME 0.1f  /* 加速时间 (s) */
+#define DECEELTIME 0.1f /* 减速时间 (s) */
 
 __IO uint16_t g_step_angle = 15;        /* 设置的步进步数*/
 extern __IO uint32_t g_add_pulse_count; /* 脉冲个数累计*/
@@ -238,13 +238,13 @@ static void matrix_combination_btn_event(flex_button_t *btn)
     case FLEX_BTN_PRESS_DOWN:
       break;
     case FLEX_BTN_PRESS_CLICK:
-      printf("MATRIX_KEY_UP\n");
+      // printf("MATRIX_KEY_UP\n");
 
       g_step_angle = g_step_angle + 1;
       if (g_step_angle >= 50)
         g_step_angle = 1;
       printf("Set_Aangle:%d \r\n", g_step_angle);                /*设置的旋转位置（角度）*/
-      printf("Add_Aangle:%.2f \r\n", g_add_pulse_count * 0.225); /*累计旋转的角度*/
+      printf("Add_Aangle:%.2f\r\n", g_add_pulse_count * 0.225); /*累计旋转的角度*/
 
       break;
     case FLEX_BTN_PRESS_DOUBLE_CLICK:
@@ -253,6 +253,7 @@ static void matrix_combination_btn_event(flex_button_t *btn)
       /* 开启电机S型加减速 */
       if (g_motor_sta == STATE_IDLE)
       {
+        printf("stepmotor1_move_rel\n");
         g_add_pulse_count = 0;
         stepmotor1_move_rel(V_START, V_END, ACCELTIME, DECEELTIME, g_step_angle * SPR); /* 一次加减速运动 */
       }
@@ -270,7 +271,7 @@ static void matrix_combination_btn_event(flex_button_t *btn)
     case FLEX_BTN_PRESS_DOWN:
       break;
     case FLEX_BTN_PRESS_CLICK:
-      printf("MATRIX_KEY_7\n");
+      printf("MATRIX_KEY_7\r\n");
 
       g_step_angle = g_step_angle - 1;
       if (g_step_angle <= 1)
@@ -280,7 +281,7 @@ static void matrix_combination_btn_event(flex_button_t *btn)
 
       break;
     case FLEX_BTN_PRESS_DOUBLE_CLICK:
-      printf("MATRIX_KEY_7 x2\n");
+      printf("MATRIX_KEY_7 x2\r\n");
 
       stepper_stop(STEPPER_MOTOR_1);
       ST1_EN(EN_OFF);
@@ -298,14 +299,11 @@ static void matrix_combination_btn_event(flex_button_t *btn)
     case FLEX_BTN_PRESS_DOWN:
       break;
     case FLEX_BTN_PRESS_CLICK:
-      printf("MATRIX_KEY_8\n");
-
-      stepper_star(STEPPER_MOTOR_1);
-      ST1_EN(EN_OFF);
+      printf("MATRIX_KEY_8\r\n");
 
       break;
     case FLEX_BTN_PRESS_DOUBLE_CLICK:
-      printf("MATRIX_KEY_8 x2\n");
+      printf("MATRIX_KEY_8 x2\r\n");
 
       break;
     }

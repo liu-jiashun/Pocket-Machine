@@ -10,7 +10,12 @@
 void stepper_init(void)
 {
   // 引脚初始化，gpio.c 文件中已完成
+
+  /* 启动电机定时器 */
   HAL_TIM_Base_Start(&htim1);
+  HAL_TIM_Base_Start(&htim4);
+
+  /* 失能电机 */
   ST1_EN(EN_OFF);
   ST2_EN(EN_OFF);
 }
@@ -247,11 +252,11 @@ void stepmotor2_move_rel(int32_t vo, int32_t vt, float AcTime, float DeTime, int
   if (step < 0)
   {
     step = -step;
-    ST1_DIR(CCW);
+    ST2_DIR(CCW);
   }
   else
   {
-    ST1_DIR(CW);
+    ST2_DIR(CW);
   }
 
   if (step >= (g_calc_t.decel_step + g_calc_t.accel_step)) /* 当总步数大于等于加减速度步数相加时，才可以实现完整的S形加减速 */
@@ -277,7 +282,7 @@ void stepmotor2_move_rel(int32_t vo, int32_t vt, float AcTime, float DeTime, int
   __HAL_TIM_SET_COUNTER(&htim1, 0);
   __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, (uint16_t)(g_toggle_pulse / 2)); /*  设置定时器比较值 */
   HAL_TIM_OC_Start_IT(&htim1, TIM_CHANNEL_1);                                   /* 使能定时器通道 */
-  ST1_EN(EN_ON);
+  ST2_EN(EN_ON);
 }
 
 /**
@@ -351,8 +356,7 @@ void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
     tmp = 0xFFFF & (Tim_Count + g_toggle_pulse);
     __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, tmp);
   }
-
-  if (htim->Instance == TIM4)
+  else if (htim->Instance == TIM4)
   {
     i++;        /* 定时器中断次数计数值 */
     if (i == 2) /* 2次，说明已经输出一个完整脉冲 */
