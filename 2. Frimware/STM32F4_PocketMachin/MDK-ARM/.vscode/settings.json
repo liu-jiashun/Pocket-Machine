@@ -27,6 +27,7 @@
     "beep.h": "c",
     "smarttimer.h": "c",
     "vision.h": "c",
-    "list.h": "c"
+    "list.h": "c",
+    "relay.h": "c"
   }
 }

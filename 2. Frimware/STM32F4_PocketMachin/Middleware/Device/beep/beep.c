@@ -1,17 +1,17 @@
 #include "beep.h"
 
 /**
- * @brief     :åˆå§‹åŒ–
+ * @brief     :³õÊ¼»¯
  * @attention :
  */
 void beep_init(void)
 {
-  // å¼•è„šåˆå§‹åŒ–ï¼Œgpio.c æ–‡ä»¶ä¸­å·²å®Œæˆ
+  // Òı½Å³õÊ¼»¯£¬gpio.c ÎÄ¼şÖĞÒÑÍê³É
 }
 
 /**
- * @brief     :èœ‚é¸£å™¨æ§åˆ¶
- * @param     state :ON å¼€ï¼ŒOFF å…³
+ * @brief     :·äÃùÆ÷¿ØÖÆ
+ * @param     state :ON ¿ª£¬OFF ¹Ø
  * @attention :
  */
 void beep_ctl(uint8_t state)

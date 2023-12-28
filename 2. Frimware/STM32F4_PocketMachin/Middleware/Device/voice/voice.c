@@ -2,18 +2,18 @@
 #include "usart.h"
 
 /**
- * @brief     :BY8301æ¨¡å— åˆå§‹åŒ–
+ * @brief     :BY8301Ä£¿é ³õÊ¼»¯
  * @attention :
  */
 void BY8301_init(void)
 {
-  // å¼•è„šåˆå§‹åŒ–ï¼Œgpio.c æ–‡ä»¶ä¸­å·²å®Œæˆ
-  // ä¸²å£4åˆå§‹åŒ–ï¼Œusart.c æ–‡ä»¶ä¸­å®Œæˆ
+  // Òı½Å³õÊ¼»¯£¬gpio.c ÎÄ¼şÖĞÒÑÍê³É
+  // ´®¿Ú4³õÊ¼»¯£¬usart.c ÎÄ¼şÖĞÍê³É
 }
 
 /**
- * @brief     :è¯­éŸ³ä¸²å£å‘é€
- * @param     str :è¦å‘é€çš„å†…å®¹
+ * @brief     :ÓïÒô´®¿Ú·¢ËÍ
+ * @param     str :Òª·¢ËÍµÄÄÚÈİ
  * @attention :
  */
 void BY8301_SendData(uint8_t *str)
@@ -22,8 +22,8 @@ void BY8301_SendData(uint8_t *str)
 }
 
 /**
- * @brief  æŒ‡å®šåºå·æ’­æŠ¥
- * @param  NOx: mp3æ–‡ä»¶åºå·
+ * @brief  Ö¸¶¨ĞòºÅ²¥±¨
+ * @param  NOx: mp3ÎÄ¼şĞòºÅ
  * @retval None
  */
 void BY8301_Say(uint8_t NOx)
@@ -40,7 +40,7 @@ void BY8301_Say(uint8_t NOx)
 }
 
 /**
- * @brief     :è®¾ç½®éŸ³é‡
+ * @brief     :ÉèÖÃÒôÁ¿
  * @param     volume : 0 ~ 30
  * @attention :
  */
@@ -59,7 +59,7 @@ void BY8301_setVolume(uint8_t volume)
 }
 
 /**
- * @brief     :è®¾ç½®æ’­æ”¾æš‚åœ
+ * @brief     :ÉèÖÃ²¥·ÅÔİÍ£
  * @param     playPause :0:pause 1:play
  * @attention :
  */
@@ -82,8 +82,8 @@ void BY8301_playPause(uint8_t playPause)
 }
 
 /**
- * @brief     :Busy å¼•è„šçŠ¶æ€
- * @return    :uint8_t è¿”å›Busyå¼•è„šç”µå¹³çŠ¶æ€ 1:busy  0:idle
+ * @brief     :Busy Òı½Å×´Ì¬
+ * @return    :uint8_t ·µ»ØBusyÒı½ÅµçÆ½×´Ì¬ 1:busy  0:idle
  * @attention :
  */
 uint8_t BY8301_Busy(void)
@@ -92,17 +92,17 @@ uint8_t BY8301_Busy(void)
 }
 
 /**
- * @brief     :è¯­éŸ³ åˆå§‹åŒ–
+ * @brief     :ÓïÒô ³õÊ¼»¯
  * @attention :
  */
 void voice_init(void)
 {
-  BY8301_setVolume(15); // è®¾ç½®éŸ³é‡ %50
+  BY8301_setVolume(15); // ÉèÖÃÒôÁ¿ %50
 }
 
 /**
- * @brief     :æ’­æ”¾æŒ‡å®šè¯­éŸ³æ–‡ä»¶
- * @param     voice :è¯­éŸ³æ–‡ä»¶ï¼ˆ0 ~ 255ï¼‰
+ * @brief     :²¥·ÅÖ¸¶¨ÓïÒôÎÄ¼ş
+ * @param     voice :ÓïÒôÎÄ¼ş£¨0 ~ 255£©
  * @attention :
  */
 void voice_say(uint8_t voice)

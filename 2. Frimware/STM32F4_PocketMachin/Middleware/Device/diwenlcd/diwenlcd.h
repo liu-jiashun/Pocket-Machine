@@ -10,12 +10,12 @@
 #include ".\lwrb\lwrb.h"
 #include ".\MALLOC\malloc.h"
 
-#define DIWENLCD_MAX_LINES 17 // è¿ªæ–‡å±æ‰“å°ç»ˆç«¯æœ€å¤§è¡Œæ•°
-#define DIWENLCD_MAX_SIZES 48 // è¿ªæ–‡å±ä¸€è¡Œæœ€å¤§å­—èŠ‚æ•°
+#define DIWENLCD_MAX_LINES 17 // µÏÎÄÆÁ´òÓ¡ÖÕ¶Ë×î´óĞĞÊı
+#define DIWENLCD_MAX_SIZES 48 // µÏÎÄÆÁÒ»ĞĞ×î´ó×Ö½ÚÊı
 
-extern char diwenlcd_recv_byte;        // æ¥æ”¶å­—èŠ‚
-extern lwrb_t diwenlcd_uart_buff;      // è¿ªæ–‡å±æ¥æ”¶ç¼“å†²åŒºå¥æŸ„
-extern uint8_t diwenlcd_buff_data[64]; // ç”³è¯·ä¸€å—å†…å­˜ç”¨äºç¼“å†²åŒº
+extern char diwenlcd_recv_byte;        // ½ÓÊÕ×Ö½Ú
+extern lwrb_t diwenlcd_uart_buff;      // µÏÎÄÆÁ½ÓÊÕ»º³åÇø¾ä±ú
+extern uint8_t diwenlcd_buff_data[64]; // ÉêÇëÒ»¿éÄÚ´æÓÃÓÚ»º³åÇø
 
 /**
  * @brief     :diwenlcd show work mode
@@ -48,7 +48,7 @@ HAL_StatusTypeDef max485_send(const uint8_t *pData, uint16_t Size);
 HAL_StatusTypeDef max485_receive(uint8_t *pData, uint16_t Size);
 
 /**
- * @brief     :è¿ªæ–‡å±ç›¸å…³
+ * @brief     :µÏÎÄÆÁÏà¹Ø
  * @attention :
  */
 void diwenlcd_init(void);

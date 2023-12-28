@@ -4,29 +4,29 @@
 #include "main.h"
 #include ".\FlexibleButton\flexible_button.h"
 
-typedef enum // çŸ©é˜µæŒ‰é”®é”®å€¼æžšä¸¾
+typedef enum // ¾ØÕó°´¼ü¼üÖµÃ¶¾Ù
 {
-    MATRIX_KEY_NONE = 0, // æ— æŒ‰é”®æŒ‰ä¸‹
-    MATRIX_KEY_UP,       // æŒ‰é”®â€œä¸Šâ€
-    MATRIX_KEY_7,        // æŒ‰é”®â€œ7â€
-    MATRIX_KEY_8,        // æŒ‰é”®â€œ8â€
-    MATRIX_KEY_9,        // æŒ‰é”®â€œ9â€
-    MATRIX_KEY_DOWN,     // æŒ‰é”®â€œä¸‹â€
-    MATRIX_KEY_4,        // æŒ‰é”®â€œ4â€
-    MATRIX_KEY_5,        // æŒ‰é”®â€œ5â€
-    MATRIX_KEY_6,        // æŒ‰é”®â€œ6â€
-    MATRIX_KEY_LEFT,     // æŒ‰é”®â€œå·¦â€
-    MATRIX_KEY_1,        // æŒ‰é”®â€œ1â€
-    MATRIX_KEY_2,        // æŒ‰é”®â€œ2â€
-    MATRIX_KEY_3,        // æŒ‰é”®â€œ3â€
-    MATRIX_KEY_RIGHT,    // æŒ‰é”®â€œå³â€
-    MATRIX_KEY_D,        // æŒ‰é”®â€œDâ€
-    MATRIX_KEY_0,        // æŒ‰é”®â€œ0â€
-    MATRIX_KEY_E,        // æŒ‰é”®â€œEâ€
-    MATRIX_KEY_F1,       // æŒ‰é”®â€œF1â€
-    MATRIX_KEY_F2,       // æŒ‰é”®â€œF2â€
-    MATRIX_KEY_F3,       // æŒ‰é”®â€œF3â€
-    MATRIX_KEY_F4,       // æŒ‰é”®â€œF4â€
+    MATRIX_KEY_NONE = 0, // ÎÞ°´¼ü°´ÏÂ
+    MATRIX_KEY_UP,       // °´¼ü¡°ÉÏ¡±
+    MATRIX_KEY_7,        // °´¼ü¡°7¡±
+    MATRIX_KEY_8,        // °´¼ü¡°8¡±
+    MATRIX_KEY_9,        // °´¼ü¡°9¡±
+    MATRIX_KEY_DOWN,     // °´¼ü¡°ÏÂ¡±
+    MATRIX_KEY_4,        // °´¼ü¡°4¡±
+    MATRIX_KEY_5,        // °´¼ü¡°5¡±
+    MATRIX_KEY_6,        // °´¼ü¡°6¡±
+    MATRIX_KEY_LEFT,     // °´¼ü¡°×ó¡±
+    MATRIX_KEY_1,        // °´¼ü¡°1¡±
+    MATRIX_KEY_2,        // °´¼ü¡°2¡±
+    MATRIX_KEY_3,        // °´¼ü¡°3¡±
+    MATRIX_KEY_RIGHT,    // °´¼ü¡°ÓÒ¡±
+    MATRIX_KEY_D,        // °´¼ü¡°D¡±
+    MATRIX_KEY_0,        // °´¼ü¡°0¡±
+    MATRIX_KEY_E,        // °´¼ü¡°E¡±
+    MATRIX_KEY_F1,       // °´¼ü¡°F1¡±
+    MATRIX_KEY_F2,       // °´¼ü¡°F2¡±
+    MATRIX_KEY_F3,       // °´¼ü¡°F3¡±
+    MATRIX_KEY_F4,       // °´¼ü¡°F4¡±
 
     MATRIX_BUTTON_MAX,
 } matrix_button_t;

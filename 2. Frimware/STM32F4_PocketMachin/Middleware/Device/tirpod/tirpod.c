@@ -2,14 +2,14 @@
 
 void tirpod_init(void)
 {
-  relay_init();   // æ¿€å…‰ç¬” ç»§ç”µå™¨åˆå§‹åŒ–
-  stepper_init(); // æ­¥è¿›ç”µæœºåˆå§‹åŒ–
+  relay_init();   // ¼¤¹â±Ê ¼ÌµçÆ÷³õÊ¼»¯
+  stepper_init(); // ²½½øµç»ú³õÊ¼»¯
 }
 
 /**
- * @brief     :é™ä½æ£€æµ‹
- * @param     x_limt :Xè½´é™ä½çŠ¶æ€
- * @param     y_limt :Yè½´é™ä½çŠ¶æ€
+ * @brief     :ÏŞÎ»¼ì²â
+ * @param     x_limt :XÖáÏŞÎ»×´Ì¬
+ * @param     y_limt :YÖáÏŞÎ»×´Ì¬
  * @attention :
  */
 void tirpod_limit_scan(uint8_t *x_limt, uint8_t *y_limt)

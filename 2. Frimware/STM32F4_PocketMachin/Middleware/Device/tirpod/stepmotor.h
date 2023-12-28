@@ -4,18 +4,34 @@
 #include "main.h"
 #include ".\MALLOC\malloc.h"
 
-/******************************************************************************************/
-#define T1_FREQ (84000000 / 84) /* é¢‘ç‡ftå€¼ */
-#define FSPR 200                      /* æ­¥è¿›ç”µæœºå•åœˆæ­¥æ•° */
-#define MICRO_STEP 8
-#define SPR (FSPR * MICRO_STEP) /* å•åœˆæ‰€éœ€è¦çš„è„‰å†²æ•° */
+// /******************************************************************************************/
+// /* ²½½øµç»ú²ÎÊıÏà¹Øºê */
+// #define PULSE_REV 6400.0      /* Ã¿È¦Âö³åÊı£¨Ï¸·ÖÊı32£© */
+// #define MAX_STEP_ANGLE 0.05625 /* ×îĞ¡²½¾à(1.8/PULSE_REV) */
 
-#define ROUNDPS_2_STEPPS(rpm) ((rpm) * SPR / 60)              /* æ ¹æ®ç”µæœºè½¬é€Ÿï¼ˆr/minï¼‰ï¼Œè®¡ç®—ç”µæœºæ­¥é€Ÿï¼ˆstep/sï¼‰ */
-#define MIDDLEVELOCITY(vo, vt) (((vo) + (vt)) / 2)            /* Så‹åŠ å‡é€ŸåŠ é€Ÿæ®µçš„ä¸­ç‚¹é€Ÿåº¦  */
-#define INCACCEL(vo, v, t) ((2 * ((v) - (vo))) / pow((t), 2)) /* åŠ åŠ é€Ÿåº¦:åŠ é€Ÿåº¦å¢åŠ é‡   V - V0 = 1/2 * J * t^2 */
-#define INCACCELSTEP(j, t) (((j) * pow((t), 3)) / 6.0f)       /* åŠ åŠ é€Ÿæ®µçš„ä½ç§»é‡(æ­¥æ•°)  S = 1/6 * J * t^3 */
-#define ACCEL_TIME(t) ((t) / 2)                               /* åŠ åŠ é€Ÿæ®µå’Œå‡åŠ é€Ÿæ®µçš„æ—¶é—´æ˜¯ç›¸ç­‰çš„ */
-#define SPEED_MIN (T1_FREQ / (65535.0f))                      /* æœ€ä½é¢‘ç‡/é€Ÿåº¦ */
+// typedef struct
+// {
+//   int angle;                     /* ÉèÖÃĞèÒªĞı×ªµÄ½Ç¶È */
+//   uint8_t dir;                   /* ·½Ïò */
+//   uint8_t en;                    /* Ê¹ÄÜ */
+//   volatile uint32_t pulse_count; /* Âö³å¸öÊı¼ÇÂ¼ */
+//   volatile int add_pulse_count;  /* Âö³å¸öÊıÀÛ¼Æ */
+// } STEPPER_MOTOR;
+
+// extern STEPPER_MOTOR g_stepper;
+
+/******************************************************************************************/
+#define T1_FREQ                 (84000000/84)                           /* ÆµÂÊftÖµ */
+#define FSPR                    (200)                                   /* ²½½øµç»úµ¥È¦²½Êı£¨*/
+#define MICRO_STEP              8    
+#define SPR                     (FSPR * MICRO_STEP)                     /* µ¥È¦ËùĞèÒªµÄÂö³åÊı */
+
+#define ROUNDPS_2_STEPPS(rpm)   ((rpm) * SPR / 60)                      /* ¸ù¾İµç»ú×ªËÙ£¨r/min£©£¬¼ÆËãµç»ú²½ËÙ£¨step/s£© */
+#define MIDDLEVELOCITY(vo,vt)   ( ( (vo) + (vt) ) / 2 )                 /* SĞÍ¼Ó¼õËÙ¼ÓËÙ¶ÎµÄÖĞµãËÙ¶È  */
+#define INCACCEL(vo,v,t)        ( ( 2 * ((v) - (vo)) ) / pow((t),2) )   /* ¼Ó¼ÓËÙ¶È:¼ÓËÙ¶ÈÔö¼ÓÁ¿   V - V0 = 1/2 * J * t^2 */
+#define INCACCELSTEP(j,t)       ( ( (j) * pow( (t) , 3 ) ) / 6.0f )     /* ¼Ó¼ÓËÙ¶ÎµÄÎ»ÒÆÁ¿(²½Êı)  S = 1/6 * J * t^3 */
+#define ACCEL_TIME(t)           ( (t) / 2 )                             /* ¼Ó¼ÓËÙ¶ÎºÍ¼õ¼ÓËÙ¶ÎµÄÊ±¼äÊÇÏàµÈµÄ */
+#define SPEED_MIN               (T1_FREQ / (65535.0f))                  /* ×îµÍÆµÂÊ/ËÙ¶È */
 
 #ifndef TRUE
 #define TRUE 1
@@ -26,64 +42,64 @@
 
 typedef struct
 {
-  int32_t vo;         /*  åˆé€Ÿåº¦ å•ä½ step/s */
-  int32_t vt;         /*  æœ«é€Ÿåº¦ å•ä½ step/s */
-  int32_t accel_step; /*  åŠ é€Ÿæ®µçš„æ­¥æ•°å•ä½ step */
-  int32_t decel_step; /*  åŠ é€Ÿæ®µçš„æ­¥æ•°å•ä½ step */
-  float *accel_tab;   /*  é€Ÿåº¦è¡¨æ ¼ å•ä½ step/s æ­¥è¿›ç”µæœºçš„è„‰å†²é¢‘ç‡ */
-  float *decel_tab;   /*  é€Ÿåº¦è¡¨æ ¼ å•ä½ step/s æ­¥è¿›ç”µæœºçš„è„‰å†²é¢‘ç‡ */
-  float *ptr;         /*  é€Ÿåº¦æŒ‡é’ˆ */
-  int32_t dec_point;  /*  å‡é€Ÿç‚¹ */
+  int32_t vo;         /*  ³õËÙ¶È µ¥Î» step/s */
+  int32_t vt;         /*  Ä©ËÙ¶È µ¥Î» step/s */
+  int32_t accel_step; /*  ¼ÓËÙ¶ÎµÄ²½Êıµ¥Î» step */
+  int32_t decel_step; /*  ¼ÓËÙ¶ÎµÄ²½Êıµ¥Î» step */
+  float *accel_tab;   /*  ËÙ¶È±í¸ñ µ¥Î» step/s ²½½øµç»úµÄÂö³åÆµÂÊ */
+  float *decel_tab;   /*  ËÙ¶È±í¸ñ µ¥Î» step/s ²½½øµç»úµÄÂö³åÆµÂÊ */
+  float *ptr;         /*  ËÙ¶ÈÖ¸Õë */
+  int32_t dec_point;  /*  ¼õËÙµã */
   int32_t step;
   int32_t step_pos;
 } speed_calc_t;
 
 typedef enum
 {
-  STATE_ACCEL = 1,    /* ç”µæœºåŠ é€ŸçŠ¶æ€ */
-  STATE_AVESPEED = 2, /* ç”µæœºåŒ€é€ŸçŠ¶æ€ */
-  STATE_DECEL = 3,    /* ç”µæœºå‡é€ŸçŠ¶æ€ */
-  STATE_STOP = 0,     /* ç”µæœºåœæ­¢çŠ¶æ€ */
-  STATE_IDLE = 4,     /* ç”µæœºç©ºé—²çŠ¶æ€ */
+  STATE_ACCEL = 1,    /* µç»ú¼ÓËÙ×´Ì¬ */
+  STATE_AVESPEED = 2, /* µç»úÔÈËÙ×´Ì¬ */
+  STATE_DECEL = 3,    /* µç»ú¼õËÙ×´Ì¬ */
+  STATE_STOP = 0,     /* µç»úÍ£Ö¹×´Ì¬ */
+  STATE_IDLE = 4,     /* µç»ú¿ÕÏĞ×´Ì¬ */
 } motor_state_typedef;
 
 enum DIR
 {
-  CCW = 0, /*é€†æ—¶é’ˆ*/
-  CW       /*é¡ºæ—¶é’ˆ*/
+  CCW = 0, /*ÄæÊ±Õë*/
+  CW       /*Ë³Ê±Õë*/
 };
 
 enum EN
 {
-  EN_OFF = 0, /* å¤±èƒ½è„±æœºå¼•è„š */
-  EN_ON       /* ä½¿èƒ½è„±æœºå¼•è„š ä½¿èƒ½åç”µæœºåœæ­¢æ—‹è½¬ */
+  EN_OFF = 0, /* Ê§ÄÜÍÑ»úÒı½Å */
+  EN_ON       /* Ê¹ÄÜÍÑ»úÒı½Å Ê¹ÄÜºóµç»úÍ£Ö¹Ğı×ª */
 };
 
 /******************************************************************************************/
-/* æ­¥è¿›ç”µæœºæ¥å£åºå· */
+/* ²½½øµç»ú½Ó¿ÚĞòºÅ */
 #define STEPPER_MOTOR_1 1
 #define STEPPER_MOTOR_2 2
 #define STEPPER_MOTOR_3 3
 
-/* æ­¥è¿›ç”µæœºå¼•è„šå®šä¹‰*/
-/*----------------------- æ–¹å‘å¼•è„šæ§åˆ¶ -----------------------------------*/
-/* ç¡¬ä»¶å¯¹ç”µå¹³åšäº†å–åæ“ä½œï¼Œæ‰€ä»¥å½“ x = 1 æœ‰æ•ˆï¼Œx = 0æ—¶æ— æ•ˆ*/
-#define ST1_DIR(x) HAL_GPIO_WritePin(STEPPER1_DIR_GPIO_Port, STEPPER1_DIR_Pin, x ? GPIO_PIN_SET : GPIO_PIN_RESET)
-#define ST2_DIR(x) HAL_GPIO_WritePin(STEPPER2_DIR_GPIO_Port, STEPPER2_DIR_Pin, x ? GPIO_PIN_SET : GPIO_PIN_RESET);
+/* ²½½øµç»úÒı½Å¶¨Òå*/
+/*----------------------- ·½ÏòÒı½Å¿ØÖÆ -----------------------------------*/
+/* Ó²¼ş¶ÔµçÆ½×öÁËÈ¡·´²Ù×÷£¬ËùÒÔµ± x = 1 ÓĞĞ§£¬x = 0Ê±ÎŞĞ§*/
+#define ST1_DIR(x) HAL_GPIO_WritePin(STEPPER1_DIR_GPIO_Port, STEPPER1_DIR_Pin, x == 0 ? GPIO_PIN_SET : GPIO_PIN_RESET)
+#define ST2_DIR(x) HAL_GPIO_WritePin(STEPPER2_DIR_GPIO_Port, STEPPER2_DIR_Pin, x == 0 ? GPIO_PIN_SET : GPIO_PIN_RESET);
 
-/*----------------------- è„±æœºå¼•è„šæ§åˆ¶ -----------------------------------*/
-/* ç¡¬ä»¶å¯¹ç”µå¹³åšäº†å–åæ“ä½œï¼Œæ‰€ä»¥å½“ x = 1 æœ‰æ•ˆï¼Œx = 0æ—¶æ— æ•ˆ*/
-#define ST1_EN(x) HAL_GPIO_WritePin(STEPPER1_EN_GPIO_Port, STEPPER1_EN_Pin, x == 0? GPIO_PIN_SET : GPIO_PIN_RESET)
-#define ST2_EN(x) HAL_GPIO_WritePin(STEPPER2_EN_GPIO_Port, STEPPER2_EN_Pin, x == 0? GPIO_PIN_SET : GPIO_PIN_RESET)
+/*----------------------- ÍÑ»úÒı½Å¿ØÖÆ -----------------------------------*/
+/* Ó²¼ş¶ÔµçÆ½×öÁËÈ¡·´²Ù×÷£¬ËùÒÔµ± x = 1 ÓĞĞ§£¬x = 0Ê±ÎŞĞ§*/
+#define ST1_EN(x) HAL_GPIO_WritePin(STEPPER1_EN_GPIO_Port, STEPPER1_EN_Pin, x == 0 ? GPIO_PIN_SET : GPIO_PIN_RESET)
+#define ST2_EN(x) HAL_GPIO_WritePin(STEPPER2_EN_GPIO_Port, STEPPER2_EN_Pin, x == 0 ? GPIO_PIN_SET : GPIO_PIN_RESET)
 
 /******************************************************************************************/
-/* å¤–éƒ¨æ¥å£å‡½æ•°*/
-void stepper_init(void);              /* æ­¥è¿›ç”µæœºæ¥å£åˆå§‹åŒ– */
-void stepper_star(uint8_t motor_num); /* å¼€å¯æ­¥è¿›ç”µæœº */
-void stepper_stop(uint8_t motor_num); /* å…³é—­æ­¥è¿›ç”µæœº */
+/* Íâ²¿½Ó¿Úº¯Êı*/
+void stepper_init(void);              /* ²½½øµç»ú½Ó¿Ú³õÊ¼»¯ */
+void stepper_star(uint8_t motor_num); /* ¿ªÆô²½½øµç»ú */
+void stepper_stop(uint8_t motor_num); /* ¹Ø±Õ²½½øµç»ú */
 
-uint8_t calc_speed(int32_t vo, int32_t vt, float time);                                     /* è®¡ç®—é€Ÿåº¦è¡¨ */
-void stepmotor1_move_rel(int32_t vo, int32_t vt, float AcTime, float DeTime, int32_t step); /* ç”µæœº1 Så‹åŠ å‡é€Ÿè¿åŠ¨æ§åˆ¶å‡½æ•° */
-void stepmotor2_move_rel(int32_t vo, int32_t vt, float AcTime, float DeTime, int32_t step); /* ç”µæœº2 Så‹åŠ å‡é€Ÿè¿åŠ¨æ§åˆ¶å‡½æ•° */
-
+uint8_t calc_speed(int32_t vo, int32_t vt, float time);                                     /* ¼ÆËãËÙ¶È±í */
+void stepmotor1_move_rel(int32_t vo, int32_t vt, float AcTime, float DeTime, int32_t step); /* µç»ú1 SĞÍ¼Ó¼õËÙÔË¶¯¿ØÖÆº¯Êı */
+void stepmotor2_move_rel(int32_t vo, int32_t vt, float AcTime, float DeTime, int32_t step); /* µç»ú2 SĞÍ¼Ó¼õËÙÔË¶¯¿ØÖÆº¯Êı */
+void stepper_set_angle(uint16_t angle, uint8_t dir, uint8_t motor_num);
 #endif

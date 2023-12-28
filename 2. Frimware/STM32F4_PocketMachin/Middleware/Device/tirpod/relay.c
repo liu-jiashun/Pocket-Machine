@@ -1,17 +1,17 @@
 #include "relay.h"
 
 /**
- * @brief     :åˆå§‹åŒ–
+ * @brief     :³õÊ¼»¯
  * @attention :
  */
 void relay_init(void)
 {
-	// å¼•è„šåˆå§‹åŒ–ï¼Œgpio.c æ–‡ä»¶ä¸­å·²å®Œæˆ
+	// Òı½Å³õÊ¼»¯£¬gpio.c ÎÄ¼şÖĞÒÑÍê³É
 }
 
 /**
- * @brief     :ç»§ç”µå™¨å¼€å…³æ§åˆ¶
- * @param     state :ON æ‰“å¼€ï¼ŒOFF å…³é—­
+ * @brief     :¼ÌµçÆ÷¿ª¹Ø¿ØÖÆ
+ * @param     state :ON ´ò¿ª£¬OFF ¹Ø±Õ
  * @attention :
  */
 void relay_ctl(uint8_t state)

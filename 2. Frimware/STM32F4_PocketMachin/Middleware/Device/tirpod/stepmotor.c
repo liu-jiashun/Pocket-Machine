@@ -3,31 +3,33 @@
 #include <stdio.h>
 #include <math.h>
 
+// STEPPER_MOTOR g_stepper;
+
 /**
- * @brief     :æ­¥è¿›ç”µæœºåˆå§‹åŒ–
+ * @brief     :²½½øµç»ú³õÊ¼»¯
  * @attention :
  */
 void stepper_init(void)
 {
-  // å¼•è„šåˆå§‹åŒ–ï¼Œgpio.c æ–‡ä»¶ä¸­å·²å®Œæˆ
+  // Òı½Å³õÊ¼»¯£¬gpio.c ÎÄ¼şÖĞÒÑÍê³É
 
-  /* å¯åŠ¨ç”µæœºå®šæ—¶å™¨ */
+  /* Æô¶¯µç»ú¶¨Ê±Æ÷ */
   HAL_TIM_Base_Start(&htim1);
   HAL_TIM_Base_Start(&htim4);
 
-  /* å¤±èƒ½ç”µæœº */
+  /* Ê§ÄÜµç»ú */
   ST1_EN(EN_OFF);
   ST2_EN(EN_OFF);
 }
 
 /**
- * @brief     :å¼€å¯æ­¥è¿›ç”µæœº
- * @param     motor_num :æ­¥è¿›ç”µæœºæ¥å£åºå·
+ * @brief     :¿ªÆô²½½øµç»ú
+ * @param     motor_num :²½½øµç»ú½Ó¿ÚĞòºÅ
  * @attention :
  */
 void stepper_star(uint8_t motor_num)
 {
-  /* å¼€å¯å¯¹åº”PWMé€šé“ */
+  /* ¿ªÆô¶ÔÓ¦PWMÍ¨µÀ */
   switch (motor_num)
   {
   case STEPPER_MOTOR_1:
@@ -40,13 +42,41 @@ void stepper_star(uint8_t motor_num)
 }
 
 /**
- * @brief     :åœæ­¢æ­¥è¿›ç”µæœº
- * @param     motor_num :æ­¥è¿›ç”µæœºæ¥å£åºå·
+ * @brief       ¿ªÆô²½½øµç»ú
+ * @param       motor_num: ²½½øµç»ú½Ó¿ÚĞòºÅ
+ * @param       dir      : ²½½øµç»úĞı×ª·½Ïò
+ * @retval      ÎŞ
+ */
+void stepper_star_dir(uint8_t motor_num, uint8_t dir)
+{
+  switch (motor_num)
+  {
+  /* ¿ªÆô¶ÔÓ¦PWMÍ¨µÀ */
+  case STEPPER_MOTOR_1:
+  {
+    ST1_DIR(dir);
+    HAL_TIM_OC_Start_IT(&htim4, TIM_CHANNEL_1);
+    break;
+  }
+  case STEPPER_MOTOR_2:
+  {
+    ST2_DIR(dir);
+    HAL_TIM_OC_Start_IT(&htim1, TIM_CHANNEL_1);
+    break;
+  }
+  default:
+    break;
+  }
+}
+
+/**
+ * @brief     :Í£Ö¹²½½øµç»ú
+ * @param     motor_num :²½½øµç»ú½Ó¿ÚĞòºÅ
  * @attention :
  */
 void stepper_stop(uint8_t motor_num)
 {
-  /* å…³é—­å¯¹åº”PWMé€šé“ */
+  /* ¹Ø±Õ¶ÔÓ¦PWMÍ¨µÀ */
   switch (motor_num)
   {
   case STEPPER_MOTOR_1:
@@ -60,105 +90,123 @@ void stepper_stop(uint8_t motor_num)
   }
 }
 
-/****************************************Så‹åŠ å‡é€Ÿè¿åŠ¨*****************************************************/
-volatile int32_t g_step_pos = 0;              /* å½“å‰ä½ç½® */
-volatile uint16_t g_toggle_pulse = 0;         /* è„‰å†²é¢‘ç‡æ§åˆ¶ */
-motor_state_typedef g_motor_sta = STATE_IDLE; /* ç”µæœºçŠ¶æ€ */
+// /**
+//  * @brief       ½«ĞèÒª×ª¶¯µÄ½Ç¶È×ª»»³ÉÂö³åÊı
+//  * @param       angle    : ĞèÒª×ª¶¯µÄ½Ç¶ÈÖµ
+//  * @param       dir      : Ğı×ª·½Ïò
+//  * @param       motor_num: ²½½øµç»ú½Ó¿ÚĞòºÅ
+//  * @retval      ÎŞ
+//  */
+// void stepper_set_angle(uint16_t angle, uint8_t dir, uint8_t motor_num)
+// {
+//   g_stepper.pulse_count = angle / MAX_STEP_ANGLE;
+//   if (g_stepper.pulse_count == 0)
+//   {
+//     stepper_stop(motor_num);
+//   }
+//   else
+//     stepper_star_dir(motor_num, dir);
+// }
+
+/****************************************SĞÍ¼Ó¼õËÙÔË¶¯*****************************************************/
+volatile int32_t g_step_pos = 0;              /* µ±Ç°Î»ÖÃ */
+volatile uint16_t g_toggle_pulse = 0;         /* Âö³åÆµÂÊ¿ØÖÆ */
+motor_state_typedef g_motor_sta = STATE_IDLE; /* µç»ú×´Ì¬ */
 speed_calc_t g_calc_t = {0};
 
-__IO uint32_t g_add_pulse_count = 0; /* è„‰å†²ä¸ªæ•°ç´¯è®¡ */
+__IO uint32_t g_add_pulse_count = 0; /* Âö³å¸öÊıÀÛ¼Æ */
 
 /**
- * @brief       é€Ÿåº¦è¡¨è®¡ç®—å‡½æ•°
- * @param       vo,åˆé€Ÿåº¦;vt,æœ«é€Ÿåº¦;time,åŠ é€Ÿæ—¶é—´
- * @retval      TRUEï¼šæˆåŠŸï¼›FALSEï¼šå¤±è´¥
+ * @brief       ËÙ¶È±í¼ÆËãº¯Êı
+ * @param       vo,³õËÙ¶È;vt,Ä©ËÙ¶È;time,¼ÓËÙÊ±¼ä
+ * @retval      TRUE£º³É¹¦£»FALSE£ºÊ§°Ü
  */
 uint8_t calc_speed(int32_t vo, int32_t vt, float time)
 {
   uint8_t is_dec = FALSE;
   int32_t i = 0;
-  int32_t vm = 0;             /* ä¸­é—´ç‚¹é€Ÿåº¦ */
-  int32_t inc_acc_stp = 0;    /* åŠ åŠ é€Ÿæ‰€éœ€çš„æ­¥æ•° */
-  int32_t dec_acc_stp = 0;    /* å‡åŠ é€Ÿæ‰€éœ€çš„æ­¥æ•° */
-  int32_t accel_step = 0;     /* åŠ é€Ÿæˆ–å‡é€Ÿéœ€è¦çš„æ­¥æ•° */
-  float jerk = 0;             /* åŠ åŠ é€Ÿåº¦ */
-  float ti = 0;               /* æ—¶é—´é—´éš” dt */
-  float sum_t = 0;            /* æ—¶é—´ç´¯åŠ é‡ */
-  float delta_v = 0;          /* é€Ÿåº¦çš„å¢é‡dv */
-  float ti_cube = 0;          /* æ—¶é—´é—´éš”çš„ç«‹æ–¹ */
-  float *velocity_tab = NULL; /* é€Ÿåº¦è¡¨æ ¼æŒ‡é’ˆ */
+  int32_t vm = 0;             /* ÖĞ¼äµãËÙ¶È */
+  int32_t inc_acc_stp = 0;    /* ¼Ó¼ÓËÙËùĞèµÄ²½Êı */
+  int32_t dec_acc_stp = 0;    /* ¼õ¼ÓËÙËùĞèµÄ²½Êı */
+  int32_t accel_step = 0;     /* ¼ÓËÙ»ò¼õËÙĞèÒªµÄ²½Êı */
+  float jerk = 0;             /* ¼Ó¼ÓËÙ¶È */
+  float ti = 0;               /* Ê±¼ä¼ä¸ô dt */
+  float sum_t = 0;            /* Ê±¼äÀÛ¼ÓÁ¿ */
+  float delta_v = 0;          /* ËÙ¶ÈµÄÔöÁ¿dv */
+  float ti_cube = 0;          /* Ê±¼ä¼ä¸ôµÄÁ¢·½ */
+  float *velocity_tab = NULL; /* ËÙ¶È±í¸ñÖ¸Õë */
 
-  if (vo > vt)                          /* åˆé€Ÿåº¦æ¯”æœ«é€Ÿåº¦å¤§,åšå‡é€Ÿè¿åŠ¨,æ•°å€¼å˜åŒ–è·ŸåŠ é€Ÿè¿åŠ¨ç›¸åŒ */
-  {                                     /* åªæ˜¯å»ºè¡¨çš„æ—¶å€™æ³¨æ„å°†é€Ÿåº¦å€’åº */
-    is_dec = TRUE;                      /* å‡é€Ÿæ®µ */
-    g_calc_t.vo = ROUNDPS_2_STEPPS(vt); /* è½¬æ¢å•ä½ èµ·é€Ÿ:step/s */
-    g_calc_t.vt = ROUNDPS_2_STEPPS(vo); /* è½¬æ¢å•ä½ æœ«é€Ÿ:step/s */
+  if (vo > vt)                          /* ³õËÙ¶È±ÈÄ©ËÙ¶È´ó,×ö¼õËÙÔË¶¯,ÊıÖµ±ä»¯¸ú¼ÓËÙÔË¶¯ÏàÍ¬ */
+  {                                     /* Ö»ÊÇ½¨±íµÄÊ±ºò×¢Òâ½«ËÙ¶Èµ¹Ğò */
+    is_dec = TRUE;                      /* ¼õËÙ¶Î */
+    g_calc_t.vo = ROUNDPS_2_STEPPS(vt); /* ×ª»»µ¥Î» ÆğËÙ:step/s */
+    g_calc_t.vt = ROUNDPS_2_STEPPS(vo); /* ×ª»»µ¥Î» Ä©ËÙ:step/s */
   }
   else
   {
-    is_dec = FALSE; /* åŠ é€Ÿæ®µ */
+    is_dec = FALSE; /* ¼ÓËÙ¶Î */
     g_calc_t.vo = ROUNDPS_2_STEPPS(vo);
     g_calc_t.vt = ROUNDPS_2_STEPPS(vt);
   }
 
-  time = ACCEL_TIME(time); /* å¾—åˆ°åŠ åŠ é€Ÿæ®µçš„æ—¶é—´ */
+  time = ACCEL_TIME(time); /* µÃµ½¼Ó¼ÓËÙ¶ÎµÄÊ±¼ä */
   // printf("time=%f\r\n", time);
-  vm = (g_calc_t.vo + g_calc_t.vt) / 2; /* è®¡ç®—ä¸­ç‚¹é€Ÿåº¦ */
+  vm = (g_calc_t.vo + g_calc_t.vt) / 2; /* ¼ÆËãÖĞµãËÙ¶È */
 
-  jerk = fabs(2.0f * (vm - g_calc_t.vo) / (time * time)); /* æ ¹æ®ä¸­ç‚¹é€Ÿåº¦è®¡ç®—åŠ åŠ é€Ÿåº¦ */
+  jerk = fabs(2.0f * (vm - g_calc_t.vo) / (time * time)); /* ¸ù¾İÖĞµãËÙ¶È¼ÆËã¼Ó¼ÓËÙ¶È */
 
-  inc_acc_stp = (int32_t)(g_calc_t.vo * time + INCACCELSTEP(jerk, time)); /* åŠ åŠ é€Ÿéœ€è¦çš„æ­¥æ•° */
+  inc_acc_stp = (int32_t)(g_calc_t.vo * time + INCACCELSTEP(jerk, time)); /* ¼Ó¼ÓËÙĞèÒªµÄ²½Êı */
 
-  dec_acc_stp = (int32_t)((g_calc_t.vt + g_calc_t.vo) * time - inc_acc_stp); /* å‡åŠ é€Ÿéœ€è¦çš„æ­¥æ•° S = vt * time - S1 */
+  dec_acc_stp = (int32_t)((g_calc_t.vt + g_calc_t.vo) * time - inc_acc_stp); /* ¼õ¼ÓËÙĞèÒªµÄ²½Êı S = vt * time - S1 */
 
-  /* ç”³è¯·å†…å­˜ç©ºé—´å­˜æ”¾é€Ÿåº¦è¡¨ */
-  accel_step = dec_acc_stp + inc_acc_stp; /* åŠ é€Ÿéœ€è¦çš„æ­¥æ•° */
-  if (accel_step % 2 != 0)                /* ç”±äºæµ®ç‚¹å‹æ•°æ®è½¬æ¢æˆæ•´å½¢æ•°æ®å¸¦æ¥äº†è¯¯å·®,æ‰€ä»¥è¿™é‡ŒåŠ 1 */
+  /* ÉêÇëÄÚ´æ¿Õ¼ä´æ·ÅËÙ¶È±í */
+  accel_step = dec_acc_stp + inc_acc_stp; /* ¼ÓËÙĞèÒªµÄ²½Êı */
+  if (accel_step % 2 != 0)                /* ÓÉÓÚ¸¡µãĞÍÊı¾İ×ª»»³ÉÕûĞÎÊı¾İ´øÀ´ÁËÎó²î,ËùÒÔÕâÀï¼Ó1 */
     accel_step += 1;
-  /* malloç”³è¯·å†…å­˜ç©ºé—´,è®°å¾—é‡Šæ”¾ */
+  /* malloÉêÇëÄÚ´æ¿Õ¼ä,¼ÇµÃÊÍ·Å */
   velocity_tab = (float *)(mymalloc(SRAMIN, ((accel_step + 1) * sizeof(float))));
   if (velocity_tab == NULL)
   {
-    // printf("å†…å­˜ä¸è¶³!è¯·ä¿®æ”¹å‚æ•°\r\n");
+    // printf("ÄÚ´æ²»×ã!ÇëĞŞ¸Ä²ÎÊı\r\n");
     return FALSE;
   }
   /*
-   * ç›®æ ‡çš„Så‹é€Ÿåº¦æ›²çº¿æ˜¯å¯¹æ—¶é—´çš„æ–¹ç¨‹,ä½†æ˜¯åœ¨æ§åˆ¶ç”µæœºçš„æ—¶å€™åˆ™æ˜¯ä»¥æ­¥è¿›çš„æ–¹å¼æ§åˆ¶,æ‰€ä»¥è¿™é‡Œå¯¹V-tæ›²çº¿åšè½¬æ¢
-   * å¾—åˆ°V-Sæ›²çº¿,è®¡ç®—å¾—åˆ°çš„é€Ÿåº¦è¡¨æ˜¯å…³äºæ­¥æ•°çš„é€Ÿåº¦å€¼.ä½¿å¾—æ­¥è¿›ç”µæœºæ¯ä¸€æ­¥éƒ½åœ¨æ§åˆ¶å½“ä¸­
+   * Ä¿±êµÄSĞÍËÙ¶ÈÇúÏßÊÇ¶ÔÊ±¼äµÄ·½³Ì,µ«ÊÇÔÚ¿ØÖÆµç»úµÄÊ±ºòÔòÊÇÒÔ²½½øµÄ·½Ê½¿ØÖÆ,ËùÒÔÕâÀï¶ÔV-tÇúÏß×ö×ª»»
+   * µÃµ½V-SÇúÏß,¼ÆËãµÃµ½µÄËÙ¶È±íÊÇ¹ØÓÚ²½ÊıµÄËÙ¶ÈÖµ.Ê¹µÃ²½½øµç»úÃ¿Ò»²½¶¼ÔÚ¿ØÖÆµ±ÖĞ
    */
-  /* è®¡ç®—ç¬¬ä¸€æ­¥é€Ÿåº¦,æ ¹æ®ç¬¬ä¸€æ­¥çš„é€Ÿåº¦å€¼è¾¾åˆ°ä¸‹ä¸€æ­¥çš„æ—¶é—´ */
-  ti_cube = 6.0f * 1.0f / jerk;  /* æ ¹æ®ä½ç§»å’Œæ—¶é—´çš„å…¬å¼S = 1/6 * J * ti^3 ç¬¬1æ­¥çš„æ—¶é—´:ti^3 = 6 * 1 / jerk */
+  /* ¼ÆËãµÚÒ»²½ËÙ¶È,¸ù¾İµÚÒ»²½µÄËÙ¶ÈÖµ´ïµ½ÏÂÒ»²½µÄÊ±¼ä */
+  ti_cube = 6.0f * 1.0f / jerk;  /* ¸ù¾İÎ»ÒÆºÍÊ±¼äµÄ¹«Ê½S = 1/6 * J * ti^3 µÚ1²½µÄÊ±¼ä:ti^3 = 6 * 1 / jerk */
   ti = pow(ti_cube, (1 / 3.0f)); /* ti */
   sum_t = ti;
-  delta_v = 0.5f * jerk * pow(sum_t, 2); /* ç¬¬ä¸€æ­¥çš„é€Ÿåº¦ */
+  delta_v = 0.5f * jerk * pow(sum_t, 2); /* µÚÒ»²½µÄËÙ¶È */
   velocity_tab[0] = g_calc_t.vo + delta_v;
 
   /*****************************************************/
-  if (velocity_tab[0] <= SPEED_MIN) /* ä»¥å½“å‰å®šæ—¶å™¨é¢‘ç‡æ‰€èƒ½è¾¾åˆ°çš„æœ€ä½é€Ÿåº¦ */
+  if (velocity_tab[0] <= SPEED_MIN) /* ÒÔµ±Ç°¶¨Ê±Æ÷ÆµÂÊËùÄÜ´ïµ½µÄ×îµÍËÙ¶È */
     velocity_tab[0] = SPEED_MIN;
 
   /*****************************************************/
 
   for (i = 1; i < accel_step; i++)
   {
-    /* æ­¥è¿›ç”µæœºçš„é€Ÿåº¦å°±æ˜¯å®šæ—¶å™¨è„‰å†²è¾“å‡ºé¢‘ç‡,å¯ä»¥è®¡ç®—å‡ºæ¯ä¸€æ­¥çš„æ—¶é—´ */
-    /* å¾—åˆ°ç¬¬i-1æ­¥çš„æ—¶é—´ */
-    ti = 1.0f / velocity_tab[i - 1]; /* ç”µæœºæ¯èµ°ä¸€æ­¥çš„æ—¶é—´ ti = 1 / Vn-1 */
-    /* åŠ åŠ é€Ÿæ®µé€Ÿåº¦è®¡ç®— */
+    /* ²½½øµç»úµÄËÙ¶È¾ÍÊÇ¶¨Ê±Æ÷Âö³åÊä³öÆµÂÊ,¿ÉÒÔ¼ÆËã³öÃ¿Ò»²½µÄÊ±¼ä */
+    /* µÃµ½µÚi-1²½µÄÊ±¼ä */
+    ti = 1.0f / velocity_tab[i - 1]; /* µç»úÃ¿×ßÒ»²½µÄÊ±¼ä ti = 1 / Vn-1 */
+    /* ¼Ó¼ÓËÙ¶ÎËÙ¶È¼ÆËã */
     if (i < inc_acc_stp)
     {
-      sum_t += ti;                             /* ä»0å¼€å§‹åˆ°içš„æ—¶é—´ç´¯ç§¯ */
-      delta_v = 0.5f * jerk * pow(sum_t, 2);   /* é€Ÿåº¦çš„å˜åŒ–é‡: dV = 1/2 * jerk * ti^2 */
-      velocity_tab[i] = g_calc_t.vo + delta_v; /* å¾—åˆ°åŠ åŠ é€Ÿæ®µæ¯ä¸€æ­¥å¯¹åº”çš„é€Ÿåº¦ */
-      /* å½“æœ€åä¸€æ­¥çš„æ—¶å€™,æ—¶é—´å¹¶ä¸ä¸¥æ ¼ç­‰äºtime,æ‰€ä»¥è¿™é‡Œè¦ç¨ä½œå¤„ç†,ä½œä¸ºå‡åŠ é€Ÿæ®µçš„æ—¶é—´ */
+      sum_t += ti;                             /* ´Ó0¿ªÊ¼µ½iµÄÊ±¼äÀÛ»ı */
+      delta_v = 0.5f * jerk * pow(sum_t, 2);   /* ËÙ¶ÈµÄ±ä»¯Á¿: dV = 1/2 * jerk * ti^2 */
+      velocity_tab[i] = g_calc_t.vo + delta_v; /* µÃµ½¼Ó¼ÓËÙ¶ÎÃ¿Ò»²½¶ÔÓ¦µÄËÙ¶È */
+      /* µ±×îºóÒ»²½µÄÊ±ºò,Ê±¼ä²¢²»ÑÏ¸ñµÈÓÚtime,ËùÒÔÕâÀïÒªÉÔ×÷´¦Àí,×÷Îª¼õ¼ÓËÙ¶ÎµÄÊ±¼ä */
       if (i == inc_acc_stp - 1)
         sum_t = fabs(sum_t - time);
     }
-    /* å‡åŠ é€Ÿæ®µé€Ÿåº¦è®¡ç®— */
+    /* ¼õ¼ÓËÙ¶ÎËÙ¶È¼ÆËã */
     else
     {
-      sum_t += ti;                                        /* æ—¶é—´ç´¯è®¡ */
-      delta_v = 0.5f * jerk * pow(fabs(time - sum_t), 2); /* dV = 1/2 * jerk *(T-t)^2 çœ‹è¿™ä¸ªé€†å‘çœ‹å‡åŠ é€Ÿçš„å›¾ */
+      sum_t += ti;                                        /* Ê±¼äÀÛ¼Æ */
+      delta_v = 0.5f * jerk * pow(fabs(time - sum_t), 2); /* dV = 1/2 * jerk *(T-t)^2 ¿´Õâ¸öÄæÏò¿´¼õ¼ÓËÙµÄÍ¼ */
       velocity_tab[i] = g_calc_t.vt - delta_v;            /* V = vt - delta_v */
       if (velocity_tab[i] >= g_calc_t.vt)
       {
@@ -167,38 +215,38 @@ uint8_t calc_speed(int32_t vo, int32_t vt, float time)
       }
     }
   }
-  if (is_dec == TRUE) /* å‡é€Ÿ */
+  if (is_dec == TRUE) /* ¼õËÙ */
   {
     float tmp_Speed = 0;
-    /* å€’åºæ’åº */
+    /* µ¹ĞòÅÅĞò */
     for (i = 0; i < (accel_step / 2); i++)
     {
       tmp_Speed = velocity_tab[i];
-      velocity_tab[i] = velocity_tab[accel_step - 1 - i]; /* å¤´å°¾é€Ÿåº¦å¯¹æ¢ */
+      velocity_tab[i] = velocity_tab[accel_step - 1 - i]; /* Í·Î²ËÙ¶È¶Ô»» */
       velocity_tab[accel_step - 1 - i] = tmp_Speed;
     }
 
-    g_calc_t.decel_tab = velocity_tab; /* å‡é€Ÿæ®µé€Ÿåº¦è¡¨ */
-    g_calc_t.decel_step = accel_step;  /* å‡é€Ÿæ®µçš„æ€»æ­¥æ•° */
+    g_calc_t.decel_tab = velocity_tab; /* ¼õËÙ¶ÎËÙ¶È±í */
+    g_calc_t.decel_step = accel_step;  /* ¼õËÙ¶ÎµÄ×Ü²½Êı */
   }
-  else /* åŠ é€Ÿ */
+  else /* ¼ÓËÙ */
   {
-    g_calc_t.accel_tab = velocity_tab; /* åŠ é€Ÿæ®µé€Ÿåº¦è¡¨ */
-    g_calc_t.accel_step = accel_step;  /* åŠ é€Ÿæ®µçš„æ€»æ­¥æ•° */
+    g_calc_t.accel_tab = velocity_tab; /* ¼ÓËÙ¶ÎËÙ¶È±í */
+    g_calc_t.accel_step = accel_step;  /* ¼ÓËÙ¶ÎµÄ×Ü²½Êı */
   }
   return TRUE;
 }
 
 /**
- * @brief       ç”µæœº1 Så‹åŠ å‡é€Ÿè¿åŠ¨
- * @param       vo:åˆé€Ÿåº¦;vt:æœ«é€Ÿåº¦;AcTime:åŠ é€Ÿæ—¶é—´;DeTime:å‡é€Ÿæ—¶é—´;step:æ­¥æ•°;
- * @retval      æ— 
+ * @brief       µç»ú1 SĞÍ¼Ó¼õËÙÔË¶¯
+ * @param       vo:³õËÙ¶È;vt:Ä©ËÙ¶È;AcTime:¼ÓËÙÊ±¼ä;DeTime:¼õËÙÊ±¼ä;step:²½Êı;
+ * @retval      ÎŞ
  */
 void stepmotor1_move_rel(int32_t vo, int32_t vt, float AcTime, float DeTime, int32_t step)
 {
-  if (calc_speed(vo, vt, AcTime) == FALSE) /* è®¡ç®—å‡ºåŠ é€Ÿæ®µçš„é€Ÿåº¦å’Œæ­¥æ•° */
+  if (calc_speed(vo, vt, AcTime) == FALSE) /* ¼ÆËã³ö¼ÓËÙ¶ÎµÄËÙ¶ÈºÍ²½Êı */
     return;
-  if (calc_speed(vt, vo, DeTime) == FALSE) /* è®¡ç®—å‡ºå‡é€Ÿæ®µçš„é€Ÿåº¦å’Œæ­¥æ•° */
+  if (calc_speed(vt, vo, DeTime) == FALSE) /* ¼ÆËã³ö¼õËÙ¶ÎµÄËÙ¶ÈºÍ²½Êı */
     return;
 
   if (step < 0)
@@ -211,42 +259,42 @@ void stepmotor1_move_rel(int32_t vo, int32_t vt, float AcTime, float DeTime, int
     ST1_DIR(CW);
   }
 
-  if (step >= (g_calc_t.decel_step + g_calc_t.accel_step)) /* å½“æ€»æ­¥æ•°å¤§äºç­‰äºåŠ å‡é€Ÿåº¦æ­¥æ•°ç›¸åŠ æ—¶ï¼Œæ‰å¯ä»¥å®ç°å®Œæ•´çš„Så½¢åŠ å‡é€Ÿ */
+  if (step >= (g_calc_t.decel_step + g_calc_t.accel_step)) /* µ±×Ü²½Êı´óÓÚµÈÓÚ¼Ó¼õËÙ¶È²½ÊıÏà¼ÓÊ±£¬²Å¿ÉÒÔÊµÏÖÍêÕûµÄSĞÎ¼Ó¼õËÙ */
   {
     g_calc_t.step = step;
-    g_calc_t.dec_point = g_calc_t.step - g_calc_t.decel_step; /* å¼€å§‹å‡é€Ÿçš„æ­¥æ•° */
+    g_calc_t.dec_point = g_calc_t.step - g_calc_t.decel_step; /* ¿ªÊ¼¼õËÙµÄ²½Êı */
   }
-  else /* æ­¥æ•°ä¸è¶³ä»¥è¿›è¡Œè¶³å¤Ÿçš„åŠ å‡é€Ÿ */
+  else /* ²½Êı²»×ãÒÔ½øĞĞ×ã¹»µÄ¼Ó¼õËÙ */
   {
-    /* æ­¥æ•°ä¸è¶³ä¸è¶³ä»¥è¿åŠ¨ï¼Œè¦æŠŠå‰é¢ç”³è¯·çš„é€Ÿåº¦è¡¨æ‰€å å†…å­˜é‡Šæ”¾ï¼Œä»¥ä¾¿åç»­å¯é‡å¤ç”³è¯· */
-    myfree(SRAMIN, g_calc_t.accel_tab); /* é‡Šæ”¾åŠ é€Ÿæ®µé€Ÿåº¦è¡¨ */
-    myfree(SRAMIN, g_calc_t.decel_tab); /* é‡Šæ”¾å‡é€Ÿæ®µé€Ÿåº¦è¡¨ */
-    // printf("æ­¥æ•°ä¸è¶³ï¼Œå‚æ•°è®¾ç½®é”™è¯¯!\r\n");
+    /* ²½Êı²»×ã²»×ãÒÔÔË¶¯£¬Òª°ÑÇ°ÃæÉêÇëµÄËÙ¶È±íËùÕ¼ÄÚ´æÊÍ·Å£¬ÒÔ±ãºóĞø¿ÉÖØ¸´ÉêÇë */
+    myfree(SRAMIN, g_calc_t.accel_tab); /* ÊÍ·Å¼ÓËÙ¶ÎËÙ¶È±í */
+    myfree(SRAMIN, g_calc_t.decel_tab); /* ÊÍ·Å¼õËÙ¶ÎËÙ¶È±í */
+    printf("²½Êı²»×ã£¬²ÎÊıÉèÖÃ´íÎó!\r\n");
     return;
   }
   g_calc_t.step_pos = 0;
-  g_motor_sta = STATE_ACCEL; /* ç”µæœºä¸ºåŠ é€ŸçŠ¶æ€ */
+  g_motor_sta = STATE_ACCEL; /* µç»úÎª¼ÓËÙ×´Ì¬ */
 
-  g_calc_t.ptr = g_calc_t.accel_tab; /* æŠŠåŠ é€Ÿæ®µçš„é€Ÿåº¦è¡¨å­˜å‚¨åˆ°ptré‡Œè¾¹ */
+  g_calc_t.ptr = g_calc_t.accel_tab; /* °Ñ¼ÓËÙ¶ÎµÄËÙ¶È±í´æ´¢µ½ptrÀï±ß */
   g_toggle_pulse = (uint32_t)(T1_FREQ / (*g_calc_t.ptr));
   g_calc_t.ptr++;
 
   __HAL_TIM_SET_COUNTER(&htim4, 0);
-  __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1, (uint16_t)(g_toggle_pulse / 2)); /*  è®¾ç½®å®šæ—¶å™¨æ¯”è¾ƒå€¼ */
-  HAL_TIM_OC_Start_IT(&htim4, TIM_CHANNEL_1);                                   /* ä½¿èƒ½å®šæ—¶å™¨é€šé“ */
+  __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1, (uint16_t)(g_toggle_pulse / 2)); /*  ÉèÖÃ¶¨Ê±Æ÷±È½ÏÖµ */
+  HAL_TIM_OC_Start_IT(&htim4, TIM_CHANNEL_1);                                   /* Ê¹ÄÜ¶¨Ê±Æ÷Í¨µÀ */
   ST1_EN(EN_ON);
 }
 
 /**
- * @brief       ç”µæœº2 Så‹åŠ å‡é€Ÿè¿åŠ¨
- * @param       vo:åˆé€Ÿåº¦;vt:æœ«é€Ÿåº¦;AcTime:åŠ é€Ÿæ—¶é—´;DeTime:å‡é€Ÿæ—¶é—´;step:æ­¥æ•°;
- * @retval      æ— 
+ * @brief       µç»ú2 SĞÍ¼Ó¼õËÙÔË¶¯
+ * @param       vo:³õËÙ¶È;vt:Ä©ËÙ¶È;AcTime:¼ÓËÙÊ±¼ä;DeTime:¼õËÙÊ±¼ä;step:²½Êı;
+ * @retval      ÎŞ
  */
 void stepmotor2_move_rel(int32_t vo, int32_t vt, float AcTime, float DeTime, int32_t step)
 {
-  if (calc_speed(vo, vt, AcTime) == FALSE) /* è®¡ç®—å‡ºåŠ é€Ÿæ®µçš„é€Ÿåº¦å’Œæ­¥æ•° */
+  if (calc_speed(vo, vt, AcTime) == FALSE) /* ¼ÆËã³ö¼ÓËÙ¶ÎµÄËÙ¶ÈºÍ²½Êı */
     return;
-  if (calc_speed(vt, vo, DeTime) == FALSE) /* è®¡ç®—å‡ºå‡é€Ÿæ®µçš„é€Ÿåº¦å’Œæ­¥æ•° */
+  if (calc_speed(vt, vo, DeTime) == FALSE) /* ¼ÆËã³ö¼õËÙ¶ÎµÄËÙ¶ÈºÍ²½Êı */
     return;
 
   if (step < 0)
@@ -259,37 +307,41 @@ void stepmotor2_move_rel(int32_t vo, int32_t vt, float AcTime, float DeTime, int
     ST2_DIR(CW);
   }
 
-  if (step >= (g_calc_t.decel_step + g_calc_t.accel_step)) /* å½“æ€»æ­¥æ•°å¤§äºç­‰äºåŠ å‡é€Ÿåº¦æ­¥æ•°ç›¸åŠ æ—¶ï¼Œæ‰å¯ä»¥å®ç°å®Œæ•´çš„Så½¢åŠ å‡é€Ÿ */
+  if (step >= (g_calc_t.decel_step + g_calc_t.accel_step)) /* µ±×Ü²½Êı´óÓÚµÈÓÚ¼Ó¼õËÙ¶È²½ÊıÏà¼ÓÊ±£¬²Å¿ÉÒÔÊµÏÖÍêÕûµÄSĞÎ¼Ó¼õËÙ */
   {
     g_calc_t.step = step;
-    g_calc_t.dec_point = g_calc_t.step - g_calc_t.decel_step; /* å¼€å§‹å‡é€Ÿçš„æ­¥æ•° */
+    g_calc_t.dec_point = g_calc_t.step - g_calc_t.decel_step; /* ¿ªÊ¼¼õËÙµÄ²½Êı */
   }
-  else /* æ­¥æ•°ä¸è¶³ä»¥è¿›è¡Œè¶³å¤Ÿçš„åŠ å‡é€Ÿ */
+  else /* ²½Êı²»×ãÒÔ½øĞĞ×ã¹»µÄ¼Ó¼õËÙ */
   {
-    /* æ­¥æ•°ä¸è¶³ä¸è¶³ä»¥è¿åŠ¨ï¼Œè¦æŠŠå‰é¢ç”³è¯·çš„é€Ÿåº¦è¡¨æ‰€å å†…å­˜é‡Šæ”¾ï¼Œä»¥ä¾¿åç»­å¯é‡å¤ç”³è¯· */
-    myfree(SRAMIN, g_calc_t.accel_tab); /* é‡Šæ”¾åŠ é€Ÿæ®µé€Ÿåº¦è¡¨ */
-    myfree(SRAMIN, g_calc_t.decel_tab); /* é‡Šæ”¾å‡é€Ÿæ®µé€Ÿåº¦è¡¨ */
-    // printf("æ­¥æ•°ä¸è¶³ï¼Œå‚æ•°è®¾ç½®é”™è¯¯!\r\n");
+    /* ²½Êı²»×ã²»×ãÒÔÔË¶¯£¬Òª°ÑÇ°ÃæÉêÇëµÄËÙ¶È±íËùÕ¼ÄÚ´æÊÍ·Å£¬ÒÔ±ãºóĞø¿ÉÖØ¸´ÉêÇë */
+    myfree(SRAMIN, g_calc_t.accel_tab); /* ÊÍ·Å¼ÓËÙ¶ÎËÙ¶È±í */
+    myfree(SRAMIN, g_calc_t.decel_tab); /* ÊÍ·Å¼õËÙ¶ÎËÙ¶È±í */
+    printf("²½Êı²»×ã£¬²ÎÊıÉèÖÃ´íÎó!\r\n");
     return;
   }
   g_calc_t.step_pos = 0;
-  g_motor_sta = STATE_ACCEL; /* ç”µæœºä¸ºåŠ é€ŸçŠ¶æ€ */
+  g_motor_sta = STATE_ACCEL; /* µç»úÎª¼ÓËÙ×´Ì¬ */
 
-  g_calc_t.ptr = g_calc_t.accel_tab; /* æŠŠåŠ é€Ÿæ®µçš„é€Ÿåº¦è¡¨å­˜å‚¨åˆ°ptré‡Œè¾¹ */
+  g_calc_t.ptr = g_calc_t.accel_tab; /* °Ñ¼ÓËÙ¶ÎµÄËÙ¶È±í´æ´¢µ½ptrÀï±ß */
   g_toggle_pulse = (uint32_t)(T1_FREQ / (*g_calc_t.ptr));
   g_calc_t.ptr++;
 
   __HAL_TIM_SET_COUNTER(&htim1, 0);
-  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, (uint16_t)(g_toggle_pulse / 2)); /*  è®¾ç½®å®šæ—¶å™¨æ¯”è¾ƒå€¼ */
-  HAL_TIM_OC_Start_IT(&htim1, TIM_CHANNEL_1);                                   /* ä½¿èƒ½å®šæ—¶å™¨é€šé“ */
+  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, (uint16_t)(g_toggle_pulse / 2)); /*  ÉèÖÃ¶¨Ê±Æ÷±È½ÏÖµ */
+  HAL_TIM_OC_Start_IT(&htim1, TIM_CHANNEL_1);                                   /* Ê¹ÄÜ¶¨Ê±Æ÷Í¨µÀ */
   ST2_EN(EN_ON);
 }
 
+// uint32_t g_count_val = 0; /* ¼ÆÊıÖµ */
+// uint32_t g_ccr_val = 32;  /* ±È½ÏÖµ±äÖµ */
+// uint8_t g_run_flag = 0;   /* ±êÖ¾Î» */
+
 /**
- * @brief  å®šæ—¶å™¨æ¯”è¾ƒä¸­æ–­
- * @param  htimï¼šå®šæ—¶å™¨å¥æŸ„æŒ‡é’ˆ
- * @note   æ— 
- * @retval æ— 
+ * @brief  ¶¨Ê±Æ÷±È½ÏÖĞ¶Ï
+ * @param  htim£º¶¨Ê±Æ÷¾ä±úÖ¸Õë
+ * @note   ÎŞ
+ * @retval ÎŞ
  */
 void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
 {
@@ -298,13 +350,72 @@ void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
   volatile float Tim_Pulse = 0;
   volatile static uint8_t i = 0;
 
-  if (htim->Instance == TIM1)
+  // if (htim->Instance == TIM1)
+  // {
+  //   i++;        /* ¶¨Ê±Æ÷ÖĞ¶Ï´ÎÊı¼ÆÊıÖµ */
+  //   if (i == 2) /* 2´Î£¬ËµÃ÷ÒÑ¾­Êä³öÒ»¸öÍêÕûÂö³å */
+  //   {
+  //     i = 0;        /* ÇåÁã¶¨Ê±Æ÷ÖĞ¶Ï´ÎÊı¼ÆÊıÖµ */
+  //     g_step_pos++; /* µ±Ç°Î»ÖÃ */
+  //     if ((g_motor_sta != STATE_IDLE) && (g_motor_sta != STATE_STOP))
+  //     {
+  //       g_calc_t.step_pos++;
+  //     }
+  //     switch (g_motor_sta)
+  //     {
+  //     case STATE_ACCEL:
+  //       g_add_pulse_count++;
+  //       Tim_Pulse = T1_FREQ / (*g_calc_t.ptr);        /* ÓÉËÙ¶È±íµÃµ½Ã¿Ò»²½µÄ¶¨Ê±Æ÷¼ÆÊıÖµ */
+  //       g_calc_t.ptr++;                               /* È¡ËÙ¶È±íµÄÏÂÒ»Î» */
+  //       g_toggle_pulse = (uint16_t)(Tim_Pulse / 2);   /* ·­×ªÄ£Ê½CĞèÒª³ıÒÔ2 */
+  //       if (g_calc_t.step_pos >= g_calc_t.accel_step) /* µ±´óÓÚ¼ÓËÙ¶Î²½Êı¾Í½øÈëÔÈËÙ */
+  //       {
+  //         myfree(SRAMIN, g_calc_t.accel_tab); /* ÔË¶¯ÍêÒªÊÍ·ÅÄÚ´æ */
+  //         g_motor_sta = STATE_AVESPEED;
+  //       }
+  //       break;
+  //     case STATE_DECEL:
+  //       g_add_pulse_count++;
+  //       Tim_Pulse = T1_FREQ / (*g_calc_t.ptr); /* ÓÉËÙ¶È±íµÃµ½Ã¿Ò»²½µÄ¶¨Ê±Æ÷¼ÆÊıÖµ */
+  //       g_calc_t.ptr++;
+  //       g_toggle_pulse = (uint16_t)(Tim_Pulse / 2);
+  //       if (g_calc_t.step_pos >= g_calc_t.step)
+  //       {
+  //         myfree(SRAMIN, g_calc_t.decel_tab); /* ÔË¶¯ÍêÒªÊÍ·ÅÄÚ´æ */
+  //         g_motor_sta = STATE_STOP;
+  //       }
+  //       break;
+  //     case STATE_AVESPEED:
+  //       g_add_pulse_count++;
+  //       Tim_Pulse = T1_FREQ / g_calc_t.vt;
+  //       g_toggle_pulse = (uint16_t)(Tim_Pulse / 2);
+  //       if (g_calc_t.step_pos >= g_calc_t.dec_point)
+  //       {
+  //         g_calc_t.ptr = g_calc_t.decel_tab; /* ½«¼õËÙ¶ÎµÄËÙ¶È±í¸³Öµ¸øptr */
+  //         g_motor_sta = STATE_DECEL;
+  //       }
+  //       break;
+  //     case STATE_STOP:
+  //       HAL_TIM_OC_Stop_IT(&htim1, TIM_CHANNEL_1); /* ¿ªÆô¶ÔÓ¦PWMÍ¨µÀ */
+  //       g_motor_sta = STATE_IDLE;
+  //       break;
+  //     case STATE_IDLE:
+  //       break;
+  //     }
+  //   }
+  //   /*  ÉèÖÃ±È½ÏÖµ */
+  //   Tim_Count = __HAL_TIM_GET_COUNTER(&htim1);
+  //   tmp = 0xFFFF & (Tim_Count + g_toggle_pulse);
+  //   __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, tmp);
+  // }
+
+  if (htim->Instance == TIM4)
   {
-    i++;        /* å®šæ—¶å™¨ä¸­æ–­æ¬¡æ•°è®¡æ•°å€¼ */
-    if (i == 2) /* 2æ¬¡ï¼Œè¯´æ˜å·²ç»è¾“å‡ºä¸€ä¸ªå®Œæ•´è„‰å†² */
+    i++;        /* ¶¨Ê±Æ÷ÖĞ¶Ï´ÎÊı¼ÆÊıÖµ */
+    if (i == 2) /* 2´Î£¬ËµÃ÷ÒÑ¾­Êä³öÒ»¸öÍêÕûÂö³å */
     {
-      i = 0;        /* æ¸…é›¶å®šæ—¶å™¨ä¸­æ–­æ¬¡æ•°è®¡æ•°å€¼ */
-      g_step_pos++; /* å½“å‰ä½ç½® */
+      i = 0;        /* ÇåÁã¶¨Ê±Æ÷ÖĞ¶Ï´ÎÊı¼ÆÊıÖµ */
+      g_step_pos++; /* µ±Ç°Î»ÖÃ */
       if ((g_motor_sta != STATE_IDLE) && (g_motor_sta != STATE_STOP))
       {
         g_calc_t.step_pos++;
@@ -313,23 +424,23 @@ void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
       {
       case STATE_ACCEL:
         g_add_pulse_count++;
-        Tim_Pulse = T1_FREQ / (*g_calc_t.ptr);        /* ç”±é€Ÿåº¦è¡¨å¾—åˆ°æ¯ä¸€æ­¥çš„å®šæ—¶å™¨è®¡æ•°å€¼ */
-        g_calc_t.ptr++;                               /* å–é€Ÿåº¦è¡¨çš„ä¸‹ä¸€ä½ */
-        g_toggle_pulse = (uint16_t)(Tim_Pulse / 2);   /* ç¿»è½¬æ¨¡å¼Céœ€è¦é™¤ä»¥2 */
-        if (g_calc_t.step_pos >= g_calc_t.accel_step) /* å½“å¤§äºåŠ é€Ÿæ®µæ­¥æ•°å°±è¿›å…¥åŒ€é€Ÿ */
+        Tim_Pulse = T1_FREQ / (*g_calc_t.ptr);        /* ÓÉËÙ¶È±íµÃµ½Ã¿Ò»²½µÄ¶¨Ê±Æ÷¼ÆÊıÖµ */
+        g_calc_t.ptr++;                               /* È¡ËÙ¶È±íµÄÏÂÒ»Î» */
+        g_toggle_pulse = (uint16_t)(Tim_Pulse / 2);   /* ·­×ªÄ£Ê½CĞèÒª³ıÒÔ2 */
+        if (g_calc_t.step_pos >= g_calc_t.accel_step) /* µ±´óÓÚ¼ÓËÙ¶Î²½Êı¾Í½øÈëÔÈËÙ */
         {
-          myfree(SRAMIN, g_calc_t.accel_tab); /* è¿åŠ¨å®Œè¦é‡Šæ”¾å†…å­˜ */
+          myfree(SRAMIN, g_calc_t.accel_tab); /* ÔË¶¯ÍêÒªÊÍ·ÅÄÚ´æ */
           g_motor_sta = STATE_AVESPEED;
         }
         break;
       case STATE_DECEL:
         g_add_pulse_count++;
-        Tim_Pulse = T1_FREQ / (*g_calc_t.ptr); /* ç”±é€Ÿåº¦è¡¨å¾—åˆ°æ¯ä¸€æ­¥çš„å®šæ—¶å™¨è®¡æ•°å€¼ */
+        Tim_Pulse = T1_FREQ / (*g_calc_t.ptr); /* ÓÉËÙ¶È±íµÃµ½Ã¿Ò»²½µÄ¶¨Ê±Æ÷¼ÆÊıÖµ */
         g_calc_t.ptr++;
         g_toggle_pulse = (uint16_t)(Tim_Pulse / 2);
         if (g_calc_t.step_pos >= g_calc_t.step)
         {
-          myfree(SRAMIN, g_calc_t.decel_tab); /* è¿åŠ¨å®Œè¦é‡Šæ”¾å†…å­˜ */
+          myfree(SRAMIN, g_calc_t.decel_tab); /* ÔË¶¯ÍêÒªÊÍ·ÅÄÚ´æ */
           g_motor_sta = STATE_STOP;
         }
         break;
@@ -339,79 +450,64 @@ void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
         g_toggle_pulse = (uint16_t)(Tim_Pulse / 2);
         if (g_calc_t.step_pos >= g_calc_t.dec_point)
         {
-          g_calc_t.ptr = g_calc_t.decel_tab; /* å°†å‡é€Ÿæ®µçš„é€Ÿåº¦è¡¨èµ‹å€¼ç»™ptr */
+          g_calc_t.ptr = g_calc_t.decel_tab; /* ½«¼õËÙ¶ÎµÄËÙ¶È±í¸³Öµ¸øptr */
           g_motor_sta = STATE_DECEL;
         }
         break;
       case STATE_STOP:
-        HAL_TIM_OC_Stop_IT(&htim1, TIM_CHANNEL_1); /* å¼€å¯å¯¹åº”PWMé€šé“ */
+        HAL_TIM_OC_Stop_IT(&htim4, TIM_CHANNEL_1); /* ¿ªÆô¶ÔÓ¦PWMÍ¨µÀ */
         g_motor_sta = STATE_IDLE;
         break;
       case STATE_IDLE:
         break;
       }
     }
-    /*  è®¾ç½®æ¯”è¾ƒå€¼ */
-    Tim_Count = __HAL_TIM_GET_COUNTER(&htim1);
-    tmp = 0xFFFF & (Tim_Count + g_toggle_pulse);
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, tmp);
-  }
-  else if (htim->Instance == TIM4)
-  {
-    i++;        /* å®šæ—¶å™¨ä¸­æ–­æ¬¡æ•°è®¡æ•°å€¼ */
-    if (i == 2) /* 2æ¬¡ï¼Œè¯´æ˜å·²ç»è¾“å‡ºä¸€ä¸ªå®Œæ•´è„‰å†² */
-    {
-      i = 0;        /* æ¸…é›¶å®šæ—¶å™¨ä¸­æ–­æ¬¡æ•°è®¡æ•°å€¼ */
-      g_step_pos++; /* å½“å‰ä½ç½® */
-      if ((g_motor_sta != STATE_IDLE) && (g_motor_sta != STATE_STOP))
-      {
-        g_calc_t.step_pos++;
-      }
-      switch (g_motor_sta)
-      {
-      case STATE_ACCEL:
-        g_add_pulse_count++;
-        Tim_Pulse = T1_FREQ / (*g_calc_t.ptr);        /* ç”±é€Ÿåº¦è¡¨å¾—åˆ°æ¯ä¸€æ­¥çš„å®šæ—¶å™¨è®¡æ•°å€¼ */
-        g_calc_t.ptr++;                               /* å–é€Ÿåº¦è¡¨çš„ä¸‹ä¸€ä½ */
-        g_toggle_pulse = (uint16_t)(Tim_Pulse / 2);   /* ç¿»è½¬æ¨¡å¼Céœ€è¦é™¤ä»¥2 */
-        if (g_calc_t.step_pos >= g_calc_t.accel_step) /* å½“å¤§äºåŠ é€Ÿæ®µæ­¥æ•°å°±è¿›å…¥åŒ€é€Ÿ */
-        {
-          myfree(SRAMIN, g_calc_t.accel_tab); /* è¿åŠ¨å®Œè¦é‡Šæ”¾å†…å­˜ */
-          g_motor_sta = STATE_AVESPEED;
-        }
-        break;
-      case STATE_DECEL:
-        g_add_pulse_count++;
-        Tim_Pulse = T1_FREQ / (*g_calc_t.ptr); /* ç”±é€Ÿåº¦è¡¨å¾—åˆ°æ¯ä¸€æ­¥çš„å®šæ—¶å™¨è®¡æ•°å€¼ */
-        g_calc_t.ptr++;
-        g_toggle_pulse = (uint16_t)(Tim_Pulse / 2);
-        if (g_calc_t.step_pos >= g_calc_t.step)
-        {
-          myfree(SRAMIN, g_calc_t.decel_tab); /* è¿åŠ¨å®Œè¦é‡Šæ”¾å†…å­˜ */
-          g_motor_sta = STATE_STOP;
-        }
-        break;
-      case STATE_AVESPEED:
-        g_add_pulse_count++;
-        Tim_Pulse = T1_FREQ / g_calc_t.vt;
-        g_toggle_pulse = (uint16_t)(Tim_Pulse / 2);
-        if (g_calc_t.step_pos >= g_calc_t.dec_point)
-        {
-          g_calc_t.ptr = g_calc_t.decel_tab; /* å°†å‡é€Ÿæ®µçš„é€Ÿåº¦è¡¨èµ‹å€¼ç»™ptr */
-          g_motor_sta = STATE_DECEL;
-        }
-        break;
-      case STATE_STOP:
-        HAL_TIM_OC_Stop_IT(&htim4, TIM_CHANNEL_1); /* å¼€å¯å¯¹åº”PWMé€šé“ */
-        g_motor_sta = STATE_IDLE;
-        break;
-      case STATE_IDLE:
-        break;
-      }
-    }
-    /*  è®¾ç½®æ¯”è¾ƒå€¼ */
+    /*  ÉèÖÃ±È½ÏÖµ */
     Tim_Count = __HAL_TIM_GET_COUNTER(&htim4);
     tmp = 0xFFFF & (Tim_Count + g_toggle_pulse);
     __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1, tmp);
   }
+
+  /**
+   * @brief     :»ù´¡ÔË¶¯
+   */
+  /*»ñÈ¡µ±Ç°¼ÆÊı*/
+  // g_count_val = __HAL_TIM_GET_COUNTER(&htim4);
+  // /*ÉèÖÃ±È½ÏÊıÖµ*/
+  // if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
+  //   __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1, (g_count_val + 500) % 0XFFFF);
+
+  /**
+   * @brief     :±äËÙ¿ØÖÆ + ¶¨Î»
+   * @attention :
+   */
+  // static uint8_t i = 0;
+  // i++;
+  // if (i % 2 == 0)
+  // {
+  //   i = 0;
+  //   g_run_flag = 1;
+  //   g_stepper.pulse_count--; /* Ã¿Ò»¸öÍêÕûµÄÂö³å¾Í-- */
+  //   if (g_stepper.dir == CW) /* Õı×ª */
+  //   {
+  //     g_stepper.add_pulse_count++; /* ¾ø¶ÔÎ»ÖÃ++ */
+  //   }
+  //   else
+  //   {
+  //     g_stepper.add_pulse_count--; /* ¾ø¶ÔÎ»ÖÃ-- */
+  //   }
+  //   if (g_stepper.pulse_count <= 0) /* µ±Âö³åÊıµÈÓÚ0µÄÊ±ºò ´ú±íĞèÒª·¢ËÍµÄÂö³å¸öÊıÒÑÍê³É£¬Í£Ö¹¶¨Ê±Æ÷Êä³ö */
+  //   {
+  //     printf("ÀÛ¼ÆĞı×ªµÄ½Ç¶È:%d\r\n", (int)(g_stepper.add_pulse_count * MAX_STEP_ANGLE)); /* ´òÓ¡ÀÛ¼Æ×ª¶¯ÁË¶àÉÙ½Ç¶È */
+  //     stepper_stop(STEPPER_MOTOR_1);                                                      /* Í£Ö¹½Ó¿ÚÒ»Êä³ö */
+  //     ST1_EN(EN_OFF);
+  //     g_run_flag = 0;
+  //   }
+  // }
+
+  // /*»ñÈ¡µ±Ç°¼ÆÊı*/
+  // g_count_val = __HAL_TIM_GET_COUNTER(&htim4);
+  // /*ÉèÖÃ±È½ÏÊıÖµ*/
+  // if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
+  //   __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1, (g_count_val + g_ccr_val) % 0XFFFF);
 }

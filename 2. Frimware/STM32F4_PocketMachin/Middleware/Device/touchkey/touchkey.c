@@ -5,12 +5,12 @@
 static flex_button_t touch_button[TOUCH_BUTTON_MAX];
 
 /**
- * @brief     :åˆå§‹åŒ–
+ * @brief     :³õÊ¼»¯
  * @attention :
  */
 void touchkey_init(void)
 {
-  // å¼•è„šåˆå§‹åŒ–ï¼Œgpio.c æ–‡ä»¶ä¸­å·²å®Œæˆ
+  // Òı½Å³õÊ¼»¯£¬gpio.c ÎÄ¼şÖĞÒÑÍê³É
 
   int i;
 
@@ -18,20 +18,20 @@ void touchkey_init(void)
 
   for (i = 0; i < TOUCH_BUTTON_MAX; i++)
   {
-    touch_button[i].id = i;                                             // æŒ‰é”®çš„IDå·
-    touch_button[i].usr_button_read = touch_btn_read;                   // æŒ‰é”®å¼•è„šç”µå¹³è¯»å–å‡½æ•°
-    touch_button[i].cb = touch_btn_evt_cb;                              // äº‹ä»¶å›è°ƒå‡½æ•°
-    touch_button[i].pressed_logic_level = 0;                            // è®¾ç½®æŒ‰é”®æŒ‰ä¸‹çš„é€»è¾‘ç”µå¹³
-    touch_button[i].short_press_start_tick = FLEX_MS_TO_SCAN_CNT(1500); // è®¾ç½®çŸ­æŒ‰äº‹ä»¶è§¦å‘çš„èµ·å§‹ tick
-    touch_button[i].long_press_start_tick = FLEX_MS_TO_SCAN_CNT(3000);  // è®¾ç½®é•¿æŒ‰äº‹ä»¶è§¦å‘çš„èµ·å§‹ tick
-    touch_button[i].long_hold_start_tick = FLEX_MS_TO_SCAN_CNT(4500);   // è®¾ç½®é•¿æŒ‰ä¿æŒäº‹ä»¶è§¦å‘çš„èµ·å§‹ tick
+    touch_button[i].id = i;                                             // °´¼üµÄIDºÅ
+    touch_button[i].usr_button_read = touch_btn_read;                   // °´¼üÒı½ÅµçÆ½¶ÁÈ¡º¯Êı
+    touch_button[i].cb = touch_btn_evt_cb;                              // ÊÂ¼ş»Øµ÷º¯Êı
+    touch_button[i].pressed_logic_level = 0;                            // ÉèÖÃ°´¼ü°´ÏÂµÄÂß¼­µçÆ½
+    touch_button[i].short_press_start_tick = FLEX_MS_TO_SCAN_CNT(1500); // ÉèÖÃ¶Ì°´ÊÂ¼ş´¥·¢µÄÆğÊ¼ tick
+    touch_button[i].long_press_start_tick = FLEX_MS_TO_SCAN_CNT(3000);  // ÉèÖÃ³¤°´ÊÂ¼ş´¥·¢µÄÆğÊ¼ tick
+    touch_button[i].long_hold_start_tick = FLEX_MS_TO_SCAN_CNT(4500);   // ÉèÖÃ³¤°´±£³ÖÊÂ¼ş´¥·¢µÄÆğÊ¼ tick
 
-    flex_button_register(&touch_button[i]); // æŒ‰é”®æ³¨å†Œ
+    flex_button_register(&touch_button[i]); // °´¼ü×¢²á
   }
 }
 
 /**
- * @brief     :è¯»å–æŒ‰é”®ç”µå¹³çŠ¶æ€
+ * @brief     :¶ÁÈ¡°´¼üµçÆ½×´Ì¬
  * @param     arg :Variable
  * @return    :uint8_t
  * @attention :
@@ -74,15 +74,15 @@ static uint8_t touch_btn_read(void *arg)
   return value;
 }
 
-// æŒ‰é”®äº‹ä»¶å›è°ƒå‡½æ•°
+// °´¼üÊÂ¼ş»Øµ÷º¯Êı
 static void touch_btn_evt_cb(void *arg)
 {
   flex_button_t *btn = (flex_button_t *)arg;
 
-  // éç»„åˆæŒ‰é”®äº‹ä»¶å¤„ç†
+  // ·Ç×éºÏ°´¼üÊÂ¼ş´¦Àí
   touch_combination_btn_event(btn);
 
-  // // ç»„åˆæŒ‰é”®äº‹ä»¶å¤„ç†
+  // // ×éºÏ°´¼üÊÂ¼ş´¦Àí
   // if ((flex_button_event_read(&touch_button[TOUCH_BUTTON_UP]) == FLEX_BTN_PRESS_CLICK) &&
   //     (flex_button_event_read(&touch_button[TOUCH_BUTTON_DOWN]) == FLEX_BTN_PRESS_CLICK))
   // {
@@ -91,26 +91,26 @@ static void touch_btn_evt_cb(void *arg)
 }
 
 /**
- * @brief     :éç»„åˆæŒ‰é”®äº‹ä»¶å¤„ç†
+ * @brief     :·Ç×éºÏ°´¼üÊÂ¼ş´¦Àí
  * @param     btn :
- * @attention :æŒ‰é”®è§¦å‘äº‹ä»¶å½¢å¼
- * FLEX_BTN_PRESS_DOWN = 0,        // æŒ‰ä¸‹äº‹ä»¶
- * FLEX_BTN_PRESS_CLICK,           // å•å‡»äº‹ä»¶
- * FLEX_BTN_PRESS_DOUBLE_CLICK,    // åŒå‡»äº‹ä»¶
- * FLEX_BTN_PRESS_REPEAT_CLICK,    // è¿å‡»äº‹ä»¶ï¼Œä½¿ç”¨ flex_button_t ä¸­çš„ click_cnt æ–­å®šè¿å‡»æ¬¡æ•°
- * FLEX_BTN_PRESS_SHORT_START,     // çŸ­æŒ‰å¼€å§‹äº‹ä»¶
- * FLEX_BTN_PRESS_SHORT_UP,        // çŸ­æŒ‰æŠ¬èµ·äº‹ä»¶
- * FLEX_BTN_PRESS_LONG_START,      // é•¿æŒ‰å¼€å§‹äº‹ä»¶
- * FLEX_BTN_PRESS_LONG_UP,         // é•¿æŒ‰æŠ¬èµ·äº‹ä»¶
- * FLEX_BTN_PRESS_LONG_HOLD,       // é•¿æŒ‰ä¿æŒäº‹ä»¶
- * FLEX_BTN_PRESS_LONG_HOLD_UP,    // é•¿æŒ‰ä¿æŒçš„æŠ¬èµ·äº‹ä»¶
+ * @attention :°´¼ü´¥·¢ÊÂ¼şĞÎÊ½
+ * FLEX_BTN_PRESS_DOWN = 0,        // °´ÏÂÊÂ¼ş
+ * FLEX_BTN_PRESS_CLICK,           // µ¥»÷ÊÂ¼ş
+ * FLEX_BTN_PRESS_DOUBLE_CLICK,    // Ë«»÷ÊÂ¼ş
+ * FLEX_BTN_PRESS_REPEAT_CLICK,    // Á¬»÷ÊÂ¼ş£¬Ê¹ÓÃ flex_button_t ÖĞµÄ click_cnt ¶Ï¶¨Á¬»÷´ÎÊı
+ * FLEX_BTN_PRESS_SHORT_START,     // ¶Ì°´¿ªÊ¼ÊÂ¼ş
+ * FLEX_BTN_PRESS_SHORT_UP,        // ¶Ì°´Ì§ÆğÊÂ¼ş
+ * FLEX_BTN_PRESS_LONG_START,      // ³¤°´¿ªÊ¼ÊÂ¼ş
+ * FLEX_BTN_PRESS_LONG_UP,         // ³¤°´Ì§ÆğÊÂ¼ş
+ * FLEX_BTN_PRESS_LONG_HOLD,       // ³¤°´±£³ÖÊÂ¼ş
+ * FLEX_BTN_PRESS_LONG_HOLD_UP,    // ³¤°´±£³ÖµÄÌ§ÆğÊÂ¼ş
  * @attention :
  */
 static void touch_combination_btn_event(flex_button_t *btn)
 {
   switch (btn->id)
   {
-  /* æŒ‰é”® UP */
+  /* °´¼ü UP */
   case TOUCH_BUTTON_UP:
   {
     switch (btn->event)
@@ -127,7 +127,7 @@ static void touch_combination_btn_event(flex_button_t *btn)
     break;
   }
 
-  /* æŒ‰é”® DOWN */
+  /* °´¼ü DOWN */
   case TOUCH_BUTTON_DOWN:
   {
     switch (btn->event)
@@ -142,7 +142,7 @@ static void touch_combination_btn_event(flex_button_t *btn)
     break;
   }
 
-    /* æŒ‰é”® LEFT */
+    /* °´¼ü LEFT */
   case TOUCH_BUTTON_LEFT:
   {
     switch (btn->event)
@@ -157,7 +157,7 @@ static void touch_combination_btn_event(flex_button_t *btn)
     break;
   }
 
-    /* æŒ‰é”® RIGHT */
+    /* °´¼ü RIGHT */
   case TOUCH_BUTTON_RIGHT:
   {
     switch (btn->event)
@@ -172,7 +172,7 @@ static void touch_combination_btn_event(flex_button_t *btn)
     break;
   }
 
-    /* æŒ‰é”® A */
+    /* °´¼ü A */
   case TOUCH_BUTTON_A:
   {
     switch (btn->event)
@@ -187,7 +187,7 @@ static void touch_combination_btn_event(flex_button_t *btn)
     break;
   }
 
-    /* æŒ‰é”® B */
+    /* °´¼ü B */
   case TOUCH_BUTTON_B:
   {
     switch (btn->event)
@@ -202,7 +202,7 @@ static void touch_combination_btn_event(flex_button_t *btn)
     break;
   }
 
-    /* æŒ‰é”® C */
+    /* °´¼ü C */
   case TOUCH_BUTTON_C:
   {
     switch (btn->event)
@@ -217,7 +217,7 @@ static void touch_combination_btn_event(flex_button_t *btn)
     break;
   }
 
-    /* æŒ‰é”® D */
+    /* °´¼ü D */
   case TOUCH_BUTTON_D:
   {
     switch (btn->event)

@@ -3,9 +3,9 @@
 <title>Static Call Graph - [STM32F4_PocketMachin\STM32F4_PocketMachin.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image STM32F4_PocketMachin\STM32F4_PocketMachin.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Thu Dec 28 17:26:04 2023
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Fri Dec 29 02:18:44 2023
 <BR><P>
-<H3>Maximum Stack Usage =        384 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        376 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
 matrix_btn_evt_cb &rArr; matrix_combination_btn_event &rArr; stepmotor1_move_rel &rArr; calc_speed &rArr; __hardfp_pow &rArr; sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
 <P>
@@ -564,7 +564,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_char_file
 </UL>
-<BR>[Called By]<UL><LI><a href="#[15c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;matrix_combination_btn_event
+<BR>[Called By]<UL><LI><a href="#[15e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stepmotor1_move_rel
+<LI><a href="#[15c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;matrix_combination_btn_event
 <LI><a href="#[178]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;touch_combination_btn_event
 <LI><a href="#[134]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_handle_packet
 <LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_a_recv_handler
@@ -595,9 +596,9 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[13b]"></a>__aeabi_memcpy</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memcpy_v6.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buffer_u8
-<LI><a href="#[156]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lwrb_write_ex
+<BR><BR>[Called By]<UL><LI><a href="#[156]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lwrb_write_ex
 <LI><a href="#[155]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lwrb_read_ex
+<LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buffer_u8
 </UL>
 
 <P><STRONG><a name="[9b]"></a>__rt_memcpy</STRONG> (Thumb, 138 bytes, Stack size 0 bytes, rt_memcpy_v6.o(.text), UNUSED)
@@ -613,8 +614,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[11a]"></a>__aeabi_memclr</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memclr.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[143]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dgus_packet_init
-<LI><a href="#[142]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dgus_recv_data
+<BR><BR>[Called By]<UL><LI><a href="#[142]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dgus_recv_data
+<LI><a href="#[143]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dgus_packet_init
 <LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7789_Init
 </UL>
 
@@ -915,9 +916,9 @@ Global Symbols
 <P><STRONG><a name="[bd]"></a>HAL_DMA_Init</STRONG> (Thumb, 206 bytes, Stack size 24 bytes, stm32f4xx_hal_dma.o(i.HAL_DMA_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = HAL_DMA_Init &rArr; DMA_CheckFifoParam
 </UL>
-<BR>[Calls]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_CheckFifoParam
+<BR>[Calls]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
+<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_CheckFifoParam
 <LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_CalcBaseAndBitshift
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
 </UL>
 <BR>[Called By]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_MspInit
 </UL>
@@ -962,7 +963,7 @@ Global Symbols
 <LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7789_WriteData
 <LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7789_WriteCommand
 <LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ST7789_SetAddressWindow
-<LI><a href="#[15d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stepmotor1_move_rel
+<LI><a href="#[15e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stepmotor1_move_rel
 <LI><a href="#[152]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;keyboard_write_row
 <LI><a href="#[15c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;matrix_combination_btn_event
 <LI><a href="#[153]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;led_ctl
@@ -992,8 +993,8 @@ Global Symbols
 <P><STRONG><a name="[c3]"></a>HAL_Init</STRONG> (Thumb, 48 bytes, Stack size 8 bytes, stm32f4xx_hal.o(i.HAL_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = HAL_Init &rArr; HAL_InitTick &rArr; HAL_NVIC_SetPriority
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_MspInit
-<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
+<BR>[Calls]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
+<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_MspInit
 <LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriorityGrouping
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -1071,8 +1072,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[112]"></a>HAL_SPI_ErrorCallback</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f4xx_hal_spi.o(i.HAL_SPI_ErrorCallback))
-<BR><BR>[Called By]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_DMAError
-<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_DMATransmitCplt
+<BR><BR>[Called By]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_DMATransmitCplt
+<LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_DMAError
 </UL>
 
 <P><STRONG><a name="[ce]"></a>HAL_SPI_Init</STRONG> (Thumb, 188 bytes, Stack size 16 bytes, stm32f4xx_hal_spi.o(i.HAL_SPI_Init))
@@ -1196,7 +1197,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[df]"></a>HAL_TIM_IRQHandler</STRONG> (Thumb, 358 bytes, Stack size 16 bytes, stm32f4xx_hal_tim.o(i.HAL_TIM_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = HAL_TIM_IRQHandler &rArr; HAL_TIM_OC_DelayElapsedCallback &rArr; HAL_TIM_OC_Stop_IT &rArr; TIM_CCxChannelCmd
+<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = HAL_TIM_IRQHandler &rArr; HAL_TIM_OC_DelayElapsedCallback &rArr; HAL_TIM_OC_Stop_IT &rArr; TIM_CCxChannelCmd
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PeriodElapsedCallback
 <LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_TriggerCallback
@@ -1233,8 +1234,8 @@ Global Symbols
 <LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_TIM1_Init
 </UL>
 
-<P><STRONG><a name="[e1]"></a>HAL_TIM_OC_DelayElapsedCallback</STRONG> (Thumb, 564 bytes, Stack size 48 bytes, stepmotor.o(i.HAL_TIM_OC_DelayElapsedCallback))
-<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = HAL_TIM_OC_DelayElapsedCallback &rArr; HAL_TIM_OC_Stop_IT &rArr; TIM_CCxChannelCmd
+<P><STRONG><a name="[e1]"></a>HAL_TIM_OC_DelayElapsedCallback</STRONG> (Thumb, 290 bytes, Stack size 32 bytes, stepmotor.o(i.HAL_TIM_OC_DelayElapsedCallback))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = HAL_TIM_OC_DelayElapsedCallback &rArr; HAL_TIM_OC_Stop_IT &rArr; TIM_CCxChannelCmd
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;myfree
 <LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Stop_IT
@@ -1261,7 +1262,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxChannelCmd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[15d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stepmotor1_move_rel
+<BR>[Called By]<UL><LI><a href="#[15e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stepmotor1_move_rel
 </UL>
 
 <P><STRONG><a name="[ee]"></a>HAL_TIM_OC_Stop_IT</STRONG> (Thumb, 178 bytes, Stack size 16 bytes, stm32f4xx_hal_tim.o(i.HAL_TIM_OC_Stop_IT))
@@ -1269,7 +1270,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxChannelCmd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[15f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stepper_stop
+<BR>[Called By]<UL><LI><a href="#[15d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stepper_stop
 <LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_DelayElapsedCallback
 </UL>
 
@@ -1553,21 +1554,21 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(.text)
 </UL>
 <P><STRONG><a name="[2b]"></a>TIM1_BRK_TIM9_IRQHandler</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f4xx_it.o(i.TIM1_BRK_TIM9_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = TIM1_BRK_TIM9_IRQHandler &rArr; HAL_TIM_IRQHandler &rArr; HAL_TIM_OC_DelayElapsedCallback &rArr; HAL_TIM_OC_Stop_IT &rArr; TIM_CCxChannelCmd
+<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = TIM1_BRK_TIM9_IRQHandler &rArr; HAL_TIM_IRQHandler &rArr; HAL_TIM_OC_DelayElapsedCallback &rArr; HAL_TIM_OC_Stop_IT &rArr; TIM_CCxChannelCmd
 </UL>
 <BR>[Calls]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_IRQHandler
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
 </UL>
 <P><STRONG><a name="[31]"></a>TIM4_IRQHandler</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f4xx_it.o(i.TIM4_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = TIM4_IRQHandler &rArr; HAL_TIM_IRQHandler &rArr; HAL_TIM_OC_DelayElapsedCallback &rArr; HAL_TIM_OC_Stop_IT &rArr; TIM_CCxChannelCmd
+<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = TIM4_IRQHandler &rArr; HAL_TIM_IRQHandler &rArr; HAL_TIM_OC_DelayElapsedCallback &rArr; HAL_TIM_OC_Stop_IT &rArr; TIM_CCxChannelCmd
 </UL>
 <BR>[Calls]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_IRQHandler
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
 </UL>
 <P><STRONG><a name="[49]"></a>TIM6_DAC_IRQHandler</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f4xx_it.o(i.TIM6_DAC_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = TIM6_DAC_IRQHandler &rArr; HAL_TIM_IRQHandler &rArr; HAL_TIM_OC_DelayElapsedCallback &rArr; HAL_TIM_OC_Stop_IT &rArr; TIM_CCxChannelCmd
+<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = TIM6_DAC_IRQHandler &rArr; HAL_TIM_IRQHandler &rArr; HAL_TIM_OC_DelayElapsedCallback &rArr; HAL_TIM_OC_Stop_IT &rArr; TIM_CCxChannelCmd
 </UL>
 <BR>[Calls]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_IRQHandler
 </UL>
@@ -1788,16 +1789,16 @@ Global Symbols
 <P><STRONG><a name="[13d]"></a>calc_speed</STRONG> (Thumb, 704 bytes, Stack size 72 bytes, stepmotor.o(i.calc_speed))
 <BR><BR>[Stack]<UL><LI>Max Depth = 336<LI>Call Chain = calc_speed &rArr; __hardfp_pow &rArr; sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mymalloc
-<LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_pow
+<BR>[Calls]<UL><LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_pow
 <LI><a href="#[13e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 <LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
 <LI><a href="#[13f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2iz
 <LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 <LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 <LI><a href="#[141]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2f
+<LI><a href="#[140]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mymalloc
 </UL>
-<BR>[Called By]<UL><LI><a href="#[15d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stepmotor1_move_rel
+<BR>[Called By]<UL><LI><a href="#[15e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stepmotor1_move_rel
 </UL>
 
 <P><STRONG><a name="[76]"></a>data_receive_task</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, app.o(i.data_receive_task))
@@ -1858,11 +1859,11 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 240 + Unknown Stack Size
 <LI>Call Chain = dgus_set_text_padded &rArr; send_data &rArr; dgus_recv_data &rArr; _handle_packet &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[149]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_data
+<BR>[Calls]<UL><LI><a href="#[148]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dgus_packet_set_len
+<LI><a href="#[149]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_data
 <LI><a href="#[143]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dgus_packet_init
 <LI><a href="#[13a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buffer_u8
 <LI><a href="#[139]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buffer_u16
-<LI><a href="#[148]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dgus_packet_set_len
 <LI><a href="#[147]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 </UL>
 <BR>[Called By]<UL><LI><a href="#[14a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;diwenlcd_init
@@ -1872,10 +1873,10 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 232 + Unknown Stack Size
 <LI>Call Chain = dgus_set_var &rArr; send_data &rArr; dgus_recv_data &rArr; _handle_packet &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[149]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_data
+<BR>[Calls]<UL><LI><a href="#[138]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buffer_u32_1
+<LI><a href="#[149]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_data
 <LI><a href="#[143]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dgus_packet_init
 <LI><a href="#[139]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buffer_u16
-<LI><a href="#[138]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buffer_u32_1
 </UL>
 <BR>[Called By]<UL><LI><a href="#[144]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dgus_set_page
 <LI><a href="#[14a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;diwenlcd_init
@@ -1929,8 +1930,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[151]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;keyboard_scan
 </UL>
 
-<P><STRONG><a name="[151]"></a>keyboard_scan</STRONG> (Thumb, 104 bytes, Stack size 16 bytes, matrixkey.o(i.keyboard_scan))
-<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = keyboard_scan &rArr; keyboard_write_row
+<P><STRONG><a name="[151]"></a>keyboard_scan</STRONG> (Thumb, 110 bytes, Stack size 32 bytes, matrixkey.o(i.keyboard_scan))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = keyboard_scan &rArr; keyboard_write_row
 </UL>
 <BR>[Calls]<UL><LI><a href="#[152]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;keyboard_write_row
 <LI><a href="#[14f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;keyboard_read_col
@@ -2089,7 +2090,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[163]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;my_mem_free
 </UL>
-<BR>[Called By]<UL><LI><a href="#[15d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stepmotor1_move_rel
+<BR>[Called By]<UL><LI><a href="#[15e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stepmotor1_move_rel
 <LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_DelayElapsedCallback
 </UL>
 
@@ -2129,12 +2130,14 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_pow
 </UL>
 
-<P><STRONG><a name="[15d]"></a>stepmotor1_move_rel</STRONG> (Thumb, 188 bytes, Stack size 24 bytes, stepmotor.o(i.stepmotor1_move_rel))
-<BR><BR>[Stack]<UL><LI>Max Depth = 360<LI>Call Chain = stepmotor1_move_rel &rArr; calc_speed &rArr; __hardfp_pow &rArr; sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
+<P><STRONG><a name="[15e]"></a>stepmotor1_move_rel</STRONG> (Thumb, 194 bytes, Stack size 24 bytes, stepmotor.o(i.stepmotor1_move_rel))
+<BR><BR>[Stack]<UL><LI>Max Depth = 360 + Unknown Stack Size
+<LI>Call Chain = stepmotor1_move_rel &rArr; calc_speed &rArr; __hardfp_pow &rArr; sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 <LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;myfree
 <LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Start_IT
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 <LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calc_speed
 </UL>
 <BR>[Called By]<UL><LI><a href="#[15c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;matrix_combination_btn_event
@@ -2149,7 +2152,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[174]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tirpod_init
 </UL>
 
-<P><STRONG><a name="[15f]"></a>stepper_stop</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, stepmotor.o(i.stepper_stop))
+<P><STRONG><a name="[15d]"></a>stepper_stop</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, stepmotor.o(i.stepper_stop))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = stepper_stop &rArr; HAL_TIM_OC_Stop_IT &rArr; TIM_CCxChannelCmd
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_OC_Stop_IT
@@ -2300,10 +2303,10 @@ Global Symbols
 <P><STRONG><a name="[130]"></a>__aeabi_dadd</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, daddsub_clz.o(x$fpl$dadd))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = __aeabi_dadd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calc_speed
-<LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
+<BR>[Called By]<UL><LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
 <LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_infnan2
 <LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_pow
+<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calc_speed
 </UL>
 
 <P><STRONG><a name="[17d]"></a>_dadd</STRONG> (Thumb, 332 bytes, Stack size 16 bytes, daddsub_clz.o(x$fpl$dadd), UNUSED)
@@ -2325,10 +2328,10 @@ Global Symbols
 <P><STRONG><a name="[127]"></a>__aeabi_ddiv</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, ddiv.o(x$fpl$ddiv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_ddiv
 </UL>
-<BR>[Called By]<UL><LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calc_speed
-<LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_invalid
+<BR>[Called By]<UL><LI><a href="#[12b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_invalid
 <LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_divzero
 <LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_pow
+<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calc_speed
 </UL>
 
 <P><STRONG><a name="[182]"></a>_ddiv</STRONG> (Thumb, 552 bytes, Stack size 32 bytes, ddiv.o(x$fpl$ddiv), UNUSED)
@@ -2352,7 +2355,7 @@ Global Symbols
 
 <P><STRONG><a name="[1c8]"></a>_dflt</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dflt), UNUSED)
 
-<P><STRONG><a name="[15e]"></a>__aeabi_ui2d</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dfltu))
+<P><STRONG><a name="[15f]"></a>__aeabi_ui2d</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dfltu))
 <BR><BR>[Called By]<UL><LI><a href="#[15c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;matrix_combination_btn_event
 </UL>
 
@@ -2372,12 +2375,12 @@ Global Symbols
 <P><STRONG><a name="[12c]"></a>__aeabi_dmul</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dmul.o(x$fpl$dmul))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_dmul
 </UL>
-<BR>[Called By]<UL><LI><a href="#[15c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;matrix_combination_btn_event
-<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calc_speed
-<LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
+<BR>[Called By]<UL><LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
 <LI><a href="#[12d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_underflow
 <LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_overflow
 <LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_pow
+<LI><a href="#[15c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;matrix_combination_btn_event
+<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calc_speed
 </UL>
 
 <P><STRONG><a name="[186]"></a>_dmul</STRONG> (Thumb, 332 bytes, Stack size 32 bytes, dmul.o(x$fpl$dmul), UNUSED)
@@ -2448,7 +2451,8 @@ Global Symbols
 <P><STRONG><a name="[13e]"></a>__aeabi_f2d</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, f2d.o(x$fpl$f2d))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = __aeabi_f2d
 </UL>
-<BR>[Called By]<UL><LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calc_speed
+<BR>[Called By]<UL><LI><a href="#[15c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;matrix_combination_btn_event
+<LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;calc_speed
 </UL>
 
 <P><STRONG><a name="[18c]"></a>_f2d</STRONG> (Thumb, 86 bytes, Stack size 16 bytes, f2d.o(x$fpl$f2d), UNUSED)
@@ -2726,7 +2730,7 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[71]"></a>matrix_btn_evt_cb</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, matrixkey.o(i.matrix_btn_evt_cb))
-<BR><BR>[Stack]<UL><LI>Max Depth = 384 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 376 + Unknown Stack Size
 <LI>Call Chain = matrix_btn_evt_cb &rArr; matrix_combination_btn_event &rArr; stepmotor1_move_rel &rArr; calc_speed &rArr; __hardfp_pow &rArr; sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[15c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;matrix_combination_btn_event
@@ -2734,22 +2738,23 @@ Local Symbols
 <BR>[Address Reference Count : 1]<UL><LI> matrixkey.o(i.matrixkey_init)
 </UL>
 <P><STRONG><a name="[70]"></a>matrix_btn_read</STRONG> (Thumb, 242 bytes, Stack size 8 bytes, matrixkey.o(i.matrix_btn_read))
-<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = matrix_btn_read &rArr; keyboard_scan &rArr; keyboard_write_row
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = matrix_btn_read &rArr; keyboard_scan &rArr; keyboard_write_row
 </UL>
 <BR>[Calls]<UL><LI><a href="#[151]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;keyboard_scan
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> matrixkey.o(i.matrixkey_init)
 </UL>
-<P><STRONG><a name="[15c]"></a>matrix_combination_btn_event</STRONG> (Thumb, 316 bytes, Stack size 24 bytes, matrixkey.o(i.matrix_combination_btn_event))
-<BR><BR>[Stack]<UL><LI>Max Depth = 384 + Unknown Stack Size
+<P><STRONG><a name="[15c]"></a>matrix_combination_btn_event</STRONG> (Thumb, 268 bytes, Stack size 16 bytes, matrixkey.o(i.matrix_combination_btn_event))
+<BR><BR>[Stack]<UL><LI>Max Depth = 376 + Unknown Stack Size
 <LI>Call Chain = matrix_combination_btn_event &rArr; stepmotor1_move_rel &rArr; calc_speed &rArr; __hardfp_pow &rArr; sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
-<LI><a href="#[15f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stepper_stop
-<LI><a href="#[15d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stepmotor1_move_rel
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+<LI><a href="#[13e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 <LI><a href="#[12c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
-<LI><a href="#[15e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
+<LI><a href="#[15f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
+<LI><a href="#[15d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stepper_stop
+<LI><a href="#[15e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stepmotor1_move_rel
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;matrix_btn_evt_cb
 </UL>

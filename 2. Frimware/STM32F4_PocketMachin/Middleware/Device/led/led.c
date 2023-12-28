@@ -1,18 +1,18 @@
 #include "led.h"
 
 /**
- * @brief     :åˆå§‹åŒ–
+ * @brief     :³õÊ¼»¯
  * @attention :
  */
 void led_init(void)
 {
-  // å¼•è„šåˆå§‹åŒ–ï¼Œgpio.c æ–‡ä»¶ä¸­å·²å®Œæˆ
+  // Òı½Å³õÊ¼»¯£¬gpio.c ÎÄ¼şÖĞÒÑÍê³É
 }
 
 /**
- * @brief     :LED æ§åˆ¶
+ * @brief     :LED ¿ØÖÆ
  * @param     led :LED0 ~ LED7
- * @param     state :ON å¼€ï¼ŒOFF å…³
+ * @param     state :ON ¿ª£¬OFF ¹Ø
  * @attention :
  */
 void led_ctl(uint8_t led, uint8_t state)

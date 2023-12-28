@@ -6,12 +6,12 @@
 static flex_button_t matrix_button[MATRIX_BUTTON_MAX];
 
 /**
- * @brief     :åˆå§‹åŒ–
+ * @brief     :³õÊ¼»¯
  * @attention :
  */
 void matrixkey_init(void)
 {
-  // å¼•è„šåˆå§‹åŒ–ï¼Œgpio.c æ–‡ä»¶ä¸­å·²å®Œæˆ
+  // Òı½Å³õÊ¼»¯£¬gpio.c ÎÄ¼şÖĞÒÑÍê³É
 
   int i;
 
@@ -19,21 +19,21 @@ void matrixkey_init(void)
 
   for (i = 0; i < MATRIX_BUTTON_MAX; i++)
   {
-    matrix_button[i].id = i;                                             // æŒ‰é”®çš„IDå·
-    matrix_button[i].usr_button_read = matrix_btn_read;                  // æŒ‰é”®å¼•è„šç”µå¹³è¯»å–å‡½æ•°
-    matrix_button[i].cb = matrix_btn_evt_cb;                             // äº‹ä»¶å›è°ƒå‡½æ•°
-    matrix_button[i].pressed_logic_level = 1;                            // è®¾ç½®æŒ‰é”®æŒ‰ä¸‹çš„é€»è¾‘ç”µå¹³
-    matrix_button[i].short_press_start_tick = FLEX_MS_TO_SCAN_CNT(1500); // è®¾ç½®çŸ­æŒ‰äº‹ä»¶è§¦å‘çš„èµ·å§‹ tick
-    matrix_button[i].long_press_start_tick = FLEX_MS_TO_SCAN_CNT(3000);  // è®¾ç½®é•¿æŒ‰äº‹ä»¶è§¦å‘çš„èµ·å§‹ tick
-    matrix_button[i].long_hold_start_tick = FLEX_MS_TO_SCAN_CNT(4500);   // è®¾ç½®é•¿æŒ‰ä¿æŒäº‹ä»¶è§¦å‘çš„èµ·å§‹ tick
+    matrix_button[i].id = i;                                             // °´¼üµÄIDºÅ
+    matrix_button[i].usr_button_read = matrix_btn_read;                  // °´¼üÒı½ÅµçÆ½¶ÁÈ¡º¯Êı
+    matrix_button[i].cb = matrix_btn_evt_cb;                             // ÊÂ¼ş»Øµ÷º¯Êı
+    matrix_button[i].pressed_logic_level = 1;                            // ÉèÖÃ°´¼ü°´ÏÂµÄÂß¼­µçÆ½
+    matrix_button[i].short_press_start_tick = FLEX_MS_TO_SCAN_CNT(1500); // ÉèÖÃ¶Ì°´ÊÂ¼ş´¥·¢µÄÆğÊ¼ tick
+    matrix_button[i].long_press_start_tick = FLEX_MS_TO_SCAN_CNT(3000);  // ÉèÖÃ³¤°´ÊÂ¼ş´¥·¢µÄÆğÊ¼ tick
+    matrix_button[i].long_hold_start_tick = FLEX_MS_TO_SCAN_CNT(4500);   // ÉèÖÃ³¤°´±£³ÖÊÂ¼ş´¥·¢µÄÆğÊ¼ tick
 
-    flex_button_register(&matrix_button[i]); // æŒ‰é”®æ³¨å†Œ
+    flex_button_register(&matrix_button[i]); // °´¼ü×¢²á
   }
 }
 
 /**
- * @brief     :å†™å…¥è¡Œ
- * @param     dat :å½“å‰è¡Œæ‹‰é«˜
+ * @brief     :Ğ´ÈëĞĞ
+ * @param     dat :µ±Ç°ĞĞÀ­¸ß
  * @attention :
  */
 void keyboard_write_row(uint16_t dat)
@@ -46,8 +46,8 @@ void keyboard_write_row(uint16_t dat)
 }
 
 /**
- * @brief     :è¯»å–åˆ—
- * @return    :uint8_t å½“å‰æ‰€åœ¨åˆ—ç”µå¹³çŠ¶æ€
+ * @brief     :¶ÁÈ¡ÁĞ
+ * @return    :uint8_t µ±Ç°ËùÔÚÁĞµçÆ½×´Ì¬
  * @attention :
  */
 uint8_t keyboard_read_col(void)
@@ -61,8 +61,8 @@ uint8_t keyboard_read_col(void)
 }
 
 /**
- * @brief     :çŸ©é˜µé”®ç›˜æ‰«æ
- * @return    :uint8_t é”®ç›˜å€¼
+ * @brief     :¾ØÕó¼üÅÌÉ¨Ãè
+ * @return    :uint8_t ¼üÅÌÖµ
  * @attention :
  */
 uint8_t keyboard_scan(void)
@@ -80,16 +80,16 @@ uint8_t keyboard_scan(void)
         switch (keyboard_read_col())
         {
         case 0xe:
-          value = 1 + 5 * i;
+          value = 1 + 4 * i;
           break;
         case 0xd:
-          value = 2 + 5 * i;
+          value = 2 + 4 * i;
           break;
         case 0xb:
-          value = 3 + 5 * i;
+          value = 3 + 4 * i;
           break;
         case 0x7:
-          value = 4 + 5 * i;
+          value = 4 + 4 * i;
           break;
         }
       }
@@ -99,7 +99,7 @@ uint8_t keyboard_scan(void)
 }
 
 /**
- * @brief     :è¯»å–æŒ‰é”®ç”µå¹³çŠ¶æ€
+ * @brief     :¶ÁÈ¡°´¼üµçÆ½×´Ì¬
  * @param     arg :Variable
  * @return    :uint8_t
  * @attention :
@@ -183,15 +183,15 @@ static uint8_t matrix_btn_read(void *arg)
   return value;
 }
 
-// æŒ‰é”®äº‹ä»¶å›è°ƒå‡½æ•°
+// °´¼üÊÂ¼ş»Øµ÷º¯Êı
 static void matrix_btn_evt_cb(void *arg)
 {
   flex_button_t *btn = (flex_button_t *)arg;
 
-  // éç»„åˆæŒ‰é”®äº‹ä»¶å¤„ç†
+  // ·Ç×éºÏ°´¼üÊÂ¼ş´¦Àí
   matrix_combination_btn_event(btn);
 
-  // // ç»„åˆæŒ‰é”®äº‹ä»¶å¤„ç†
+  // // ×éºÏ°´¼üÊÂ¼ş´¦Àí
   // if ((flex_button_event_read(&touch_button[TOUCH_BUTTON_UP]) == FLEX_BTN_PRESS_CLICK) &&
   //     (flex_button_event_read(&touch_button[TOUCH_BUTTON_DOWN]) == FLEX_BTN_PRESS_CLICK))
   // {
@@ -201,36 +201,40 @@ static void matrix_btn_evt_cb(void *arg)
 
 #include ".\tirpod\tirpod.h"
 
-#define V_END 300      /* æœ«é€Ÿåº¦ */
-#define V_START 0       /* åˆé€Ÿåº¦ */
-#define ACCELTIME 0.1f  /* åŠ é€Ÿæ—¶é—´ (s) */
-#define DECEELTIME 0.1f /* å‡é€Ÿæ—¶é—´ (s) */
+#define V_END 300       /* Ä©ËÙ¶È */
+#define V_START 0       /* ³õËÙ¶È */
+#define ACCELTIME 3.5f  /* ¼ÓËÙÊ±¼ä (s) */
+#define DECEELTIME 1.5f /* ¼õËÙÊ±¼ä (s) */
 
-__IO uint16_t g_step_angle = 15;        /* è®¾ç½®çš„æ­¥è¿›æ­¥æ•°*/
-extern __IO uint32_t g_add_pulse_count; /* è„‰å†²ä¸ªæ•°ç´¯è®¡*/
+__IO uint16_t g_step_angle = 20;        /* ÉèÖÃµÄ²½½ø²½Êı*/
+extern __IO uint32_t g_add_pulse_count; /* Âö³å¸öÊıÀÛ¼Æ*/
 extern motor_state_typedef g_motor_sta;
 
+// extern uint32_t g_ccr_val; /* ±È½ÏÖµ±äÖµ */
+// extern uint8_t g_run_flag;
+// int angle = 0;
+
 /**
- * @brief     :éç»„åˆæŒ‰é”®äº‹ä»¶å¤„ç†
+ * @brief     :·Ç×éºÏ°´¼üÊÂ¼ş´¦Àí
  * @param     btn :
- * @attention :æŒ‰é”®è§¦å‘äº‹ä»¶å½¢å¼
- * FLEX_BTN_PRESS_DOWN = 0,        // æŒ‰ä¸‹äº‹ä»¶
- * FLEX_BTN_PRESS_CLICK,           // å•å‡»äº‹ä»¶
- * FLEX_BTN_PRESS_DOUBLE_CLICK,    // åŒå‡»äº‹ä»¶
- * FLEX_BTN_PRESS_REPEAT_CLICK,    // è¿å‡»äº‹ä»¶ï¼Œä½¿ç”¨ flex_button_t ä¸­çš„ click_cnt æ–­å®šè¿å‡»æ¬¡æ•°
- * FLEX_BTN_PRESS_SHORT_START,     // çŸ­æŒ‰å¼€å§‹äº‹ä»¶
- * FLEX_BTN_PRESS_SHORT_UP,        // çŸ­æŒ‰æŠ¬èµ·äº‹ä»¶
- * FLEX_BTN_PRESS_LONG_START,      // é•¿æŒ‰å¼€å§‹äº‹ä»¶
- * FLEX_BTN_PRESS_LONG_UP,         // é•¿æŒ‰æŠ¬èµ·äº‹ä»¶
- * FLEX_BTN_PRESS_LONG_HOLD,       // é•¿æŒ‰ä¿æŒäº‹ä»¶
- * FLEX_BTN_PRESS_LONG_HOLD_UP,    // é•¿æŒ‰ä¿æŒçš„æŠ¬èµ·äº‹ä»¶
+ * @attention :°´¼ü´¥·¢ÊÂ¼şĞÎÊ½
+ * FLEX_BTN_PRESS_DOWN = 0,        // °´ÏÂÊÂ¼ş
+ * FLEX_BTN_PRESS_CLICK,           // µ¥»÷ÊÂ¼ş
+ * FLEX_BTN_PRESS_DOUBLE_CLICK,    // Ë«»÷ÊÂ¼ş
+ * FLEX_BTN_PRESS_REPEAT_CLICK,    // Á¬»÷ÊÂ¼ş£¬Ê¹ÓÃ flex_button_t ÖĞµÄ click_cnt ¶Ï¶¨Á¬»÷´ÎÊı
+ * FLEX_BTN_PRESS_SHORT_START,     // ¶Ì°´¿ªÊ¼ÊÂ¼ş
+ * FLEX_BTN_PRESS_SHORT_UP,        // ¶Ì°´Ì§ÆğÊÂ¼ş
+ * FLEX_BTN_PRESS_LONG_START,      // ³¤°´¿ªÊ¼ÊÂ¼ş
+ * FLEX_BTN_PRESS_LONG_UP,         // ³¤°´Ì§ÆğÊÂ¼ş
+ * FLEX_BTN_PRESS_LONG_HOLD,       // ³¤°´±£³ÖÊÂ¼ş
+ * FLEX_BTN_PRESS_LONG_HOLD_UP,    // ³¤°´±£³ÖµÄÌ§ÆğÊÂ¼ş
  * @attention :
  */
 static void matrix_combination_btn_event(flex_button_t *btn)
 {
   switch (btn->id)
   {
-  /* æŒ‰é”® UP */
+  /* °´¼ü UP */
   case MATRIX_KEY_UP:
   {
     switch (btn->event)
@@ -238,24 +242,24 @@ static void matrix_combination_btn_event(flex_button_t *btn)
     case FLEX_BTN_PRESS_DOWN:
       break;
     case FLEX_BTN_PRESS_CLICK:
-      // printf("MATRIX_KEY_UP\n");
+      printf("MATRIX_KEY_UP\n");
 
       g_step_angle = g_step_angle + 1;
       if (g_step_angle >= 50)
         g_step_angle = 1;
-      printf("Set_Aangle:%d \r\n", g_step_angle);                /*è®¾ç½®çš„æ—‹è½¬ä½ç½®ï¼ˆè§’åº¦ï¼‰*/
-      printf("Add_Aangle:%.2f\r\n", g_add_pulse_count * 0.225); /*ç´¯è®¡æ—‹è½¬çš„è§’åº¦*/
+      printf("Set_Aangle:%d \r\n", g_step_angle);                  /*ÉèÖÃµÄĞı×ªÎ»ÖÃ£¨½Ç¶È£©*/
+      printf("Add_Aangle:%.2f\r\n", g_add_pulse_count * 0.05625f); /*ÀÛ¼ÆĞı×ªµÄ½Ç¶È*/
 
       break;
     case FLEX_BTN_PRESS_DOUBLE_CLICK:
       printf("MATRIX_KEY_UP x2\n");
 
-      /* å¼€å¯ç”µæœºSå‹åŠ å‡é€Ÿ */
+      /* ¿ªÆôµç»úSĞÍ¼Ó¼õËÙ */
       if (g_motor_sta == STATE_IDLE)
       {
         printf("stepmotor1_move_rel\n");
         g_add_pulse_count = 0;
-        stepmotor1_move_rel(V_START, V_END, ACCELTIME, DECEELTIME, g_step_angle * SPR); /* ä¸€æ¬¡åŠ å‡é€Ÿè¿åŠ¨ */
+        stepmotor1_move_rel(V_START, V_END, ACCELTIME, DECEELTIME, g_step_angle * SPR); /* Ò»´Î¼Ó¼õËÙÔË¶¯ */
       }
 
       break;
@@ -263,7 +267,7 @@ static void matrix_combination_btn_event(flex_button_t *btn)
     break;
   }
 
-  /* æŒ‰é”® UP */
+  /* °´¼ü 7 */
   case MATRIX_KEY_7:
   {
     switch (btn->event)
@@ -276,8 +280,8 @@ static void matrix_combination_btn_event(flex_button_t *btn)
       g_step_angle = g_step_angle - 1;
       if (g_step_angle <= 1)
         g_step_angle = 50;
-      printf("Set_Aangle:%d \r\n", g_step_angle);                /*è®¾ç½®çš„æ—‹è½¬ä½ç½®ï¼ˆè§’åº¦ï¼‰*/
-      printf("Add_Aangle:%.2f \r\n", g_add_pulse_count * 0.225); /*ç´¯è®¡æ—‹è½¬çš„è§’åº¦*/
+      printf("Set_Aangle:%d \r\n", g_step_angle);                /*ÉèÖÃµÄĞı×ªÎ»ÖÃ£¨½Ç¶È£©*/
+      printf("Add_Aangle:%.2f \r\n", g_add_pulse_count * 0.225); /*ÀÛ¼ÆĞı×ªµÄ½Ç¶È*/
 
       break;
     case FLEX_BTN_PRESS_DOUBLE_CLICK:
@@ -291,23 +295,140 @@ static void matrix_combination_btn_event(flex_button_t *btn)
     break;
   }
 
-    /* æŒ‰é”® UP */
-  case MATRIX_KEY_8:
-  {
-    switch (btn->event)
-    {
-    case FLEX_BTN_PRESS_DOWN:
-      break;
-    case FLEX_BTN_PRESS_CLICK:
-      printf("MATRIX_KEY_8\r\n");
+    //   /* °´¼ü 8 */
+    // case MATRIX_KEY_8:
+    // {
+    //   switch (btn->event)
+    //   {
+    //   case FLEX_BTN_PRESS_DOWN:
+    //     break;
+    //   case FLEX_BTN_PRESS_CLICK:
+    //     printf("MATRIX_KEY_8\r\n");
 
-      break;
-    case FLEX_BTN_PRESS_DOUBLE_CLICK:
-      printf("MATRIX_KEY_8 x2\r\n");
+    //     stepper_star(STEPPER_MOTOR_1);
+    //     ST1_EN(EN_ON);
+    //     printf("motor1 star\r\n");
 
-      break;
-    }
-    break;
-  }
+    //     break;
+    //   case FLEX_BTN_PRESS_DOUBLE_CLICK:
+    //     printf("MATRIX_KEY_8 x2\r\n");
+
+    //     stepper_stop(STEPPER_MOTOR_1);
+    //     ST1_EN(EN_OFF);
+    //     printf("motor1 stop\r\n");
+
+    //     break;
+    //   }
+    //   break;
+    // }
+
+    //   /* °´¼ü 9 */
+    // case MATRIX_KEY_9:
+    // {
+    //   switch (btn->event)
+    //   {
+    //   case FLEX_BTN_PRESS_DOWN:
+    //     break;
+    //   case FLEX_BTN_PRESS_CLICK:
+    //     printf("MATRIX_KEY_9\r\n");
+
+    //     g_ccr_val -= 20;
+    //     if (g_ccr_val <= 20)
+    //     {
+    //       g_ccr_val = 20;
+    //     }
+
+    //     break;
+    //   case FLEX_BTN_PRESS_DOUBLE_CLICK:
+    //     printf("MATRIX_KEY_9 x2\r\n");
+
+    //     g_ccr_val += 20;
+    //     if (g_ccr_val >= 1000)
+    //     {
+    //       g_ccr_val = 1000;
+    //     }
+
+    //     break;
+    //   }
+    //   break;
+    // }
+
+    //   /* °´¼ü DOWN */
+    // case MATRIX_KEY_DOWN:
+    // {
+    //   switch (btn->event)
+    //   {
+    //   case FLEX_BTN_PRESS_DOWN:
+    //     break;
+    //   case FLEX_BTN_PRESS_CLICK:
+    //     printf("MATRIX_KEY_DOWN\r\n");
+
+    //     if (g_run_flag == 0)
+    //     {
+    //       angle += 90;
+    //       if (angle >= 0)
+    //       {
+    //         g_stepper.angle = angle;
+    //         g_stepper.dir = CW;
+    //       }
+    //       else
+    //       {
+    //         g_stepper.angle = -angle;
+    //         g_stepper.dir = CCW;
+    //       }
+    //       printf("Ğı×ªµÄ½Ç¶ÈÎª£º%d\r\n", angle);
+    //     }
+
+    //     break;
+    //   case FLEX_BTN_PRESS_DOUBLE_CLICK:
+    //     printf("MATRIX_KEY_DOWN x2\r\n");
+
+    //     if (g_run_flag == 0)
+    //     {
+    //       angle -= 90;
+    //       if (angle >= 0)
+    //       {
+    //         g_stepper.angle = angle;
+    //         g_stepper.dir = CW;
+    //       }
+    //       else
+    //       {
+    //         g_stepper.angle = -angle;
+    //         g_stepper.dir = CCW;
+    //       }
+    //       printf("Ğı×ªµÄ½Ç¶ÈÎª£º%d\r\n", angle);
+    //     }
+
+    //     break;
+    //   }
+    //   break;
+    // }
+
+    //   /* °´¼ü 4 */
+    // case MATRIX_KEY_4:
+    // {
+    //   switch (btn->event)
+    //   {
+    //   case FLEX_BTN_PRESS_DOWN:
+    //     break;
+    //   case FLEX_BTN_PRESS_CLICK:
+    //     printf("MATRIX_KEY_4\r\n");
+
+    //     if (g_run_flag == 0)
+    //     {
+    //       ST1_EN(EN_ON);
+    //       angle = 0;                                                          /* ½Ç¶ÈÇå0£¬ÒÔ±ãÏÂ´ÎÉèÖÃ */
+    //       stepper_set_angle(g_stepper.angle, g_stepper.dir, STEPPER_MOTOR_1); /* ¿ªÆôĞı×ª */
+    //       printf("¿ªÆôĞı×ª\r\n");
+    //     }
+
+    //     break;
+    //   case FLEX_BTN_PRESS_DOUBLE_CLICK:
+    //     printf("MATRIX_KEY_4 x2\r\n");
+
+    //     break;
+    //   }
+    //   break;
+    // }
   }
 }
