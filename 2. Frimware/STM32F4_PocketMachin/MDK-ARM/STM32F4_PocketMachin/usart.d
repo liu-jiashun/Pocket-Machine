@@ -34,6 +34,10 @@ stm32f4_pocketmachin\usart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_
 stm32f4_pocketmachin\usart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 stm32f4_pocketmachin\usart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 stm32f4_pocketmachin\usart.o: D:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+stm32f4_pocketmachin\usart.o: ../Middleware/App/_debug.h
+stm32f4_pocketmachin\usart.o: ../Middleware/Library/.\letter-shell\src\shell.h
+stm32f4_pocketmachin\usart.o: ../Middleware/Library/.\letter-shell\src\shell_cfg.h
+stm32f4_pocketmachin\usart.o: ../Middleware/Library/.\MALLOC\malloc.h
 stm32f4_pocketmachin\usart.o: ../Middleware/Device/.\diwenlcd\diwenlcd.h
 stm32f4_pocketmachin\usart.o: D:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 stm32f4_pocketmachin\usart.o: D:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
@@ -43,7 +47,6 @@ stm32f4_pocketmachin\usart.o: ../Middleware/Library/.\libdgus_ii\dgus_util.h
 stm32f4_pocketmachin\usart.o: ../Middleware/Library/.\libdgus_ii\dgus_control_text.h
 stm32f4_pocketmachin\usart.o: ../Middleware/Library/.\libdgus_ii\dgus_config.h
 stm32f4_pocketmachin\usart.o: ../Middleware/Library/.\lwrb\lwrb.h
-stm32f4_pocketmachin\usart.o: ../Middleware/Library/.\MALLOC\malloc.h
 stm32f4_pocketmachin\usart.o: ../Middleware/Device/.\vision\vision.h
 stm32f4_pocketmachin\usart.o: ../Middleware/Library/.\list\list.h
 stm32f4_pocketmachin\usart.o: D:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h

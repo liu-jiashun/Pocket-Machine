@@ -10,6 +10,7 @@
       <TargetName>STM32F4_PocketMachin</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
+      <pArmCC>5060960::V5.06 update 7 (build 960)::.\ARMCC</pArmCC>
       <pCCUsed>5060960::V5.06 update 7 (build 960)::.\ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
@@ -313,7 +314,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>3</Optim>
+            <Optim>4</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -328,7 +329,7 @@
             <uC99>1</uC99>
             <uGnu>0</uGnu>
             <useXO>0</useXO>
-            <v6Lang>5</v6Lang>
+            <v6Lang>3</v6Lang>
             <v6LangP>3</v6LangP>
             <vShortEn>1</vShortEn>
             <vShortWch>1</vShortWch>
@@ -870,6 +871,31 @@
               <FilePath>..\Middleware\Library\SmartTimer\smarttimer.c</FilePath>
             </File>
             <File>
+              <FileName>shell.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Middleware\Library\letter-shell\src\shell.c</FilePath>
+            </File>
+            <File>
+              <FileName>shell_cmd_list.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Middleware\Library\letter-shell\src\shell_cmd_list.c</FilePath>
+            </File>
+            <File>
+              <FileName>shell_companion.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Middleware\Library\letter-shell\src\shell_companion.c</FilePath>
+            </File>
+            <File>
+              <FileName>shell_ext.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Middleware\Library\letter-shell\src\shell_ext.c</FilePath>
+            </File>
+            <File>
+              <FileName>shell_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Middleware\Library\letter-shell\src\shell_cfg.h</FilePath>
+            </File>
+            <File>
               <FileName>flexible_button.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Middleware\Library\FlexibleButton\flexible_button.c</FilePath>
@@ -973,6 +999,11 @@
               <FileName>app.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Middleware\App\app.c</FilePath>
+            </File>
+            <File>
+              <FileName>_Debug.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Middleware\App\_Debug.c</FilePath>
             </File>
           </Files>
         </Group>

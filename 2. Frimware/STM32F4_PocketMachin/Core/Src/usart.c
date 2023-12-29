@@ -23,6 +23,7 @@
 /* USER CODE BEGIN 0 */
 #include <stdio.h>
 
+#include "_debug.h"
 #include ".\diwenlcd\diwenlcd.h"
 #include ".\vision\vision.h"
 
@@ -264,10 +265,10 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
   /* USER CODE BEGIN USART1_MspInit 1 */
 
     HAL_UART_Receive_IT(&huart1, (uint8_t *)&vision_recv_byte, 1);            // usart1 receive enable
-    lwrb_init(&vision_uart_buff, vision_buff_data, sizeof(vision_buff_data)); // Initialize buffer
-    while (!lwrb_is_ready(&vision_uart_buff))                                 // ringbuffer is ready
-    {
-    }
+   lwrb_init(&vision_uart_buff, vision_buff_data, sizeof(vision_buff_data)); // Initialize buffer
+   while (!lwrb_is_ready(&vision_uart_buff))                                 // ringbuffer is ready
+   {
+   }
 
   /* USER CODE END USART1_MspInit 1 */
   }
@@ -346,12 +347,20 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
   if (huart->Instance == UART5) // diwenlcd receive one byte for interrupt
   {
     lwrb_write(&diwenlcd_uart_buff, (uint8_t *)&diwenlcd_recv_byte, 1);
-    HAL_UART_Receive_IT(&huart5, (uint8_t *)&diwenlcd_recv_byte, 1); // uart5 receive enable
+    HAL_UART_Receive_IT(&huart5, (uint8_t *)&diwenlcd_recv_byte, 1); // uart5 receive re-enable
   }
+
   if (huart->Instance == USART1) // vision receive one byte for interrupt
   {
-    lwrb_write(&diwenlcd_uart_buff, (uint8_t *)&vision_recv_byte, 1);
-    HAL_UART_Receive_IT(&huart1, (uint8_t *)&vision_recv_byte, 1); // usart1 receive enable
+    // lwrb_write(&diwenlcd_uart_buff, (uint8_t *)&vision_recv_byte, 1);
+
+#ifdef __Debug
+    // 调用shell处理数据的接口
+    shell_recv_buf = vision_recv_byte;
+    shellHandler(&shell, shell_recv_buf);
+#endif
+
+    HAL_UART_Receive_IT(&huart1, (uint8_t *)&vision_recv_byte, 1); // usart1 receive re-enable 
   }
 }
 

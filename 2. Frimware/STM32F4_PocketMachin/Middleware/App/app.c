@@ -1,5 +1,6 @@
 #include "app.h"
 #include "tim.h"
+#include "_Debug.h"
 #include ".\SmartTimer\smarttimer.h"
 #include ".\MALLOC\malloc.h"
 #include ".\power\power.h"
@@ -14,8 +15,6 @@
 #include ".\vision\vision.h"
 
 #include <stdio.h>
-
-#define Debug
 
 /**
  * @brief     :系统运行指示灯任务
@@ -54,6 +53,7 @@ void data_receive_task(void)
  */
 void debug_task(void)
 {
+	// shellTask(&shell);
 }
 
 /**
@@ -62,12 +62,13 @@ void debug_task(void)
  */
 void system_start_task(void)
 {
-#ifdef Debug
-	stim_loop(5, debug_task, STIM_LOOP_FOREVER); // 调试单元任务
-#endif
 	stim_loop(200, sys_task, STIM_LOOP_FOREVER);				 // 系统运行指示灯任务（200ms）
 	stim_loop(20, button_task, STIM_LOOP_FOREVER);			 // 按键事件处理任务（20ms）
 	stim_loop(50, data_receive_task, STIM_LOOP_FOREVER); // 数据接收任务（50ms）
+
+#ifdef __Debug
+	stim_loop(5, debug_task, STIM_LOOP_FOREVER); // 调试单元任务
+#endif
 
 	// 开始
 	// voice_say(DEVICE_STARTED); // 设备启动播报
@@ -79,18 +80,20 @@ void system_start_task(void)
  */
 void stim_start_task(void)
 {
-	// 设备驱动初始化
 	my_mem_init(SRAMIN); /* 内部SRAM内存池初始化*/
-	led_init();					 /* 口袋机LED初始化 */
-	beep_init();				 /* 口袋机蜂鸣器初始化 */
-	touchkey_init();		 /* 口袋机触摸按键初始化 */
-	ST7789_Init();			 /* 口袋机TFTLCD初始化 */
-	matrixkey_init();		 /* 5 x 4 矩阵键盘初始化 */
-	diwenlcd_init();		 /* 迪文屏初始化 */
-	voice_init();				 /* 语音初始化 */
-	tirpod_init();			 /* 云台初始化 */
-	vision_init();			 /* 视觉识别初始化 */
+	_Debug_Shell_Init(); /* 调试接口初始化 */
+
+	// 设备驱动初始化
+	led_init();				/* 口袋机LED初始化 */
+	beep_init();			/* 口袋机蜂鸣器初始化 */
+	touchkey_init();	/* 口袋机触摸按键初始化 */
+	ST7789_Init();		/* 口袋机TFTLCD初始化 */
+	matrixkey_init(); /* 5 x 4 矩阵键盘初始化 */
+	diwenlcd_init();	/* 迪文屏初始化 */
+	voice_init();			/* 语音初始化 */
+	tirpod_init();		/* 云台初始化 */
+	vision_init();		/* 视觉识别初始化 */
 
 	// 任务调度系统启动
-	stim_runlater(100, system_start_task); // 100 ms后启动任务全部任务
+	system_start_task(); // 系统启动任务全部任务
 }

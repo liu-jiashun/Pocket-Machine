@@ -34,8 +34,11 @@ stm32f4_pocketmachin\app.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_ti
 stm32f4_pocketmachin\app.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 stm32f4_pocketmachin\app.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 stm32f4_pocketmachin\app.o: ../Core/Inc/tim.h
-stm32f4_pocketmachin\app.o: ../Middleware/Library/.\SmartTimer\smarttimer.h
+stm32f4_pocketmachin\app.o: ..\Middleware\App\_Debug.h
+stm32f4_pocketmachin\app.o: ../Middleware/Library/.\letter-shell\src\shell.h
+stm32f4_pocketmachin\app.o: ../Middleware/Library/.\letter-shell\src\shell_cfg.h
 stm32f4_pocketmachin\app.o: ../Middleware/Library/.\MALLOC\malloc.h
+stm32f4_pocketmachin\app.o: ../Middleware/Library/.\SmartTimer\smarttimer.h
 stm32f4_pocketmachin\app.o: ../Middleware/Device/.\power\power.h
 stm32f4_pocketmachin\app.o: ../Middleware/Device/.\led\led.h
 stm32f4_pocketmachin\app.o: ../Middleware/Device/.\beep\beep.h

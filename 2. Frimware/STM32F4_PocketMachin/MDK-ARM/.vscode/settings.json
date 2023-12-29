@@ -28,6 +28,8 @@
     "smarttimer.h": "c",
     "vision.h": "c",
     "list.h": "c",
-    "relay.h": "c"
+    "relay.h": "c",
+    "shell.h": "c",
+    "_debug.h": "c"
   }
 }

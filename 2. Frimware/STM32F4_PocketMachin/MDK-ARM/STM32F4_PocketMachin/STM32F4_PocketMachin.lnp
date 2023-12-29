@@ -31,6 +31,10 @@
 "stm32f4_pocketmachin\list_iterator.o"
 "stm32f4_pocketmachin\list_node.o"
 "stm32f4_pocketmachin\smarttimer.o"
+"stm32f4_pocketmachin\shell.o"
+"stm32f4_pocketmachin\shell_cmd_list.o"
+"stm32f4_pocketmachin\shell_companion.o"
+"stm32f4_pocketmachin\shell_ext.o"
 "stm32f4_pocketmachin\flexible_button.o"
 "stm32f4_pocketmachin\dgus_control_curve.o"
 "stm32f4_pocketmachin\dgus_control_text.o"
@@ -50,6 +54,7 @@
 "stm32f4_pocketmachin\tirpod.o"
 "stm32f4_pocketmachin\vision.o"
 "stm32f4_pocketmachin\app.o"
+"stm32f4_pocketmachin\_debug.o"
 --strict --scatter "STM32F4_PocketMachin\STM32F4_PocketMachin.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

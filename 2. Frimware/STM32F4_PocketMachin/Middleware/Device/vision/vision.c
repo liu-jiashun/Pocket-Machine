@@ -12,6 +12,7 @@ uint8_t vision_buff_data[64]; // 开辟一块内存用于缓冲区
  * @attention :
  */
 vision_item v_object[] = {
+    {"添加需要检测的物体...", 0x00, 0x00},
     {"红色正方形", 0x01, 0x01},
     {"绿色正方形", 0x02, 0x01},
     {"蓝色正方形", 0x03, 0x01},
@@ -63,6 +64,6 @@ void vision_requst(char *name)
   }
   data[6] = 0x9F;
   data[7] = 0xF9;
-	
+
   vision_senddata(data, 8);
 }
