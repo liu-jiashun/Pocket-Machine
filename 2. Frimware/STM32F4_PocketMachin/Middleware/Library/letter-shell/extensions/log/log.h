@@ -11,39 +11,23 @@
 #ifndef __LOG_H__
 #define __LOG_H__
 
-#ifdef __cplusplus
-extern "C" {
-#endif /**< defined __cplusplus */
-
 #include "shell.h"
 
 #define     LOG_VERSION        "1.0.1"
 
 #define     SHELL_COMPANION_ID_LOG          -2
 
-#define     LOG_USING_LOCK     0
 #define     LOG_BUFFER_SIZE    256              /**< log输出缓冲大小 */
 #define     LOG_USING_COLOR    1                /**< 是否使用颜色 */
 #define     LOG_MAX_NUMBER     5                /**< 允许注册的最大log对象数量 */
 #define     LOG_AUTO_TAG       1                /**< 是否自动添加TAG */
 #define     LOG_END            "\r\n"           /**< log信息结尾 */
+#define     LOG_TAG            __FUNCTION__     /**< 自定添加的TAG */
 #define     LOG_TIME_STAMP     0                /**< 设置获取系统时间戳 */
-
-#ifndef LOG_TAG
-    #define LOG_TAG            __FUNCTION__     /**< 自定添加的TAG */
-#endif
 
 #ifndef     LOG_ENABLE
     #define LOG_ENABLE         1                /**< 使能log */
 #endif
-
-#if LOG_USING_LOCK == 1
-#define     LOG_LOCK(log)           log->lock(log)
-#define     LOG_UNLOCK(log)         log->unlock(log)
-#else
-#define     LOG_LOCK(log)
-#define     LOG_UNLOCK(log)
-#endif /* LOG_USING_LOCK == 1 */
 
 #define     LOG_ALL_OBJ        ((Log *)-1)      /**< 所有已注册的log对象 */
 
@@ -68,17 +52,17 @@ extern "C" {
 #define     CSI_WHITE_L         97              /**< 亮白 */
 #define     CSI_DEFAULT         39              /**< 默认 */
 
-#define     CSI(code)           "\033[" #code "m"   /**< ANSI CSI指令 */
+#define     CSI(code)           "\033["#code"m" /**< ANSI CSI指令 */
 
 /**
  * log级别字符(包含颜色)
  */
 #if LOG_USING_COLOR == 1
-#define     ERROR_TEXT          CSI(31) "E(%d) %s:" CSI(39)     /**< 错误标签 */
-#define     WARNING_TEXT        CSI(33) "W(%d) %s:" CSI(39)     /**< 警告标签 */
-#define     INFO_TEXT           CSI(32) "I(%d) %s:" CSI(39)     /**< 信息标签 */
-#define     DEBUG_TEXT          CSI(34) "D(%d) %s:" CSI(39)     /**< 调试标签 */
-#define     VERBOSE_TEXT        CSI(36) "V(%d) %s:" CSI(39)     /**< 冗余信息标签 */
+#define     ERROR_TEXT          CSI(31)"E(%d) %s:"CSI(39)       /**< 错误标签 */
+#define     WARNING_TEXT        CSI(33)"W(%d) %s:"CSI(39)       /**< 警告标签 */
+#define     INFO_TEXT           CSI(32)"I(%d) %s:"CSI(39)       /**< 信息标签 */
+#define     DEBUG_TEXT          CSI(34)"D(%d) %s:"CSI(39)       /**< 调试标签 */
+#define     VERBOSE_TEXT        CSI(36)"V(%d) %s:"CSI(39)       /**< 冗余信息标签 */
 #else
 #define     ERROR_TEXT          "E(%d) %s:"
 #define     WARNING_TEXT        "W(%d) %s:"
@@ -108,15 +92,11 @@ typedef enum
  * @brief log对象定义
  * 
  */
-typedef struct log_def
+typedef struct
 {
     void (*write)(char *, short);                   /**< 写buffer */
     char active;                                    /**< 是否激活 */
     LogLevel level;                                 /**< 日志级别 */
-#if LOG_USING_LOCK == 1   
-    int (*lock)(struct log_def *);                  /**< log 加锁 */
-    int (*unlock)(struct log_def *);                /**< log 解锁 */
-#endif /** LOG_USING_LOCK == 1 */
     Shell *shell;                                   /**< 关联shell对象 */
 } Log;
 
@@ -129,7 +109,7 @@ typedef struct log_def
  * @param ... 参数
  */
 #define logPrintln(format, ...) \
-        logWrite(LOG_ALL_OBJ, LOG_NONE, format "\r\n", ##__VA_ARGS__)
+        logWrite(LOG_ALL_OBJ, LOG_NONE, format"\r\n", ##__VA_ARGS__)
 
 
 /**
@@ -142,7 +122,7 @@ typedef struct log_def
  */
 #define logFormat(text, level, fmt, ...) \
         if (LOG_ENABLE) {\
-            logWrite(LOG_ALL_OBJ, level, text " " fmt "" LOG_END, \
+            logWrite(LOG_ALL_OBJ, level, text" "fmt""LOG_END, \
                 LOG_TIME_STAMP, LOG_TAG, ##__VA_ARGS__); }
 
 /**
@@ -214,11 +194,7 @@ typedef struct log_def
 void logRegister(Log *log, Shell *shell);
 void logUnRegister(Log *log);
 void logSetLevel(Log *log, LogLevel level);
-void logWrite(Log *log, LogLevel level, const char *fmt, ...);
+void logWrite(Log *log, LogLevel level, char *fmt, ...);
 void logHexDump(Log *log, LogLevel level, void *base, unsigned int length);
-
-#ifdef __cplusplus
-}
-#endif /**< defined __cplusplus */
 
 #endif

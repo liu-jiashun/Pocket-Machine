@@ -48,15 +48,6 @@ void data_receive_task(void)
 }
 
 /**
- * @brief     :调试单元任务
- * @attention :
- */
-void debug_task(void)
-{
-	// shellTask(&shell);
-}
-
-/**
  * @brief     :系统启动任务
  * @attention :
  */
@@ -65,10 +56,6 @@ void system_start_task(void)
 	stim_loop(200, sys_task, STIM_LOOP_FOREVER);				 // 系统运行指示灯任务（200ms）
 	stim_loop(20, button_task, STIM_LOOP_FOREVER);			 // 按键事件处理任务（20ms）
 	stim_loop(50, data_receive_task, STIM_LOOP_FOREVER); // 数据接收任务（50ms）
-
-#ifdef __Debug
-	stim_loop(5, debug_task, STIM_LOOP_FOREVER); // 调试单元任务
-#endif
 
 	// 开始
 	// voice_say(DEVICE_STARTED); // 设备启动播报
@@ -95,5 +82,5 @@ void stim_start_task(void)
 	vision_init();		/* 视觉识别初始化 */
 
 	// 任务调度系统启动
-	system_start_task(); // 系统启动任务全部任务
+	stim_runlater(100, system_start_task); // 系统启动任务全部任务
 }

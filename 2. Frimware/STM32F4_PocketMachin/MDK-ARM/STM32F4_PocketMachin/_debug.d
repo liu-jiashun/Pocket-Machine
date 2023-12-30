@@ -36,5 +36,9 @@ stm32f4_pocketmachin\_debug.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal
 stm32f4_pocketmachin\_debug.o: ../Middleware/Library/.\letter-shell\src\shell.h
 stm32f4_pocketmachin\_debug.o: ../Middleware/Library/.\letter-shell\src\shell_cfg.h
 stm32f4_pocketmachin\_debug.o: ../Middleware/Library/.\MALLOC\malloc.h
-stm32f4_pocketmachin\_debug.o: D:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 stm32f4_pocketmachin\_debug.o: ../Core/Inc/usart.h
+stm32f4_pocketmachin\_debug.o: D:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+stm32f4_pocketmachin\_debug.o: D:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+stm32f4_pocketmachin\_debug.o: ../Middleware/Device/.\tirpod\tirpod.h
+stm32f4_pocketmachin\_debug.o: ../Middleware/Device/.\tirpod\relay.h
+stm32f4_pocketmachin\_debug.o: ../Middleware/Device/.\tirpod\stepmotor.h

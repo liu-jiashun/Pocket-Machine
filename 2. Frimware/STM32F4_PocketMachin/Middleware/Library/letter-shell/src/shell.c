@@ -119,7 +119,7 @@ static const char *shellText[] =
     [SHELL_TEXT_HELP_HEADER] =
         "command help of ",
     [SHELL_TEXT_PASSWORD_HINT] = 
-        "Please input password:",
+        "\r\nPlease input password:",
     [SHELL_TEXT_PASSWORD_ERROR] = 
         "\r\npassword error\r\n",
     [SHELL_TEXT_CLEAR_CONSOLE] = 
@@ -153,7 +153,7 @@ static void shellAdd(Shell *shell);
 static void shellWritePrompt(Shell *shell, unsigned char newline);
 static void shellWriteReturnValue(Shell *shell, int value);
 static int shellShowVar(Shell *shell, ShellCommand *command);
-void shellSetUser(Shell *shell, const ShellCommand *user);
+static void shellSetUser(Shell *shell, const ShellCommand *user);
 ShellCommand* shellSeekCommand(Shell *shell,
                                const char *cmd,
                                ShellCommand *base,
@@ -373,22 +373,18 @@ static void shellWritePrompt(Shell *shell, unsigned char newline)
  * @param fmt 格式化字符串
  * @param ... 参数
  */
-void shellPrint(Shell *shell, const char *fmt, ...)
+void shellPrint(Shell *shell, char *fmt, ...)
 {
     char buffer[SHELL_PRINT_BUFFER];
     va_list vargs;
-    int len;
 
     SHELL_ASSERT(shell, return);
 
     va_start(vargs, fmt);
-    len = vsnprintf(buffer, SHELL_PRINT_BUFFER, fmt, vargs);
+    vsnprintf(buffer, SHELL_PRINT_BUFFER - 1, fmt, vargs);
     va_end(vargs);
-    if (len > SHELL_PRINT_BUFFER)
-    {
-        len = SHELL_PRINT_BUFFER;
-    }
-    shell->write(buffer, len);
+    
+    shellWriteString(shell, buffer);
 }
 #endif
 
@@ -442,9 +438,8 @@ signed char shellCheckPermission(Shell *shell, ShellCommand *command)
 {
     return ((!command->attr.attrs.permission
                 || command->attr.attrs.type == SHELL_TYPE_USER
-                || (shell->info.user
-                    && (command->attr.attrs.permission 
-                        & shell->info.user->attr.attrs.permission)))
+                || (command->attr.attrs.permission 
+                    & shell->info.user->attr.attrs.permission))
             && (shell->status.isChecked
                 || command->attr.attrs.enableUnchecked))
             ? 0 : -1;
@@ -577,12 +572,6 @@ static const char* shellGetCommandName(ShellCommand *command)
     {
         return command->data.user.name;
     }
-#if SHELL_USING_FUNC_SIGNATURE == 1
-    else if (command->attr.attrs.type == SHELL_TYPE_PARAM_PARSER)
-    {
-        return command->data.paramParser.type;
-    }
-#endif
     else
     {
         shellToHex(command->data.key.value, buffer);
@@ -1260,7 +1249,7 @@ static void shellCheckPassword(Shell *shell)
  * @param shell shell对象
  * @param user 用户
  */
-void shellSetUser(Shell *shell, const ShellCommand *user)
+static void shellSetUser(Shell *shell, const ShellCommand *user)
 {
     shell->info.user = user;
     shell->status.isChecked = 
@@ -1967,13 +1956,7 @@ int shellExecute(int argc, char *argv[])
     Shell *shell = shellGetCurrent();
     if (shell && argc >= 2)
     {
-        unsigned result;
-        if (shellExtParsePara(shell, argv[1], NULL, &result) != 0)
-        {
-            shellWriteString(shell, shellText[SHELL_TEXT_PARAM_ERROR]);
-            return -1;
-        }
-        int (*func)() = (int (*)())result;
+        int (*func)() = (int (*)())shellExtParsePara(shell, argv[1]);
         ShellCommand command = {
             .attr.value = SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_CMD_FUNC)
                           |SHELL_CMD_DISABLE_RETURN,

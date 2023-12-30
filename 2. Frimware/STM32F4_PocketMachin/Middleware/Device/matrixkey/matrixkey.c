@@ -263,6 +263,13 @@ static void matrix_combination_btn_event(flex_button_t *btn)
       }
 
       break;
+
+    case FLEX_BTN_PRESS_LONG_START:
+      printf("FLEX_BTN_PRESS_LONG_START\n");
+      break;
+    case FLEX_BTN_PRESS_LONG_UP:
+      printf("FLEX_BTN_PRESS_LONG_UP\n");
+      break;
     }
     break;
   }
@@ -292,143 +299,134 @@ static void matrix_combination_btn_event(flex_button_t *btn)
 
       break;
     }
+
     break;
   }
 
-    //   /* 按键 8 */
-    // case MATRIX_KEY_8:
-    // {
-    //   switch (btn->event)
-    //   {
-    //   case FLEX_BTN_PRESS_DOWN:
-    //     break;
-    //   case FLEX_BTN_PRESS_CLICK:
-    //     printf("MATRIX_KEY_8\r\n");
+    /* 按键 8 */
+  case MATRIX_KEY_8:
+  {
+    switch (btn->event)
+    {
+    case FLEX_BTN_PRESS_DOWN:
+      break;
+    case FLEX_BTN_PRESS_CLICK:
+      printf("MATRIX_KEY_8\r\n");
+      break;
+    case FLEX_BTN_PRESS_DOUBLE_CLICK:
+      printf("MATRIX_KEY_8 x2\r\n");
+      break;
+    }
+    break;
+  }
 
-    //     stepper_star(STEPPER_MOTOR_1);
-    //     ST1_EN(EN_ON);
-    //     printf("motor1 star\r\n");
+    /* 按键 9 */
+  case MATRIX_KEY_9:
+  {
+    switch (btn->event)
+    {
+    case FLEX_BTN_PRESS_DOWN:
+      break;
+    case FLEX_BTN_PRESS_CLICK:
+      printf("MATRIX_KEY_9\r\n");
 
-    //     break;
-    //   case FLEX_BTN_PRESS_DOUBLE_CLICK:
-    //     printf("MATRIX_KEY_8 x2\r\n");
+      // g_ccr_val -= 20;
+      // if (g_ccr_val <= 20)
+      // {
+      //   g_ccr_val = 20;
+      // }
 
-    //     stepper_stop(STEPPER_MOTOR_1);
-    //     ST1_EN(EN_OFF);
-    //     printf("motor1 stop\r\n");
+      break;
+    case FLEX_BTN_PRESS_DOUBLE_CLICK:
+      printf("MATRIX_KEY_9 x2\r\n");
 
-    //     break;
-    //   }
-    //   break;
-    // }
+      // g_ccr_val += 20;
+      // if (g_ccr_val >= 1000)
+      // {
+      //   g_ccr_val = 1000;
+      // }
 
-    //   /* 按键 9 */
-    // case MATRIX_KEY_9:
-    // {
-    //   switch (btn->event)
-    //   {
-    //   case FLEX_BTN_PRESS_DOWN:
-    //     break;
-    //   case FLEX_BTN_PRESS_CLICK:
-    //     printf("MATRIX_KEY_9\r\n");
+      break;
+    }
+    break;
+  }
 
-    //     g_ccr_val -= 20;
-    //     if (g_ccr_val <= 20)
-    //     {
-    //       g_ccr_val = 20;
-    //     }
+    /* 按键 DOWN */
+  case MATRIX_KEY_DOWN:
+  {
+    switch (btn->event)
+    {
+    case FLEX_BTN_PRESS_DOWN:
+      break;
+    case FLEX_BTN_PRESS_CLICK:
+      printf("MATRIX_KEY_DOWN\r\n");
 
-    //     break;
-    //   case FLEX_BTN_PRESS_DOUBLE_CLICK:
-    //     printf("MATRIX_KEY_9 x2\r\n");
+      // if (g_run_flag == 0)
+      // {
+      //   angle += 90;
+      //   if (angle >= 0)
+      //   {
+      //     g_stepper.angle = angle;
+      //     g_stepper.dir = CW;
+      //   }
+      //   else
+      //   {
+      //     g_stepper.angle = -angle;
+      //     g_stepper.dir = CCW;
+      //   }
+      //   printf("旋转的角度为：%d\r\n", angle);
+      // }
 
-    //     g_ccr_val += 20;
-    //     if (g_ccr_val >= 1000)
-    //     {
-    //       g_ccr_val = 1000;
-    //     }
+      break;
+    case FLEX_BTN_PRESS_DOUBLE_CLICK:
+      printf("MATRIX_KEY_DOWN x2\r\n");
 
-    //     break;
-    //   }
-    //   break;
-    // }
+      // if (g_run_flag == 0)
+      // {
+      //   angle -= 90;
+      //   if (angle >= 0)
+      //   {
+      //     g_stepper.angle = angle;
+      //     g_stepper.dir = CW;
+      //   }
+      //   else
+      //   {
+      //     g_stepper.angle = -angle;
+      //     g_stepper.dir = CCW;
+      //   }
+      //   printf("旋转的角度为：%d\r\n", angle);
+      // }
 
-    //   /* 按键 DOWN */
-    // case MATRIX_KEY_DOWN:
-    // {
-    //   switch (btn->event)
-    //   {
-    //   case FLEX_BTN_PRESS_DOWN:
-    //     break;
-    //   case FLEX_BTN_PRESS_CLICK:
-    //     printf("MATRIX_KEY_DOWN\r\n");
+      break;
+    }
+    break;
+  }
 
-    //     if (g_run_flag == 0)
-    //     {
-    //       angle += 90;
-    //       if (angle >= 0)
-    //       {
-    //         g_stepper.angle = angle;
-    //         g_stepper.dir = CW;
-    //       }
-    //       else
-    //       {
-    //         g_stepper.angle = -angle;
-    //         g_stepper.dir = CCW;
-    //       }
-    //       printf("旋转的角度为：%d\r\n", angle);
-    //     }
+    /* 按键 4 */
+  case MATRIX_KEY_4:
+  {
+    switch (btn->event)
+    {
+    case FLEX_BTN_PRESS_DOWN:
+      break;
+    case FLEX_BTN_PRESS_CLICK:
+      printf("MATRIX_KEY_4\r\n");
 
-    //     break;
-    //   case FLEX_BTN_PRESS_DOUBLE_CLICK:
-    //     printf("MATRIX_KEY_DOWN x2\r\n");
+      // if (g_run_flag == 0)
+      // {
+      //   ST1_EN(EN_ON);
+      //   angle = 0;                                                          /* 角度清0，以便下次设置 */
+      //   stepper_set_angle(g_stepper.angle, g_stepper.dir, STEPPER_MOTOR_1); /* 开启旋转 */
+      //   printf("开启旋转\r\n");
+      // }
 
-    //     if (g_run_flag == 0)
-    //     {
-    //       angle -= 90;
-    //       if (angle >= 0)
-    //       {
-    //         g_stepper.angle = angle;
-    //         g_stepper.dir = CW;
-    //       }
-    //       else
-    //       {
-    //         g_stepper.angle = -angle;
-    //         g_stepper.dir = CCW;
-    //       }
-    //       printf("旋转的角度为：%d\r\n", angle);
-    //     }
+      break;
+    case FLEX_BTN_PRESS_DOUBLE_CLICK:
+      printf("MATRIX_KEY_4 x2\r\n");
 
-    //     break;
-    //   }
-    //   break;
-    // }
-
-    //   /* 按键 4 */
-    // case MATRIX_KEY_4:
-    // {
-    //   switch (btn->event)
-    //   {
-    //   case FLEX_BTN_PRESS_DOWN:
-    //     break;
-    //   case FLEX_BTN_PRESS_CLICK:
-    //     printf("MATRIX_KEY_4\r\n");
-
-    //     if (g_run_flag == 0)
-    //     {
-    //       ST1_EN(EN_ON);
-    //       angle = 0;                                                          /* 角度清0，以便下次设置 */
-    //       stepper_set_angle(g_stepper.angle, g_stepper.dir, STEPPER_MOTOR_1); /* 开启旋转 */
-    //       printf("开启旋转\r\n");
-    //     }
-
-    //     break;
-    //   case FLEX_BTN_PRESS_DOUBLE_CLICK:
-    //     printf("MATRIX_KEY_4 x2\r\n");
-
-    //     break;
-    //   }
-    //   break;
-    // }
+      break;
+    }
+    break;
+  }
   }
 }

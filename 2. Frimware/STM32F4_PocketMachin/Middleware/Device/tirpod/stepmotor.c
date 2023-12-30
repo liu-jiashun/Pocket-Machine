@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <math.h>
 
-// STEPPER_MOTOR g_stepper;
+STEPPER_MOTOR g_stepper;
 
 /**
  * @brief     :步进电机初始化
@@ -90,23 +90,23 @@ void stepper_stop(uint8_t motor_num)
   }
 }
 
-// /**
-//  * @brief       将需要转动的角度转换成脉冲数
-//  * @param       angle    : 需要转动的角度值
-//  * @param       dir      : 旋转方向
-//  * @param       motor_num: 步进电机接口序号
-//  * @retval      无
-//  */
-// void stepper_set_angle(uint16_t angle, uint8_t dir, uint8_t motor_num)
-// {
-//   g_stepper.pulse_count = angle / MAX_STEP_ANGLE;
-//   if (g_stepper.pulse_count == 0)
-//   {
-//     stepper_stop(motor_num);
-//   }
-//   else
-//     stepper_star_dir(motor_num, dir);
-// }
+/**
+ * @brief       将需要转动的角度转换成脉冲数
+ * @param       angle    : 需要转动的角度值
+ * @param       dir      : 旋转方向
+ * @param       motor_num: 步进电机接口序号
+ * @retval      无
+ */
+void stepper_set_angle(uint16_t angle, uint8_t dir, uint8_t motor_num)
+{
+  g_stepper.pulse_count = angle / MAX_STEP_ANGLE;
+  if (g_stepper.pulse_count == 0)
+  {
+    stepper_stop(motor_num);
+  }
+  else
+    stepper_star_dir(motor_num, dir);
+}
 
 /****************************************S型加减速运动*****************************************************/
 volatile int32_t g_step_pos = 0;              /* 当前位置 */
@@ -333,9 +333,9 @@ void stepmotor2_move_rel(int32_t vo, int32_t vt, float AcTime, float DeTime, int
   ST2_EN(EN_ON);
 }
 
-// uint32_t g_count_val = 0; /* 计数值 */
-// uint32_t g_ccr_val = 32;  /* 比较值变值 */
-// uint8_t g_run_flag = 0;   /* 标志位 */
+uint32_t g_count_val = 0; /* 计数值 */
+uint32_t g_ccr_val = 500; /* 比较值变值 */
+uint8_t g_run_flag = 0;   /* 标志位 */
 
 /**
  * @brief  定时器比较中断
@@ -345,11 +345,11 @@ void stepmotor2_move_rel(int32_t vo, int32_t vt, float AcTime, float DeTime, int
  */
 void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
 {
-  volatile uint32_t Tim_Count = 0;
-  volatile uint32_t tmp = 0;
-  volatile float Tim_Pulse = 0;
-  volatile static uint8_t i = 0;
-
+  // volatile uint32_t Tim_Count = 0;
+  // volatile uint32_t tmp = 0;
+  // volatile float Tim_Pulse = 0;
+  // volatile static uint8_t i = 0;
+  //
   // if (htim->Instance == TIM1)
   // {
   //   i++;        /* 定时器中断次数计数值 */
@@ -409,64 +409,64 @@ void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
   //   __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, tmp);
   // }
 
-  if (htim->Instance == TIM4)
-  {
-    i++;        /* 定时器中断次数计数值 */
-    if (i == 2) /* 2次，说明已经输出一个完整脉冲 */
-    {
-      i = 0;        /* 清零定时器中断次数计数值 */
-      g_step_pos++; /* 当前位置 */
-      if ((g_motor_sta != STATE_IDLE) && (g_motor_sta != STATE_STOP))
-      {
-        g_calc_t.step_pos++;
-      }
-      switch (g_motor_sta)
-      {
-      case STATE_ACCEL:
-        g_add_pulse_count++;
-        Tim_Pulse = T1_FREQ / (*g_calc_t.ptr);        /* 由速度表得到每一步的定时器计数值 */
-        g_calc_t.ptr++;                               /* 取速度表的下一位 */
-        g_toggle_pulse = (uint16_t)(Tim_Pulse / 2);   /* 翻转模式C需要除以2 */
-        if (g_calc_t.step_pos >= g_calc_t.accel_step) /* 当大于加速段步数就进入匀速 */
-        {
-          myfree(SRAMIN, g_calc_t.accel_tab); /* 运动完要释放内存 */
-          g_motor_sta = STATE_AVESPEED;
-        }
-        break;
-      case STATE_DECEL:
-        g_add_pulse_count++;
-        Tim_Pulse = T1_FREQ / (*g_calc_t.ptr); /* 由速度表得到每一步的定时器计数值 */
-        g_calc_t.ptr++;
-        g_toggle_pulse = (uint16_t)(Tim_Pulse / 2);
-        if (g_calc_t.step_pos >= g_calc_t.step)
-        {
-          myfree(SRAMIN, g_calc_t.decel_tab); /* 运动完要释放内存 */
-          g_motor_sta = STATE_STOP;
-        }
-        break;
-      case STATE_AVESPEED:
-        g_add_pulse_count++;
-        Tim_Pulse = T1_FREQ / g_calc_t.vt;
-        g_toggle_pulse = (uint16_t)(Tim_Pulse / 2);
-        if (g_calc_t.step_pos >= g_calc_t.dec_point)
-        {
-          g_calc_t.ptr = g_calc_t.decel_tab; /* 将减速段的速度表赋值给ptr */
-          g_motor_sta = STATE_DECEL;
-        }
-        break;
-      case STATE_STOP:
-        HAL_TIM_OC_Stop_IT(&htim4, TIM_CHANNEL_1); /* 开启对应PWM通道 */
-        g_motor_sta = STATE_IDLE;
-        break;
-      case STATE_IDLE:
-        break;
-      }
-    }
-    /*  设置比较值 */
-    Tim_Count = __HAL_TIM_GET_COUNTER(&htim4);
-    tmp = 0xFFFF & (Tim_Count + g_toggle_pulse);
-    __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1, tmp);
-  }
+  // if (htim->Instance == TIM4)
+  // {
+  //   i++;        /* 定时器中断次数计数值 */
+  //   if (i == 2) /* 2次，说明已经输出一个完整脉冲 */
+  //   {
+  //     i = 0;        /* 清零定时器中断次数计数值 */
+  //     g_step_pos++; /* 当前位置 */
+  //     if ((g_motor_sta != STATE_IDLE) && (g_motor_sta != STATE_STOP))
+  //     {
+  //       g_calc_t.step_pos++;
+  //     }
+  //     switch (g_motor_sta)
+  //     {
+  //     case STATE_ACCEL:
+  //       g_add_pulse_count++;
+  //       Tim_Pulse = T1_FREQ / (*g_calc_t.ptr);        /* 由速度表得到每一步的定时器计数值 */
+  //       g_calc_t.ptr++;                               /* 取速度表的下一位 */
+  //       g_toggle_pulse = (uint16_t)(Tim_Pulse / 2);   /* 翻转模式C需要除以2 */
+  //       if (g_calc_t.step_pos >= g_calc_t.accel_step) /* 当大于加速段步数就进入匀速 */
+  //       {
+  //         myfree(SRAMIN, g_calc_t.accel_tab); /* 运动完要释放内存 */
+  //         g_motor_sta = STATE_AVESPEED;
+  //       }
+  //       break;
+  //     case STATE_DECEL:
+  //       g_add_pulse_count++;
+  //       Tim_Pulse = T1_FREQ / (*g_calc_t.ptr); /* 由速度表得到每一步的定时器计数值 */
+  //       g_calc_t.ptr++;
+  //       g_toggle_pulse = (uint16_t)(Tim_Pulse / 2);
+  //       if (g_calc_t.step_pos >= g_calc_t.step)
+  //       {
+  //         myfree(SRAMIN, g_calc_t.decel_tab); /* 运动完要释放内存 */
+  //         g_motor_sta = STATE_STOP;
+  //       }
+  //       break;
+  //     case STATE_AVESPEED:
+  //       g_add_pulse_count++;
+  //       Tim_Pulse = T1_FREQ / g_calc_t.vt;
+  //       g_toggle_pulse = (uint16_t)(Tim_Pulse / 2);
+  //       if (g_calc_t.step_pos >= g_calc_t.dec_point)
+  //       {
+  //         g_calc_t.ptr = g_calc_t.decel_tab; /* 将减速段的速度表赋值给ptr */
+  //         g_motor_sta = STATE_DECEL;
+  //       }
+  //       break;
+  //     case STATE_STOP:
+  //       HAL_TIM_OC_Stop_IT(&htim4, TIM_CHANNEL_1); /* 开启对应PWM通道 */
+  //       g_motor_sta = STATE_IDLE;
+  //       break;
+  //     case STATE_IDLE:
+  //       break;
+  //     }
+  //   }
+  //   /*  设置比较值 */
+  //   Tim_Count = __HAL_TIM_GET_COUNTER(&htim4);
+  //   tmp = 0xFFFF & (Tim_Count + g_toggle_pulse);
+  //   __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1, tmp);
+  // }
 
   /**
    * @brief     :基础运动
@@ -481,33 +481,33 @@ void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
    * @brief     :变速控制 + 定位
    * @attention :
    */
-  // static uint8_t i = 0;
-  // i++;
-  // if (i % 2 == 0)
-  // {
-  //   i = 0;
-  //   g_run_flag = 1;
-  //   g_stepper.pulse_count--; /* 每一个完整的脉冲就-- */
-  //   if (g_stepper.dir == CW) /* 正转 */
-  //   {
-  //     g_stepper.add_pulse_count++; /* 绝对位置++ */
-  //   }
-  //   else
-  //   {
-  //     g_stepper.add_pulse_count--; /* 绝对位置-- */
-  //   }
-  //   if (g_stepper.pulse_count <= 0) /* 当脉冲数等于0的时候 代表需要发送的脉冲个数已完成，停止定时器输出 */
-  //   {
-  //     printf("累计旋转的角度:%d\r\n", (int)(g_stepper.add_pulse_count * MAX_STEP_ANGLE)); /* 打印累计转动了多少角度 */
-  //     stepper_stop(STEPPER_MOTOR_1);                                                      /* 停止接口一输出 */
-  //     ST1_EN(EN_OFF);
-  //     g_run_flag = 0;
-  //   }
-  // }
+  static uint8_t i = 0;
+  i++;
+  if (i % 2 == 0)
+  {
+    i = 0;
+    g_run_flag = 1;
+    g_stepper.pulse_count--; /* 每一个完整的脉冲就-- */
+    if (g_stepper.dir == CW) /* 正转 */
+    {
+      g_stepper.add_pulse_count++; /* 绝对位置++ */
+    }
+    else
+    {
+      g_stepper.add_pulse_count--; /* 绝对位置-- */
+    }
+    if (g_stepper.pulse_count <= 0) /* 当脉冲数等于0的时候 代表需要发送的脉冲个数已完成，停止定时器输出 */
+    {
+      printf("累计旋转的角度:%d\r\n", (int)(g_stepper.add_pulse_count * MAX_STEP_ANGLE)); /* 打印累计转动了多少角度 */
+      stepper_stop(STEPPER_MOTOR_1);                                                      /* 停止接口一输出 */
+      ST1_EN(EN_OFF);
+      g_run_flag = 0;
+    }
+  }
 
-  // /*获取当前计数*/
-  // g_count_val = __HAL_TIM_GET_COUNTER(&htim4);
-  // /*设置比较数值*/
-  // if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
-  //   __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1, (g_count_val + g_ccr_val) % 0XFFFF);
+  /*获取当前计数*/
+  g_count_val = __HAL_TIM_GET_COUNTER(&htim4);
+  /*设置比较数值*/
+  if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
+    __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1, (g_count_val + g_ccr_val) % 0XFFFF);
 }

@@ -18,7 +18,7 @@ void BY8301_init(void)
  */
 void BY8301_SendData(uint8_t *str)
 {
-  HAL_UART_Transmit_IT(&huart4, str, 8);
+  HAL_UART_Transmit(&huart4, str, 8, 0XFFFF);
 }
 
 /**
@@ -97,7 +97,7 @@ uint8_t BY8301_Busy(void)
  */
 void voice_init(void)
 {
-  BY8301_setVolume(15); // 设置音量 %50
+  BY8301_setVolume(30); // 设置音量 %100
 }
 
 /**

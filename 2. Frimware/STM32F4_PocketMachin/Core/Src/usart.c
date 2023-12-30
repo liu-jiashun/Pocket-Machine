@@ -73,6 +73,17 @@ int fputc(int ch, FILE *f)
   return ch;
 }
 
+#else
+
+/* 重定义fputc函数，
+ * printf函数最终会通过调用fputc输出字符到串口
+ */
+int fputc(int ch, FILE *f)
+{
+  HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xffff);
+  return ch;
+}
+
 #endif
 
 /* USER CODE END 0 */
@@ -134,6 +145,12 @@ void MX_UART5_Init(void)
   }
   /* USER CODE BEGIN UART5_Init 2 */
 
+  HAL_UART_Receive_IT(&huart5, (uint8_t *)&diwenlcd_recv_byte, 1);                // uart5 receive enable
+  lwrb_init(&diwenlcd_uart_buff, diwenlcd_buff_data, sizeof(diwenlcd_buff_data)); // Initialize buffer
+  while (!lwrb_is_ready(&diwenlcd_uart_buff))                                     // ringbuffer is ready
+  {
+  }
+
   /* USER CODE END UART5_Init 2 */
 
 }
@@ -162,6 +179,12 @@ void MX_USART1_UART_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USART1_Init 2 */
+
+  HAL_UART_Receive_IT(&huart1, (uint8_t *)&vision_recv_byte, 1);            // usart1 receive enable
+  lwrb_init(&vision_uart_buff, vision_buff_data, sizeof(vision_buff_data)); // Initialize buffer
+  while (!lwrb_is_ready(&vision_uart_buff))                                 // ringbuffer is ready
+  {
+  }
 
   /* USER CODE END USART1_Init 2 */
 
@@ -192,7 +215,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
     /* UART4 interrupt Init */
-    HAL_NVIC_SetPriority(UART4_IRQn, 0, 0);
+    HAL_NVIC_SetPriority(UART4_IRQn, 1, 0);
     HAL_NVIC_EnableIRQ(UART4_IRQn);
   /* USER CODE BEGIN UART4_MspInit 1 */
 
@@ -231,12 +254,6 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     HAL_NVIC_EnableIRQ(UART5_IRQn);
   /* USER CODE BEGIN UART5_MspInit 1 */
 
-    HAL_UART_Receive_IT(&huart5, (uint8_t *)&diwenlcd_recv_byte, 1);                // uart5 receive enable
-    lwrb_init(&diwenlcd_uart_buff, diwenlcd_buff_data, sizeof(diwenlcd_buff_data)); // Initialize buffer
-    while (!lwrb_is_ready(&diwenlcd_uart_buff))                                     // ringbuffer is ready
-    {
-    }
-
   /* USER CODE END UART5_MspInit 1 */
   }
   else if(uartHandle->Instance==USART1)
@@ -252,7 +269,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     PA9     ------> USART1_TX
     PA10     ------> USART1_RX
     */
-    GPIO_InitStruct.Pin = VISION_TX_Pin|VISION_RX_Pin;
+    GPIO_InitStruct.Pin = GPIO_PIN_9|GPIO_PIN_10;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
@@ -263,12 +280,6 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     HAL_NVIC_SetPriority(USART1_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(USART1_IRQn);
   /* USER CODE BEGIN USART1_MspInit 1 */
-
-    HAL_UART_Receive_IT(&huart1, (uint8_t *)&vision_recv_byte, 1);            // usart1 receive enable
-   lwrb_init(&vision_uart_buff, vision_buff_data, sizeof(vision_buff_data)); // Initialize buffer
-   while (!lwrb_is_ready(&vision_uart_buff))                                 // ringbuffer is ready
-   {
-   }
 
   /* USER CODE END USART1_MspInit 1 */
   }
@@ -331,7 +342,7 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
     PA9     ------> USART1_TX
     PA10     ------> USART1_RX
     */
-    HAL_GPIO_DeInit(GPIOA, VISION_TX_Pin|VISION_RX_Pin);
+    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_9|GPIO_PIN_10);
 
     /* USART1 interrupt Deinit */
     HAL_NVIC_DisableIRQ(USART1_IRQn);
@@ -352,15 +363,15 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 
   if (huart->Instance == USART1) // vision receive one byte for interrupt
   {
-    // lwrb_write(&diwenlcd_uart_buff, (uint8_t *)&vision_recv_byte, 1);
-
 #ifdef __Debug
     // 调用shell处理数据的接口
     shell_recv_buf = vision_recv_byte;
     shellHandler(&shell, shell_recv_buf);
 #endif
 
-    HAL_UART_Receive_IT(&huart1, (uint8_t *)&vision_recv_byte, 1); // usart1 receive re-enable 
+    lwrb_write(&diwenlcd_uart_buff, (uint8_t *)&vision_recv_byte, 1);
+
+    HAL_UART_Receive_IT(&huart1, (uint8_t *)&vision_recv_byte, 1); // usart1 receive re-enable
   }
 }
 

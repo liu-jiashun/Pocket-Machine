@@ -1,8 +1,8 @@
 # letter shell 3.x
 
-![version](https://img.shields.io/badge/version-3.2.0-brightgreen.svg)
+![version](https://img.shields.io/badge/version-3.1.2-brightgreen.svg)
 ![standard](https://img.shields.io/badge/standard-c99-brightgreen.svg)
-![build](https://img.shields.io/badge/build-2023.04.15-brightgreen.svg)
+![build](https://img.shields.io/badge/build-2021.10.17-brightgreen.svg)
 ![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)
 
 一个功能强大的嵌入式shell
@@ -25,8 +25,6 @@
     - [定义宏说明](#定义宏说明)
     - [命令属性字段说明](#命令属性字段说明)
   - [代理函数和代理参数解析](#代理函数和代理参数解析)
-  - [函数签名](#函数签名)
-    - [自定义类型解析](#自定义类型解析)
   - [权限系统说明](#权限系统说明)
   - [锁说明](#锁说明)
   - [伴生对象](#伴生对象)
@@ -150,8 +148,6 @@
 
     shell_cfg.h文件中包含了所有用于配置shell的宏，在使用前，需要根据需要进行配置
 
-    建议采用 overlay 的方式，新建一个头文件，例如 `shell_cfg_user.h`，然后定义编译宏 `SHELL_CFG_USER="shell_cfg_user.h"`，在这个头文件中添加需要修改的配置即可
-
     | 宏                          | 意义                           |
     | --------------------------- | ------------------------------ |
     | SHELL_TASK_WHILE            | 是否使用默认shell任务while循环 |
@@ -180,7 +176,6 @@
     | SHELL_DEFAULT_USER          | shell默认用户                  |
     | SHELL_DEFAULT_USER_PASSWORD | 默认用户密码                   |
     | SHELL_LOCK_TIMEOUT          | shell自动锁定超时              |
-    | SHELL_USING_FUNC_SIGNATURE  | 使用函数签名                   |
 
 ## 使用方式
 
@@ -193,7 +188,7 @@ letter shell 3.x同时支持两种形式的函数定义方式，形如main函数
 使用此方式，一个函数定义的例子如下：
 
 ```C
-int func(int argc, char *argv[])
+int func(int argc, char *agrv[])
 {
     printf("%dparameter(s)\r\n", argc);
     for (char i = 1; i < argc; i++)
@@ -291,7 +286,7 @@ letter shell采取一个静态数组对定义的多个shell进行管理，shell�
 
 letter shell支持通过函数地址直接执行函数，可以方便执行那些没有导出，但是又临时需要使用的函数，使用命令`exec [addr] [args]`执行，使用此功能需要开启`SHELL_EXEC_UNDEF_FUNC`宏，注意，由于直接操作函数地址执行，如果给进的地址有误，可能引起程序崩溃
 
-函数的地址可以通过编译生成的文件查找，比如说对于keil，可以在`.map`文件中查找到每个函数的地址，但是要注意有些平台可能需要要对地址做进一步处理，比如说对于 arm 平台，如果使用的是 Thumb 指令集，那么需要将地址的最低位置 1，比如说`shellClear`函数地址为`0x08028620`，则通过`exec`执行应为`exec 0x08028621`
+函数的地址可以通过编译生成的文件查找，比如说对于keil，可以在`.map`文件中查找到每个函数的地址，对于keil，`.map`文件中的地址需要偏移一个字节，才可以成功执行，比如说`shellClear`函数地址为`0x08028620`，则通过`exec`执行应为`exec 0x08028621`
 
 其他编译器查找函数地址的方式和地址偏移的处理，请参考各编译器手册
 
@@ -488,85 +483,6 @@ p1, SHELL_PARAM_FLOAT(p2), p3, SHELL_PARAM_FLOAT(p4));
 
 相比常规的命令导出，代理函数命令导出前4个参数和常规形式的命令导出一致，之后的参数即传递至目标函数的参数，letter shell默认实现的代理函数定义支持最多7个参数，p1~p7，对于不需要代理参数解析的参数，只需要对应写入`px(x为1~7)`即可，比如上方示例的`p1`和`p3`，而需要代理参数解析的参数，则需要使用对应的参数解析器，比如上方示例的`p2`和`p4`
 
-## 函数签名
-
-letter shell 3.2.x 之后，引入了函数签名的概念，以便于参数自动解析
-
-之前的版本里，如果声明的命令是 `SHELL_TYPE_CMD_FUNC`，shell 会自动进行参数的转换，但是参数转换后的类型是猜出来的，无法保证转换后的数据类型是正确的，一旦猜错了，就容易导致程序挂掉
-
-由此，借鉴 Java 等语言的函数签名，新版也引入了函数签名的概念，在声明命令时，可以给定最终执行命令的函数的签名，shell 根据这个签名进行参数转换，使用此功能时，需要打开宏 `SHELL_USING_FUNC_SIGNATURE`
-
-函数签名是一个字符串，通过这个字符串声明表达函数的参数类型，返回值不声明，比如一个函数`int func(int a, char *b, char c)`，它的函数签名就是 `isc`
-
-基本类型的参数签名定义如下:
-
-| 类型                 | 签名 |
-| -------------------- | ---- |
-| char(字符)           | c    |
-| int/short/char(数字) | i    |
-| char * (字符串)      | s    |
-| pointer              | p    |
-
-声明命令时，在最后添加一个参数 `.data.cmd.signature = "isc"` 即可，比如：
-
-```c
-void shellFuncSignatureTest(int a, char *b, char c)
-{
-    printf("a = %d, b = %s, c = %c\r\n", a, b, c);
-}
-SHELL_EXPORT_CMD(SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_CMD_FUNC),
-funcSignatureTest, shellFuncSignatureTest, test function signature, .data.cmd.signature = "isc");
-```
-
-### 自定义类型解析
-
-由于函数签名的引用，我们就可以使用函数签名描述任何参数，对应的，在参数类型已知的情况下，也可以定义对应的参数解析器进行参数解析，自定义的参数类型签名需要以 `L` 开头，以 `;` 结尾，比如说定义一个 `TestStruct` 结构体类型为 `LTestStruct;`，那么接收这个结构体为参数的函数就可以通过这个类型签名定义函数签名，并导出命令
-
-```c
-typedef struct {
-    int a;
-    char *b;
-} TestStruct;
-
-void shellParamParserTest(int a, TestStruct *data, char *c)
-{
-    printf("a = %d, data->a = %d, data->b = %s, c = %s\r\n", a, data->a, data->b, c);
-}
-SHELL_EXPORT_CMD_SIGN(SHELL_CMD_PERMISSION(0)|SHELL_CMD_TYPE(SHELL_TYPE_CMD_FUNC),
-paramParserTest, shellParamParserTest, test function signature and param parser, iLTestStruct;s);
-```
-
-同时，我们需要对自定义的类型定义解析器，使用 `SHELL_EXPORT_PARAM_PARSER` 宏
-
-```c
-int testStructParser(char *string, void **param)
-{
-    TestStruct *data = malloc(sizeof(TestStruct));
-    data->b = malloc(16);
-    if (sscanf(string, "%d %s", &(data->a), data->b) == 2)
-    {
-        *param = (void *)data;
-        return 0;
-    }
-    return -1;
-}
-
-int testStructClener(void *param)
-{
-    TestStruct *data = (TestStruct *)param;
-    free(data->b);
-    free(data);
-    return 0;
-}
-SHELL_EXPORT_PARAM_PARSER(0, LTestStruct;, testStructParser, testStructClener);
-```
-
-`SHELL_EXPORT_PARAM_PARSER` 接收四个参数，第一个参数表示属性，这里一般填 0 皆可，第二个参数就是解析器对应的类型签名，第三个参数是解析器函数，第四个参数是清理函数，清理函数在参数解析失败或者命令执行完毕后会被调用，一般用于清理解析器分配的内存，如果不需要清理函数，填 `NULL` 即可
-
-解析器函数接收两个参数，第一个参数是输入的字符串，也就是命令行输入的参数，第二个参数是解析后的参数，解析成功后，需要将解析后的参数赋值给第二个参数，解析成功返回 0，解析失败返回 -1
-
-清理函数接收一个参数，就是解析器函数解析得到的结果
-
 ## 权限系统说明
 
 letter shell 3.x的权限管理同用户定义紧密相关，letter shell 3.x使用8个bit位表示命令权限，当用户和命令的权限按位与为真，或者命令权限为0时，表示该用户拥有此命令的权限，可以调用该命令
@@ -648,6 +564,7 @@ python shellTools.py project
 letter shell 3.x提供了一个x86的demo，可以直接编译运行，其中包含了一条按键键值测试命令，可以测试按键键值，用于快捷键的定义，编译运行方法如下：
 
 ```sh
+mv src/shell_cfg.h src/shell_cfg.h.bak
 cd demo/x86-gcc/
 cmake .
 make

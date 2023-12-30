@@ -55,7 +55,7 @@
 "stm32f4_pocketmachin\vision.o"
 "stm32f4_pocketmachin\app.o"
 "stm32f4_pocketmachin\_debug.o"
---strict --scatter "STM32F4_PocketMachin\STM32F4_PocketMachin.sct"
+--library_type=microlib --strict --scatter "STM32F4_PocketMachin\STM32F4_PocketMachin.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "STM32F4_PocketMachin.map" -o STM32F4_PocketMachin\STM32F4_PocketMachin.axf

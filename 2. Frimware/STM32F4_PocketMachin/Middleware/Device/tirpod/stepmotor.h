@@ -4,34 +4,34 @@
 #include "main.h"
 #include ".\MALLOC\malloc.h"
 
-// /******************************************************************************************/
-// /* 步进电机参数相关宏 */
-// #define PULSE_REV 6400.0      /* 每圈脉冲数（细分数32） */
-// #define MAX_STEP_ANGLE 0.05625 /* 最小步距(1.8/PULSE_REV) */
+/******************************************************************************************/
+/* 步进电机参数相关宏 */
+#define PULSE_REV 6400.0       /* 每圈脉冲数（细分数32） */
+#define MAX_STEP_ANGLE 1.8 / 32 /* 最小步距(1.8/PULSE_REV) */
 
-// typedef struct
-// {
-//   int angle;                     /* 设置需要旋转的角度 */
-//   uint8_t dir;                   /* 方向 */
-//   uint8_t en;                    /* 使能 */
-//   volatile uint32_t pulse_count; /* 脉冲个数记录 */
-//   volatile int add_pulse_count;  /* 脉冲个数累计 */
-// } STEPPER_MOTOR;
+typedef struct
+{
+  int angle;                     /* 设置需要旋转的角度 */
+  uint8_t dir;                   /* 方向 */
+  uint8_t en;                    /* 使能 */
+  volatile uint32_t pulse_count; /* 脉冲个数记录 */
+  volatile int add_pulse_count;  /* 脉冲个数累计 */
+} STEPPER_MOTOR;
 
-// extern STEPPER_MOTOR g_stepper;
+extern STEPPER_MOTOR g_stepper;
 
 /******************************************************************************************/
-#define T1_FREQ                 (84000000/84)                           /* 频率ft值 */
-#define FSPR                    (200)                                   /* 步进电机单圈步数（*/
-#define MICRO_STEP              8    
-#define SPR                     (FSPR * MICRO_STEP)                     /* 单圈所需要的脉冲数 */
+#define T1_FREQ (84000000 / 84) /* 频率ft值 */
+#define FSPR (200)              /* 步进电机单圈步数（*/
+#define MICRO_STEP 4
+#define SPR (FSPR * MICRO_STEP) /* 单圈所需要的脉冲数 */
 
-#define ROUNDPS_2_STEPPS(rpm)   ((rpm) * SPR / 60)                      /* 根据电机转速（r/min），计算电机步速（step/s） */
-#define MIDDLEVELOCITY(vo,vt)   ( ( (vo) + (vt) ) / 2 )                 /* S型加减速加速段的中点速度  */
-#define INCACCEL(vo,v,t)        ( ( 2 * ((v) - (vo)) ) / pow((t),2) )   /* 加加速度:加速度增加量   V - V0 = 1/2 * J * t^2 */
-#define INCACCELSTEP(j,t)       ( ( (j) * pow( (t) , 3 ) ) / 6.0f )     /* 加加速段的位移量(步数)  S = 1/6 * J * t^3 */
-#define ACCEL_TIME(t)           ( (t) / 2 )                             /* 加加速段和减加速段的时间是相等的 */
-#define SPEED_MIN               (T1_FREQ / (65535.0f))                  /* 最低频率/速度 */
+#define ROUNDPS_2_STEPPS(rpm) ((rpm) * SPR / 60)              /* 根据电机转速（r/min），计算电机步速（step/s） */
+#define MIDDLEVELOCITY(vo, vt) (((vo) + (vt)) / 2)            /* S型加减速加速段的中点速度  */
+#define INCACCEL(vo, v, t) ((2 * ((v) - (vo))) / pow((t), 2)) /* 加加速度:加速度增加量   V - V0 = 1/2 * J * t^2 */
+#define INCACCELSTEP(j, t) (((j) * pow((t), 3)) / 6.0f)       /* 加加速段的位移量(步数)  S = 1/6 * J * t^3 */
+#define ACCEL_TIME(t) ((t) / 2)                               /* 加加速段和减加速段的时间是相等的 */
+#define SPEED_MIN (T1_FREQ / (65535.0f))                      /* 最低频率/速度 */
 
 #ifndef TRUE
 #define TRUE 1
@@ -63,6 +63,7 @@ typedef enum
   STATE_IDLE = 4,     /* 电机空闲状态 */
 } motor_state_typedef;
 
+#if 0
 enum DIR
 {
   CCW = 0, /*逆时针*/
@@ -74,6 +75,19 @@ enum EN
   EN_OFF = 0, /* 失能脱机引脚 */
   EN_ON       /* 使能脱机引脚 使能后电机停止旋转 */
 };
+#else
+enum DIR
+{
+  CW = 0, /*顺时针*/
+  CCW     /*逆时针*/
+};
+
+enum EN
+{
+  EN_ON = 0, /* 使能脱机引脚 使能后电机停止旋转 */
+  EN_OFF,    /* 失能脱机引脚 */
+};
+#endif
 
 /******************************************************************************************/
 /* 步进电机接口序号 */
@@ -84,13 +98,13 @@ enum EN
 /* 步进电机引脚定义*/
 /*----------------------- 方向引脚控制 -----------------------------------*/
 /* 硬件对电平做了取反操作，所以当 x = 1 有效，x = 0时无效*/
-#define ST1_DIR(x) HAL_GPIO_WritePin(STEPPER1_DIR_GPIO_Port, STEPPER1_DIR_Pin, x == 0 ? GPIO_PIN_SET : GPIO_PIN_RESET)
-#define ST2_DIR(x) HAL_GPIO_WritePin(STEPPER2_DIR_GPIO_Port, STEPPER2_DIR_Pin, x == 0 ? GPIO_PIN_SET : GPIO_PIN_RESET);
+#define ST1_DIR(x) HAL_GPIO_WritePin(STEPPER1_DIR_GPIO_Port, STEPPER1_DIR_Pin, x ? GPIO_PIN_SET : GPIO_PIN_RESET)
+#define ST2_DIR(x) HAL_GPIO_WritePin(STEPPER2_DIR_GPIO_Port, STEPPER2_DIR_Pin, x ? GPIO_PIN_SET : GPIO_PIN_RESET);
 
 /*----------------------- 脱机引脚控制 -----------------------------------*/
 /* 硬件对电平做了取反操作，所以当 x = 1 有效，x = 0时无效*/
-#define ST1_EN(x) HAL_GPIO_WritePin(STEPPER1_EN_GPIO_Port, STEPPER1_EN_Pin, x == 0 ? GPIO_PIN_SET : GPIO_PIN_RESET)
-#define ST2_EN(x) HAL_GPIO_WritePin(STEPPER2_EN_GPIO_Port, STEPPER2_EN_Pin, x == 0 ? GPIO_PIN_SET : GPIO_PIN_RESET)
+#define ST1_EN(x) HAL_GPIO_WritePin(STEPPER1_EN_GPIO_Port, STEPPER1_EN_Pin, x ? GPIO_PIN_SET : GPIO_PIN_RESET)
+#define ST2_EN(x) HAL_GPIO_WritePin(STEPPER2_EN_GPIO_Port, STEPPER2_EN_Pin, x ? GPIO_PIN_SET : GPIO_PIN_RESET)
 
 /******************************************************************************************/
 /* 外部接口函数*/

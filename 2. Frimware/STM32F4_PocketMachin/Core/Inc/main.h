@@ -117,10 +117,6 @@ void Error_Handler(void);
 #define TOUCH_KEY_C_GPIO_Port GPIOG
 #define TOUCH_KEY_D_Pin GPIO_PIN_8
 #define TOUCH_KEY_D_GPIO_Port GPIOG
-#define VISION_TX_Pin GPIO_PIN_9
-#define VISION_TX_GPIO_Port GPIOA
-#define VISION_RX_Pin GPIO_PIN_10
-#define VISION_RX_GPIO_Port GPIOA
 #define STEPPER1_DIR_Pin GPIO_PIN_15
 #define STEPPER1_DIR_GPIO_Port GPIOA
 #define VOICE_TX_Pin GPIO_PIN_10

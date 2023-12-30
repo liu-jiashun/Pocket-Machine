@@ -3,7 +3,7 @@
 
 #include "main.h"
 
-typedef enum // 璇煶妯″潡涓闊虫枃浠剁殑鏋氫妇
+typedef enum // 语音模块中语音文件的枚举
 {
   DETECTED_R_SQUARE = 1,
   DETECTED_G_SQUARE,
@@ -40,7 +40,7 @@ typedef enum // 璇煶妯″潡涓闊虫枃浠剁殑鏋氫妇
   DEVICE_CHECKING,
 } Voice_Enum;
 
-/* 鐢ㄦ埛鍑芥暟 */
+/* 用户函数 */
 void voice_init(void);
 void voice_say(uint8_t voice);
 

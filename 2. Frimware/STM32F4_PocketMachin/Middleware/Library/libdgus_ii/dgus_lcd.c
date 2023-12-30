@@ -12,7 +12,10 @@
 // #include <time.h>
 #include "dgus.h"
 
-static uint8_t _ack_mode = ACK_MODE;
+// #define DIWEN_DEBUG // 开迪文屏串口输出数据打印（注释该语句，关闭调试）
+
+// static uint8_t _ack_mode = ACK_MODE;ACK_MODE_OK_DISABLED
+static uint8_t _ack_mode = ACK_MODE_OK_DISABLED;
 
 static int _handle_packet(char *data, uint8_t cmd, uint8_t len);
 
@@ -20,10 +23,10 @@ extern void dgus_delay(int ms);
 
 static void _delay(int ms)
 {
-  // Storing start time
+  // // Storing start time
   // clock_t start_time = clock();
 
-  // looping till required time is not achieved
+  // // looping till required time is not achieved
   // while (clock() < start_time + ((CLOCKS_PER_SEC / 1000) * ms))
   //     ;
   dgus_delay(ms);
@@ -464,7 +467,7 @@ static int _handle_packet(char *data, uint8_t cmd, uint8_t len)
       data[i] = data[2 + i];
     }
   }
-  
+
 #ifdef DIWEN_DEBUG
   DEBUG_PRINTF("CMD 0x%02x : PLEN %d : LEN %d : ADDR 0x%02x : DATA: ", cmd, len, bytelen, addr);
   for (uint8_t i = 0; i < bytelen; i += 2)

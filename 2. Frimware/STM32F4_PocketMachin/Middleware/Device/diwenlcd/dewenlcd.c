@@ -26,9 +26,9 @@ HAL_StatusTypeDef max485_send(const uint8_t *pData, uint16_t Size)
   HAL_StatusTypeDef status;
 
   MAX485_DR(MAX485_SEND); // send enable
-
-  status = HAL_UART_Transmit_IT(&huart5, pData, Size);
-
+  HAL_Delay(5);
+  status = HAL_UART_Transmit(&huart5, pData, Size, 0xFFFF);
+  HAL_Delay(5);
   MAX485_DR(MAX485_RECEIVE); // receive enable
 
   return status;
@@ -54,7 +54,7 @@ HAL_StatusTypeDef max485_receive(uint8_t *pData, uint16_t Size)
  */
 void dgus_delay(uint16_t ms)
 {
-  // HAL_Delay(ms);  // 发送指令，无返回，关闭超时退出
+  HAL_Delay(ms); // 发送指令，无返回，关闭超时退出
 }
 
 /**
@@ -85,7 +85,7 @@ char _serial_recv_byte()
  */
 void _serial_send_data(char *data, size_t len)
 {
-  max485_send((void *)&data, len);
+  max485_send((uint8_t*)data, len);
 }
 /**
  * @brief     :接收处理回调

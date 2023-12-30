@@ -118,10 +118,17 @@ static void touch_combination_btn_event(flex_button_t *btn)
     case FLEX_BTN_PRESS_DOWN:
       break;
     case FLEX_BTN_PRESS_CLICK:
-			printf("TOUCH_BUTTON_UP\n");
+      printf("TOUCH_BUTTON_UP\n");
       break;
     case FLEX_BTN_PRESS_DOUBLE_CLICK:
       printf("TOUCH_BUTTON_UP x2\n");
+      break;
+
+    case FLEX_BTN_PRESS_SHORT_START:
+      printf("FLEX_BTN_PRESS_SHORT_START\n");
+      break;
+    case FLEX_BTN_PRESS_SHORT_UP:
+      printf("FLEX_BTN_PRESS_SHORT_UP\n");
       break;
     }
     break;

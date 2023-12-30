@@ -34,8 +34,8 @@ typedef enum DIWENLCD_MODE
  */
 enum
 {
-  MAX485_RECEIVE = 0,
-  MAX485_SEND,
+  MAX485_SEND = 0,
+  MAX485_RECEIVE,
 };
 
 /**

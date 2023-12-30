@@ -23,9 +23,9 @@ static void shellCmdGroupHelp(Shell *shell, char *name, ShellCommand *group);
  * @param argc 参数数量
  * @param argv 参数
  * 
- * @return int 执行命令返回值
+ * @return unsigned int 执行命令返回值
  */
-int shellCmdGroupRun(ShellCommand *group, int argc, char *argv[])
+unsigned int shellCmdGroupRun(ShellCommand *group, int argc, char *argv[])
 {
     ShellCommand *item = group;
     Shell *shell = shellGetCurrent();
@@ -47,6 +47,7 @@ int shellCmdGroupRun(ShellCommand *group, int argc, char *argv[])
             }
             shell->parser.paramCount--;
             return shellRunCommand(shell, item);
+            break;
         }
         item++;
     }
