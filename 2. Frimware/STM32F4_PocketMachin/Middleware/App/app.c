@@ -44,18 +44,29 @@ void button_task(void)
  */
 void data_receive_task(void)
 {
-	dgus_recv_data(); // 接收迪文屏数据
+	dgus_recv_data();		// 接收迪文屏数据
+	vision_recv_data(); // 接收视觉识别数据
 }
 
+/**
+ * @brief     :迪文屏工作时间显示任务（1S）
+ * @attention :
+ */
+void diwenlcd_datatime_task(void)
+{
+	static uint32_t times = 0;
+	diwenlcd_time_show(times++);
+}
 /**
  * @brief     :系统启动任务
  * @attention :
  */
 void system_start_task(void)
 {
-	stim_loop(200, sys_task, STIM_LOOP_FOREVER);				 // 系统运行指示灯任务（200ms）
-	stim_loop(20, button_task, STIM_LOOP_FOREVER);			 // 按键事件处理任务（20ms）
-	stim_loop(50, data_receive_task, STIM_LOOP_FOREVER); // 数据接收任务（50ms）
+	stim_loop(200, sys_task, STIM_LOOP_FOREVER);								// 系统运行指示灯任务（200ms）
+	stim_loop(20, button_task, STIM_LOOP_FOREVER);							// 按键事件处理任务（20ms）
+	stim_loop(50, data_receive_task, STIM_LOOP_FOREVER);				// 数据接收任务（50ms）
+	stim_loop(1000, diwenlcd_datatime_task, STIM_LOOP_FOREVER); // 迪文屏显示系统工作时长（1S）
 
 	// 开始
 	// voice_say(DEVICE_STARTED); // 设备启动播报
@@ -82,5 +93,5 @@ void stim_start_task(void)
 	vision_init();		/* 视觉识别初始化 */
 
 	// 任务调度系统启动
-	stim_runlater(100, system_start_task); // 系统启动任务全部任务
+	stim_runlater(100, system_start_task); // 系统启动任务，初始化和启动全部任务
 }

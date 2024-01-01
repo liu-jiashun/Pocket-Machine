@@ -40,3 +40,6 @@ stm32f4_pocketmachin\vision.o: D:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include
 stm32f4_pocketmachin\vision.o: ../Middleware/Library/.\MALLOC\malloc.h
 stm32f4_pocketmachin\vision.o: ../Core/Inc/usart.h
 stm32f4_pocketmachin\vision.o: D:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+stm32f4_pocketmachin\vision.o: ../Middleware/App/_Debug.h
+stm32f4_pocketmachin\vision.o: ../Middleware/Library/.\letter-shell\src\shell.h
+stm32f4_pocketmachin\vision.o: ../Middleware/Library/.\letter-shell\src\shell_cfg.h

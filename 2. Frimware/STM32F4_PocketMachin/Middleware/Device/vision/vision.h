@@ -5,49 +5,51 @@
 #include ".\lwrb\lwrb.h"
 #include ".\list\list.h"
 
-extern lwrb_t vision_uart_buff;      // è¿ªæ–‡å±æ¥æ”¶ç¼“å†²åŒºå¥æŸ„
-extern char vision_recv_byte;        // æ¥æ”¶å­—èŠ‚
-extern uint8_t vision_buff_data[64]; // å¼€è¾Ÿä¸€å—å†…å­˜ç”¨äºç¼“å†²åŒº
+extern lwrb_t vision_uart_buff;      // µÏÎÄÆÁ½ÓÊÕ»º³åÇø¾ä±ú
+extern char vision_recv_byte;        // ½ÓÊÕ×Ö½Ú
+extern uint8_t vision_buff_data[64]; // ¿ª±ÙÒ»¿éÄÚ´æÓÃÓÚ»º³åÇø
 
-#define VISION_HEAD 0x5AA5 // å¸§å¤´
-#define VISION_TAIL 0x9FF9 // å¸§å°¾
+extern list_t *vision_coord_list; // ÎïÆ·×ø±ê´æ´¢Á´±í
 
-/* ç‰©å“ä¿¡æ¯è¡¨æœ€å¤§ä¸ªæ•° */
-#define VISION_OBJECT_MAX 32
-
-/**
- * @brief     :ç‰©å“ä½ç½®åæ ‡å€¼
- * @attention :
- */
-typedef struct VISION_COORD
-{
-  uint16_t x_coord; // ç‰©å“ x åæ ‡
-  uint16_t y_coord; // ç‰©å“ y åæ ‡
-} vision_coord;
+#define VISION_HEAD0 0x5A // Ö¡Í·
+#define VISION_HEAD1 0x5A
+#define VISION_TAIL0 0x9F // Ö¡Î²
+#define VISION_TAIL1 0xF9
 
 /**
- * @brief     :ç‰©å“ç‰¹å¾
+ * @brief     :ÎïÆ·ÌØÕ÷
  * @attention :
  */
 typedef struct VISION_ITEM
 {
-  char name[32]; // ç‰©å“åç§°
-  uint8_t color; // ç‰©å“é¢œè‰²
-  uint8_t type;  // ç‰©å“ç±»å‹
+  char name[32]; // ÎïÆ·Ãû³Æ
+  uint8_t color; // ÎïÆ·ÑÕÉ«
+  uint8_t type;  // ÎïÆ·ÀàĞÍ
 } vision_item;
 
 /**
- * @brief     :è§†è§‰è¯†åˆ«å¯¹è±¡æè¿°ä¿¡æ¯
+ * @brief     :ÎïÆ·Î»ÖÃ×ø±êÖµ
+ * @attention :
+ */
+typedef struct VISION_COORD
+{
+  uint16_t x_coord; // ÎïÆ· x ×ø±ê
+  uint16_t y_coord; // ÎïÆ· y ×ø±ê
+} vision_coord;
+
+/**
+ * @brief     :ÊÓ¾õÊ¶±ğ¶ÔÏóÃèÊöĞÅÏ¢
  * @attention :
  */
 typedef struct VISION_OBJECT
 {
-  vision_item *item;   // ç‰©å“ç‰¹å¾
-  vision_coord *coord; // ç‰©å“ä½ç½®åæ ‡å€¼
-  void *desc;          // ç‰©å“å…¶ä»–ç‰¹å¾
+  vision_item *item;   // ÎïÆ·ÌØÕ÷
+  vision_coord *coord; // ÎïÆ·Î»ÖÃ×ø±êÖµ
+  void *desc;          // ÎïÆ·ÆäËûÌØÕ÷
 } vision_obj_typdef;
 
 void vision_init(void);
-void vision_requst(char *name); // è¯·æ±‚è¯†åˆ«çš„ç‰©å“
+void vision_requst(char *name); // ÇëÇóÊ¶±ğµÄÎïÆ·
+int8_t vision_recv_data(void);  // ½ÓÊÕÊ¶±ğµ½µÄÊı¾İ
 
 #endif

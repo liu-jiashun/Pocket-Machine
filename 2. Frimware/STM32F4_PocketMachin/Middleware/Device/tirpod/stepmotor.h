@@ -6,8 +6,8 @@
 
 /******************************************************************************************/
 /* 步进电机参数相关宏 */
-#define PULSE_REV 6400.0       /* 每圈脉冲数（细分数32） */
-#define MAX_STEP_ANGLE 1.8 / 32 /* 最小步距(1.8/PULSE_REV) */
+#define PULSE_REV 6400.0f         /* 每圈脉冲数（细分数32） */
+#define MAX_STEP_ANGLE (0.05625f) /* 最小步距(1.8/PULSE_REV) */
 
 typedef struct
 {
@@ -18,9 +18,12 @@ typedef struct
   volatile int add_pulse_count;  /* 脉冲个数累计 */
 } STEPPER_MOTOR;
 
-extern STEPPER_MOTOR g_stepper;
+extern STEPPER_MOTOR g_stepper1;
+extern STEPPER_MOTOR g_stepper2;
 
+// #define S_CURVE // 是否使用S型加速曲线（解除注释该语句，启用S型加速曲线）
 /******************************************************************************************/
+#ifdef S_CURVE
 #define T1_FREQ (84000000 / 84) /* 频率ft值 */
 #define FSPR (200)              /* 步进电机单圈步数（*/
 #define MICRO_STEP 4
@@ -63,7 +66,9 @@ typedef enum
   STATE_IDLE = 4,     /* 电机空闲状态 */
 } motor_state_typedef;
 
-#if 0
+#endif /* S 型加减速曲线 */
+
+#if 0 // (1 硬件电路进行电平取反操作，0 原始电平控制)
 enum DIR
 {
   CCW = 0, /*逆时针*/

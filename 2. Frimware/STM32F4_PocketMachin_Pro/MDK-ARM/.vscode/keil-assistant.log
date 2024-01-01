@@ -1,0 +1,93 @@
+[info] Log at : 2023/12/22|00:31:26|GMT+0800
+
+[info] Log at : 2023/12/22|00:31:31|GMT+0800
+
+[info] Log at : 2023/12/22|14:01:18|GMT+0800
+
+[info] Log at : 2023/12/22|14:01:24|GMT+0800
+
+[SyntaxError: Unexpected end of JSON input
+	at JSON.parse (<anonymous>)
+	at F.updateCppProperties (c:\Users\admin\.vscode\extensions\cl.keil-assistant-1.7.0\dist\extension.js:1:10911)
+	at F.<anonymous> (c:\Users\admin\.vscode\extensions\cl.keil-assistant-1.7.0\dist\extension.js:1:12641)
+	at Generator.next (<anonymous>)
+	at c:\Users\admin\.vscode\extensions\cl.keil-assistant-1.7.0\dist\extension.js:1:4542
+	at new Promise (<anonymous>)
+	at r (c:\Users\admin\.vscode\extensions\cl.keil-assistant-1.7.0\dist\extension.js:1:4287)
+	at F.load (c:\Users\admin\.vscode\extensions\cl.keil-assistant-1.7.0\dist\extension.js:1:11372)
+	at w.<anonymous> (c:\Users\admin\.vscode\extensions\cl.keil-assistant-1.7.0\dist\extension.js:1:8799)
+	at Generator.next (<anonymous>)
+	at a (c:\Users\admin\.vscode\extensions\cl.keil-assistant-1.7.0\dist\extension.js:1:4344)
+	at process.processTicksAndRejections (node:internal/process/task_queues:95:5)]
+[info] Log at : 2023/12/23|08:59:32|GMT+0800
+
+[info] Log at : 2023/12/23|08:59:36|GMT+0800
+
+[info] Log at : 2023/12/24|01:15:03|GMT+0800
+
+[info] Log at : 2023/12/24|11:35:02|GMT+0800
+
+[info] Log at : 2023/12/24|13:50:22|GMT+0800
+
+[info] Log at : 2023/12/24|13:50:29|GMT+0800
+
+[info] Log at : 2023/12/24|13:51:33|GMT+0800
+
+[info] Log at : 2023/12/24|13:52:04|GMT+0800
+
+[info] Log at : 2023/12/24|13:52:46|GMT+0800
+
+[info] Log at : 2023/12/24|14:03:18|GMT+0800
+
+[info] Log at : 2023/12/24|15:06:03|GMT+0800
+
+[info] Log at : 2023/12/25|19:48:59|GMT+0800
+
+[info] Log at : 2023/12/26|01:36:05|GMT+0800
+
+[info] Log at : 2023/12/26|01:36:13|GMT+0800
+
+[info] Log at : 2023/12/26|09:45:27|GMT+0800
+
+[info] Log at : 2023/12/26|09:45:38|GMT+0800
+
+[info] Log at : 2023/12/26|09:50:40|GMT+0800
+
+[info] Log at : 2023/12/26|09:50:42|GMT+0800
+
+[info] Log at : 2023/12/26|09:54:22|GMT+0800
+
+[info] Log at : 2023/12/26|11:02:09|GMT+0800
+
+[info] Log at : 2023/12/26|20:17:45|GMT+0800
+
+[info] Log at : 2023/12/26|20:18:27|GMT+0800
+
+[info] Log at : 2023/12/27|21:58:29|GMT+0800
+
+[info] Log at : 2023/12/27|21:58:35|GMT+0800
+
+[info] Log at : 2023/12/28|15:18:37|GMT+0800
+
+[info] Log at : 2023/12/28|19:54:15|GMT+0800
+
+[info] Log at : 2023/12/28|19:54:19|GMT+0800
+
+[info] Log at : 2023/12/28|21:06:29|GMT+0800
+
+[info] Log at : 2023/12/28|21:06:33|GMT+0800
+
+[info] Log at : 2023/12/28|21:25:34|GMT+0800
+
+[info] Log at : 2023/12/28|21:52:22|GMT+0800
+
+[info] Log at : 2023/12/29|21:53:58|GMT+0800
+
+[info] Log at : 2023/12/30|13:51:04|GMT+0800
+
+[info] Log at : 2023/12/30|15:48:58|GMT+0800
+
+[info] Log at : 2023/12/31|09:03:31|GMT+0800
+
+[info] Log at : 2023/12/31|09:03:36|GMT+0800
+

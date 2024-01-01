@@ -35,7 +35,7 @@ HAL_StatusTypeDef max485_send(const uint8_t *pData, uint16_t Size)
 }
 
 /**
- * @brief     :MAX485 接收一定量的数据
+ * @brief     :MAX485 接收一定量的数据（从缓冲区读取字节）
  * @param     pData :接收的数据
  * @param     Size :接收字节长度
  * @return    :HAL_StatusTypeDef
@@ -58,7 +58,7 @@ void dgus_delay(uint16_t ms)
 }
 
 /**
- * @brief     :获取可从串行端口读取的字节（字符）数回调
+ * @brief     :获取可从串行端口读取的字节（字符）数回调（获得当前缓冲区的字节数）
  * @return    :uint8_t 可用字节数
  * @attention :
  */
@@ -85,7 +85,7 @@ char _serial_recv_byte()
  */
 void _serial_send_data(char *data, size_t len)
 {
-  max485_send((uint8_t*)data, len);
+  max485_send((uint8_t *)data, len);
 }
 /**
  * @brief     :接收处理回调
