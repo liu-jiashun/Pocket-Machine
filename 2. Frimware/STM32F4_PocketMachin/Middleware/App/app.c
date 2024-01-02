@@ -70,6 +70,7 @@ void system_start_task(void)
 
 	// 开始
 	// voice_say(DEVICE_STARTED); // 设备启动播报
+	vision_requst("红色正方形");
 }
 
 /**
@@ -78,7 +79,7 @@ void system_start_task(void)
  */
 void stim_start_task(void)
 {
-	my_mem_init(SRAMIN); /* 内部SRAM内存池初始化*/
+	my_mem_init(SRAMIN); /* 内部SRAM内存池初始化*/	
 	_Debug_Shell_Init(); /* 调试接口初始化 */
 
 	// 设备驱动初始化
@@ -93,5 +94,5 @@ void stim_start_task(void)
 	vision_init();		/* 视觉识别初始化 */
 
 	// 任务调度系统启动
-	stim_runlater(100, system_start_task); // 系统启动任务，初始化和启动全部任务
+	stim_runlater(200, system_start_task); // 系统启动任务，初始化和启动全部任务
 }

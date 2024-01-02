@@ -12,7 +12,7 @@
 // #include <time.h>
 #include "dgus.h"
 
-// #define DIWEN_DEBUG // 开迪文屏串口输出数据打印（注释该语句，关闭调试）
+// #define DIWEN_DEBUG // 开迪文屏串口输出数据打印（注释该语句，关闭迪文屏调试）
 
 // static uint8_t _ack_mode = ACK_MODE;ACK_MODE_OK_DISABLED
 static uint8_t _ack_mode = ACK_MODE_OK_DISABLED;
@@ -23,12 +23,6 @@ extern void dgus_delay(int ms);
 
 static void _delay(int ms)
 {
-  // // Storing start time
-  // clock_t start_time = clock();
-
-  // // looping till required time is not achieved
-  // while (clock() < start_time + ((CLOCKS_PER_SEC / 1000) * ms))
-  //     ;
   dgus_delay(ms);
 }
 

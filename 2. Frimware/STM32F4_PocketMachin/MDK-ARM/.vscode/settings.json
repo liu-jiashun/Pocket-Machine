@@ -33,6 +33,7 @@
     "_debug.h": "c",
     "time.h": "c",
     "tim.h": "c",
-    "usart.h": "c"
+    "usart.h": "c",
+    "led.h": "c"
   }
 }

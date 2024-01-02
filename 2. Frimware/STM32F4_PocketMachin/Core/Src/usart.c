@@ -351,10 +351,10 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
   {
 #ifdef __Debug // 串口调试 shell 打开
     // 调用shell处理数据的接口
-    shell_recv_buf = vision_recv_byte;
-    shellHandler(&shell, shell_recv_buf);
+    // shell_recv_buf = vision_recv_byte;
+    // shellHandler(&shell, shell_recv_buf);
 #endif
-    lwrb_write(&diwenlcd_uart_buff, (uint8_t *)&vision_recv_byte, 1);
+    lwrb_write(&vision_uart_buff, (uint8_t *)&vision_recv_byte, 1);
     HAL_UART_Receive_IT(&huart1, (uint8_t *)&vision_recv_byte, 1); // usart1 receive re-enable
   }
 }

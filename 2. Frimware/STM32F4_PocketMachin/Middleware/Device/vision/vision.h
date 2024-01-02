@@ -12,7 +12,7 @@ extern uint8_t vision_buff_data[64]; // 开辟一块内存用于缓冲区
 extern list_t *vision_coord_list; // 物品坐标存储链表
 
 #define VISION_HEAD0 0x5A // 帧头
-#define VISION_HEAD1 0x5A
+#define VISION_HEAD1 0xA5
 #define VISION_TAIL0 0x9F // 帧尾
 #define VISION_TAIL1 0xF9
 

@@ -28,6 +28,7 @@ list_t *vision_coord_list;      // 物品坐标存储链表
 uint8_t recvlen = 0;
 uint8_t recvnum = 0;
 uint8_t recv_cnt = 0;
+uint8_t recv_coord = 0;
 uint8_t _recv_state = 0;
 
 /**
@@ -38,7 +39,6 @@ void vision_init(void)
 {
   // 串口1初始化，usart.c 文件中完成
 
-  // vision_requst("黄色正方形");
   vision_coord_list = list_new();                                                                       // 新建一个链表
   list_node_t *v_coord0 = list_rpush(vision_coord_list, list_node_new((vision_obj_typdef *)&v_coords)); // 添加默认对象0（原点坐标）
 }
@@ -51,7 +51,7 @@ void vision_init(void)
  */
 void vision_senddata(uint8_t *data, uint8_t len)
 {
-  HAL_UART_Transmit_IT(&huart1, data, len);
+  HAL_UART_Transmit(&huart1, data, len, 0xFFFF);
 }
 
 /**
@@ -98,6 +98,7 @@ int8_t vision_recv_data(void)
   while (lwrb_get_full(&vision_uart_buff))
   {
     lwrb_read(&vision_uart_buff, &dat, 1); // 读取缓冲区一个字节
+
     switch (_recv_state)
     {
     case 0:
@@ -111,6 +112,7 @@ int8_t vision_recv_data(void)
         recv_cnt = 0;
         return -1;
       }
+      printf("%x ", dat);
       _recv_state = 1;
       break;
     case 1:
@@ -121,72 +123,91 @@ int8_t vision_recv_data(void)
         _recv_state = 0;
         return -1;
       }
+      printf("%x ", dat);
       _recv_state = 2;
       break;
 
     case 2:
       recvlen = dat; // 数据长度
+      printf("%x ", dat);
       _recv_state = 3;
       break;
 
     case 3:
       recvnum = dat; // 图形个数
+      printf("%x ", dat);
       _recv_state = 4;
       break;
 
     case 4:
-      if (dat == VISION_TAIL0) // 检测到帧尾
+      recv_cnt++;
+      if (recv_cnt > recvlen - 1)
+      {
         _recv_state = 5;
+      }
+      else
+      {
+        switch (recv_coord)
+        {
+        case 0:
+          v_coords.x_coord |= dat << 8; // X 坐标高八位
+          recv_coord = 1;
+          break;
+        case 1:
+          v_coords.x_coord |= dat; // X 坐标低八位
+          recv_coord = 2;
+          break;
+        case 2:
+          v_coords.y_coord |= dat << 8; // Y 坐标高八位
+          recv_coord = 3;
+          break;
+        case 3:
+          v_coords.y_coord |= dat; // Y 坐标低八位
+          recv_coord = 0;
+          break;
+        default:
+          break;
+        }
+      }
       break;
+
     case 5:
-      if (dat == VISION_TAIL1) // 接收到最后一个帧尾，完成一帧数据的接收
+      if (dat != VISION_TAIL0) // 检测到帧尾
+      {
+        recv_cnt = 0;
+        return -1;
+      }
+      printf("%x ", dat);
+      _recv_state = 6;
+      break;
+    case 6:
+      if (dat != VISION_TAIL1) // 接收到最后一个帧尾，完成一帧数据的接收
       {
         recv_cnt = 0;
         _recv_state = 0;
-        return 0;
+        return -1;
       }
-      _recv_state = 6;
+      printf("%x ", dat);
+      _recv_state = 7;
       break;
 
-    case 6: // 把接收到的x,y坐标存到链表中
-      recv_cnt++;
-      switch (recv_cnt)
-      {
-      case 0:
-        v_coords.x_coord |= dat << 8; // X 坐标高八位
-        break;
-      case 1:
-        v_coords.x_coord |= dat; // X 坐标低八位
-        break;
-      case 2:
-        v_coords.y_coord |= dat << 8; // Y 轴坐标高八位
-        break;
-      case 3:
-        v_coords.y_coord |= dat; // Y坐标低八位
-        break;
-      case 4:
-        recv_cnt = 0;
-        _recv_state = 7;
-      default:
-        break;
-      }
-      break;
     case 7:
     {
-      list_rpush(vision_coord_list, list_node_new((vision_obj_typdef *)&v_coords)); // 把完整的坐标数据添加到链表中
 #ifdef __Debug
       // 打印识别到的图像坐标
       static uint8_t v_number;
       vision_coord *coords;
       list_node_t *node;
       list_iterator_t *it = list_iterator_new(vision_coord_list, LIST_HEAD);
-      if ((node == list_iterator_next(it)))
+      while ((node == list_iterator_next(it)))
       {
         v_number++;
         coords = node->val;
         printf("检测到图像%d, x轴坐标:%d, Y轴坐标:%d\r\n", v_number, coords->x_coord, coords->y_coord);
       }
 #endif
+      list_rpush(vision_coord_list, list_node_new((vision_obj_typdef *)&v_coords)); // 把完整的坐标数据添加到链表中
+      _recv_state = 0;
       break;
     }
 
