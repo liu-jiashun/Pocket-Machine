@@ -178,7 +178,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x65573978)
 I (../Middleware/Library/.\SmartTimer\smarttimer.h)(0x658A31C2)
-F (../Core/Src/usart.c)(0x6592F577)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\usart.o --depend stm32f4_pocketmachin\usart.d)
+F (../Core/Src/usart.c)(0x6597F055)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\usart.o --depend stm32f4_pocketmachin\usart.d)
 I (../Core/Inc/usart.h)(0x658FC9F0)
 I (../Core/Inc/main.h)(0x658FC9B9)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x65573977)
@@ -213,11 +213,11 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x65573978)
 I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (../Middleware/App/_debug.h)(0x65926E7B)
+I (../Middleware/App/_debug.h)(0x6597F05B)
 I (../Middleware/Library/.\letter-shell\src\shell.h)(0x616BB7DC)
 I (../Middleware/Library/.\letter-shell\src\shell_cfg.h)(0x659015BF)
-I (../Middleware/Library/.\MALLOC\malloc.h)(0x658F08F8)
-I (../Middleware/Device/.\diwenlcd\diwenlcd.h)(0x658FEF37)
+I (../Middleware/Library/.\MALLOC\malloc.h)(0x6596DE9A)
+I (../Middleware/Device/.\diwenlcd\diwenlcd.h)(0x6597A20F)
 I (D:\Program Files\Keil_v5\ARM\ARMCC\include\string.h)(0x6025237E)
 I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x60252376)
 I (../Middleware/Library/.\libdgus_ii\dgus.h)(0x65890B97)
@@ -226,7 +226,7 @@ I (../Middleware/Library/.\libdgus_ii\dgus_util.h)(0x65857F2F)
 I (../Middleware/Library/.\libdgus_ii\dgus_control_text.h)(0x65857948)
 I (../Middleware/Library/.\libdgus_ii\dgus_config.h)(0x65857948)
 I (../Middleware/Library/.\lwrb\lwrb.h)(0x658A2F1E)
-I (../Middleware/Device/.\vision\vision.h)(0x6592F4AA)
+I (../Middleware/Device/.\vision\vision.h)(0x6597EE48)
 I (../Middleware/Library/.\list\list.h)(0x658A8B1D)
 I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60252374)
 F (../Core/Src/stm32f4xx_it.c)(0x658FC9F0)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\stm32f4xx_it.o --depend stm32f4_pocketmachin\stm32f4xx_it.d)
@@ -873,7 +873,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x65573978)
 F (..\Middleware\Library\MALLOC\malloc.c)(0x658F08EA)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\malloc.o --depend stm32f4_pocketmachin\malloc.d)
-I (..\Middleware\Library\MALLOC\malloc.h)(0x658F08F8)
+I (..\Middleware\Library\MALLOC\malloc.h)(0x6596DE9A)
 I (../Core/Inc/main.h)(0x658FC9B9)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x65573977)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x6585248F)
@@ -909,7 +909,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x65573978)
 F (..\Middleware\Library\list\list.c)(0x658A5AD5)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\list.o --depend stm32f4_pocketmachin\list.d)
 I (..\Middleware\Library\list\list.h)(0x658A8B1D)
 I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60252374)
-I (../Middleware/Library/.\MALLOC\malloc.h)(0x658F08F8)
+I (../Middleware/Library/.\MALLOC\malloc.h)(0x6596DE9A)
 I (../Core/Inc/main.h)(0x658FC9B9)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x65573977)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x6585248F)
@@ -945,7 +945,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x65573978)
 F (..\Middleware\Library\list\list_iterator.c)(0x658A5AD5)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\list_iterator.o --depend stm32f4_pocketmachin\list_iterator.d)
 I (..\Middleware\Library\list\list.h)(0x658A8B1D)
 I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60252374)
-I (../Middleware/Library/.\MALLOC\malloc.h)(0x658F08F8)
+I (../Middleware/Library/.\MALLOC\malloc.h)(0x6596DE9A)
 I (../Core/Inc/main.h)(0x658FC9B9)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x65573977)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x6585248F)
@@ -981,7 +981,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x65573978)
 F (..\Middleware\Library\list\list_node.c)(0x658BF21F)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\list_node.o --depend stm32f4_pocketmachin\list_node.d)
 I (..\Middleware\Library\list\list.h)(0x658A8B1D)
 I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60252374)
-I (../Middleware/Library/.\MALLOC\malloc.h)(0x658F08F8)
+I (../Middleware/Library/.\MALLOC\malloc.h)(0x6596DE9A)
 I (../Core/Inc/main.h)(0x658FC9B9)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x65573977)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x6585248F)
@@ -1014,6 +1014,11 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x65573978)
+F (..\Middleware\Library\lwrb\lwrb.c)(0x65894B84)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\lwrb.o --depend stm32f4_pocketmachin\lwrb.d)
+I (..\Middleware\Library\lwrb\lwrb.h)(0x658A2F1E)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stddef.h)(0x6025237E)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdint.h)(0x6025237E)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\string.h)(0x6025237E)
 F (..\Middleware\Library\SmartTimer\smarttimer.c)(0x62FB05DA)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\smarttimer.o --depend stm32f4_pocketmachin\smarttimer.d)
 I (..\Middleware\Library\SmartTimer\smarttimer.h)(0x658A31C2)
 I (../Core/Inc/main.h)(0x658FC9B9)
@@ -1065,7 +1070,6 @@ F (..\Middleware\Library\letter-shell\src\shell_ext.c)(0x616BB7DC)(--c99 -c --cp
 I (..\Middleware\Library\letter-shell\src\shell_cfg.h)(0x659015BF)
 I (..\Middleware\Library\letter-shell\src\shell.h)(0x616BB7DC)
 I (..\Middleware\Library\letter-shell\src\shell_ext.h)(0x616BB7DC)
-F (..\Middleware\Library\letter-shell\src\shell_cfg.h)(0x659015BF)()
 F (..\Middleware\Library\FlexibleButton\flexible_button.c)(0x5E92E09E)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\flexible_button.o --depend stm32f4_pocketmachin\flexible_button.d)
 I (..\Middleware\Library\FlexibleButton\flexible_button.h)(0x5E92E09E)
 I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdint.h)(0x6025237E)
@@ -1094,7 +1098,7 @@ I (..\Middleware\Library\libdgus_ii\dgus_reg.h)(0x65857948)
 I (..\Middleware\Library\libdgus_ii\dgus_util.h)(0x65857F2F)
 I (..\Middleware\Library\libdgus_ii\dgus_control_text.h)(0x65857948)
 I (..\Middleware\Library\libdgus_ii\dgus_config.h)(0x65857948)
-F (..\Middleware\Library\libdgus_ii\dgus_lcd.c)(0x6590007C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\dgus_lcd.o --depend stm32f4_pocketmachin\dgus_lcd.d)
+F (..\Middleware\Library\libdgus_ii\dgus_lcd.c)(0x6595A43F)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\dgus_lcd.o --depend stm32f4_pocketmachin\dgus_lcd.d)
 I (D:\Program Files\Keil_v5\ARM\ARMCC\include\string.h)(0x6025237E)
 I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60252374)
@@ -1117,12 +1121,7 @@ I (..\Middleware\Library\libdgus_ii\dgus_reg.h)(0x65857948)
 I (..\Middleware\Library\libdgus_ii\dgus_util.h)(0x65857F2F)
 I (..\Middleware\Library\libdgus_ii\dgus_control_text.h)(0x65857948)
 I (..\Middleware\Library\libdgus_ii\dgus_config.h)(0x65857948)
-F (..\Middleware\Library\lwrb\lwrb.c)(0x65894B84)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\lwrb.o --depend stm32f4_pocketmachin\lwrb.d)
-I (..\Middleware\Library\lwrb\lwrb.h)(0x658A2F1E)
-I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (D:\Program Files\Keil_v5\ARM\ARMCC\include\string.h)(0x6025237E)
-F (..\Middleware\Device\led\led.c)(0x658D7386)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\led.o --depend stm32f4_pocketmachin\led.d)
+F (..\Middleware\Device\led\led.c)(0x659593DF)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\led.o --depend stm32f4_pocketmachin\led.d)
 I (..\Middleware\Device\led\led.h)(0x6582CB3E)
 I (../Core/Inc/main.h)(0x658FC9B9)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x65573977)
@@ -1156,7 +1155,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x65573978)
-F (..\Middleware\Device\beep\beep.c)(0x658D737E)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\beep.o --depend stm32f4_pocketmachin\beep.d)
+F (..\Middleware\Device\beep\beep.c)(0x659593F1)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\beep.o --depend stm32f4_pocketmachin\beep.d)
 I (..\Middleware\Device\beep\beep.h)(0x6582CB4A)
 I (../Core/Inc/main.h)(0x658FC9B9)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x65573977)
@@ -1190,7 +1189,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x65573978)
-F (..\Middleware\Device\touchkey\touchkey.c)(0x658FDD79)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\touchkey.o --depend stm32f4_pocketmachin\touchkey.d)
+F (..\Middleware\Device\touchkey\touchkey.c)(0x6597A76F)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\touchkey.o --depend stm32f4_pocketmachin\touchkey.d)
 I (..\Middleware\Device\touchkey\touchkey.h)(0x65845D59)
 I (../Core/Inc/main.h)(0x658FC9B9)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x65573977)
@@ -1227,7 +1226,86 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x65573978)
 I (../Middleware/Library/.\FlexibleButton\flexible_button.h)(0x5E92E09E)
 I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (D:\Program Files\Keil_v5\ARM\ARMCC\include\string.h)(0x6025237E)
-F (..\Middleware\Device\matrixkey\matrixkey.c)(0x6590C597)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\matrixkey.o --depend stm32f4_pocketmachin\matrixkey.d)
+F (..\Middleware\Device\tftlcd\fonts.c)(0x658D734D)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\fonts.o --depend stm32f4_pocketmachin\fonts.d)
+I (..\Middleware\Device\tftlcd\fonts.h)(0x6582B858)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdint.h)(0x6025237E)
+F (..\Middleware\Device\tftlcd\st7789.c)(0x658D734A)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\st7789.o --depend stm32f4_pocketmachin\st7789.d)
+I (..\Middleware\Device\tftlcd\st7789.h)(0x65890C37)
+I (..\Middleware\Device\tftlcd\fonts.h)(0x6582B858)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdint.h)(0x6025237E)
+I (../Core/Inc/main.h)(0x658FC9B9)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x65573977)
+I (../Core/Inc/stm32f4xx_hal_conf.h)(0x6585248F)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x65573978)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x65573977)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x65573941)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x65573941)
+I (../Drivers/CMSIS/Include/core_cm4.h)(0x65573947)
+I (../Drivers/CMSIS/Include/cmsis_version.h)(0x65573947)
+I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x65573947)
+I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x65573947)
+I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x65573947)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x65573941)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x65573977)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stddef.h)(0x6025237E)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x65573978)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x65573977)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x65573977)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x65573977)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x65573977)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x65573977)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x65573977)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x65573977)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x65573977)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x65573977)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x65573978)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x65573978)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x65573978)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x65573978)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x65573978)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x65573978)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\string.h)(0x6025237E)
+F (..\Middleware\Device\tftlcd\tftlcd.c)(0x6595941B)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\tftlcd.o --depend stm32f4_pocketmachin\tftlcd.d)
+I (..\Middleware\Device\tftlcd\tftlcd.h)(0x6597A201)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60252374)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\string.h)(0x6025237E)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x60252376)
+I (../Middleware/Library/.\MALLOC\malloc.h)(0x6596DE9A)
+I (../Core/Inc/main.h)(0x658FC9B9)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x65573977)
+I (../Core/Inc/stm32f4xx_hal_conf.h)(0x6585248F)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x65573978)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x65573977)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x65573941)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x65573941)
+I (../Drivers/CMSIS/Include/core_cm4.h)(0x65573947)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdint.h)(0x6025237E)
+I (../Drivers/CMSIS/Include/cmsis_version.h)(0x65573947)
+I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x65573947)
+I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x65573947)
+I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x65573947)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x65573941)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x65573977)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stddef.h)(0x6025237E)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x65573978)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x65573977)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x65573977)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x65573977)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x65573977)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x65573977)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x65573977)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x65573977)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x65573977)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x65573977)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x65573978)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x65573978)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x65573978)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x65573978)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x65573978)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x65573978)
+I (../Middleware/Device/.\tftlcd\st7789.h)(0x65890C37)
+I (../Middleware/Device/.\tftlcd\fonts.h)(0x6582B858)
+F (..\Middleware\Device\matrixkey\matrixkey.c)(0x6597A766)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\matrixkey.o --depend stm32f4_pocketmachin\matrixkey.d)
 I (..\Middleware\Device\matrixkey\matrixkey.h)(0x658D7BC5)
 I (../Core/Inc/main.h)(0x658FC9B9)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x65573977)
@@ -1268,48 +1346,9 @@ I (../Middleware/Device/.\voice\voice.h)(0x658FD823)
 I (../Middleware/Device/.\tirpod\tirpod.h)(0x658DB5BB)
 I (../Middleware/Device/.\tirpod\relay.h)(0x658D7339)
 I (../Middleware/Device/.\tirpod\stepmotor.h)(0x65924B0F)
-I (../Middleware/Library/.\MALLOC\malloc.h)(0x658F08F8)
-F (..\Middleware\Device\tftlcd\fonts.c)(0x658D734D)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\fonts.o --depend stm32f4_pocketmachin\fonts.d)
-I (..\Middleware\Device\tftlcd\fonts.h)(0x6582B858)
-I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-F (..\Middleware\Device\tftlcd\st7789.c)(0x658D734A)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\st7789.o --depend stm32f4_pocketmachin\st7789.d)
-I (..\Middleware\Device\tftlcd\st7789.h)(0x65890C37)
-I (..\Middleware\Device\tftlcd\fonts.h)(0x6582B858)
-I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Core/Inc/main.h)(0x658FC9B9)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x65573977)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x6585248F)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x65573978)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x65573977)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x65573941)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x65573941)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x65573947)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x65573947)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x65573947)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x65573947)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x65573947)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x65573941)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x65573977)
-I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x65573978)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x65573977)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x65573977)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x65573977)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x65573977)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x65573977)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x65573977)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x65573977)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x65573977)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x65573977)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x65573978)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x65573978)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x65573978)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x65573978)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x65573978)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x65573978)
-I (D:\Program Files\Keil_v5\ARM\ARMCC\include\string.h)(0x6025237E)
-F (..\Middleware\Device\diwenlcd\dewenlcd.c)(0x65924F31)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\dewenlcd.o --depend stm32f4_pocketmachin\dewenlcd.d)
-I (..\Middleware\Device\diwenlcd\diwenlcd.h)(0x658FEF37)
+I (../Middleware/Library/.\MALLOC\malloc.h)(0x6596DE9A)
+F (..\Middleware\Device\diwenlcd\dewenlcd.c)(0x6597A94E)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\dewenlcd.o --depend stm32f4_pocketmachin\dewenlcd.d)
+I (..\Middleware\Device\diwenlcd\diwenlcd.h)(0x6597A20F)
 I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (D:\Program Files\Keil_v5\ARM\ARMCC\include\string.h)(0x6025237E)
 I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x60252376)
@@ -1352,8 +1391,8 @@ I (../Middleware/Library/.\libdgus_ii\dgus_util.h)(0x65857F2F)
 I (../Middleware/Library/.\libdgus_ii\dgus_control_text.h)(0x65857948)
 I (../Middleware/Library/.\libdgus_ii\dgus_config.h)(0x65857948)
 I (../Middleware/Library/.\lwrb\lwrb.h)(0x658A2F1E)
-I (../Middleware/Library/.\MALLOC\malloc.h)(0x658F08F8)
-F (..\Middleware\Device\voice\voice.c)(0x658FDA11)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\voice.o --depend stm32f4_pocketmachin\voice.d)
+I (../Middleware/Library/.\MALLOC\malloc.h)(0x6596DE9A)
+F (..\Middleware\Device\voice\voice.c)(0x6595945D)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\voice.o --depend stm32f4_pocketmachin\voice.d)
 I (..\Middleware\Device\voice\voice.h)(0x658FD823)
 I (../Core/Inc/main.h)(0x658FC9B9)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x65573977)
@@ -1388,7 +1427,58 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x65573978)
 I (../Core/Inc/usart.h)(0x658FC9F0)
-F (..\Middleware\Device\tirpod\relay.c)(0x658D7335)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\relay.o --depend stm32f4_pocketmachin\relay.d)
+F (..\Middleware\Device\vision\vision.c)(0x6597F124)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\vision.o --depend stm32f4_pocketmachin\vision.d)
+I (..\Middleware\Device\vision\vision.h)(0x6597EE48)
+I (../Core/Inc/main.h)(0x658FC9B9)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x65573977)
+I (../Core/Inc/stm32f4xx_hal_conf.h)(0x6585248F)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x65573978)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x65573977)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x65573941)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x65573941)
+I (../Drivers/CMSIS/Include/core_cm4.h)(0x65573947)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdint.h)(0x6025237E)
+I (../Drivers/CMSIS/Include/cmsis_version.h)(0x65573947)
+I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x65573947)
+I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x65573947)
+I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x65573947)
+I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x65573941)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x65573977)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stddef.h)(0x6025237E)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x65573978)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x65573977)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x65573977)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x65573977)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x65573977)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x65573977)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x65573977)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x65573977)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x65573977)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x65573977)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x65573978)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x65573978)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x65573978)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x65573978)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x65573978)
+I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x65573978)
+I (../Middleware/Library/.\lwrb\lwrb.h)(0x658A2F1E)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\string.h)(0x6025237E)
+I (../Middleware/Library/.\list\list.h)(0x658A8B1D)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60252374)
+I (../Middleware/Library/.\MALLOC\malloc.h)(0x6596DE9A)
+I (../Core/Inc/usart.h)(0x658FC9F0)
+I (../Middleware/App/_Debug.h)(0x6597F05B)
+I (../Middleware/Library/.\letter-shell\src\shell.h)(0x616BB7DC)
+I (../Middleware/Library/.\letter-shell\src\shell_cfg.h)(0x659015BF)
+I (../Middleware/Device/.\diwenlcd\diwenlcd.h)(0x6597A20F)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60252374)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x60252376)
+I (../Middleware/Library/.\libdgus_ii\dgus.h)(0x65890B97)
+I (../Middleware/Library/.\libdgus_ii\dgus_reg.h)(0x65857948)
+I (../Middleware/Library/.\libdgus_ii\dgus_util.h)(0x65857F2F)
+I (../Middleware/Library/.\libdgus_ii\dgus_control_text.h)(0x65857948)
+I (../Middleware/Library/.\libdgus_ii\dgus_config.h)(0x65857948)
+F (..\Middleware\Device\tirpod\relay.c)(0x6595946A)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\relay.o --depend stm32f4_pocketmachin\relay.d)
 I (..\Middleware\Device\tirpod\relay.h)(0x658D7339)
 I (../Core/Inc/main.h)(0x658FC9B9)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x65573977)
@@ -1422,7 +1512,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x65573978)
-F (..\Middleware\Device\tirpod\stepmotor.c)(0x6590DD49)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\stepmotor.o --depend stm32f4_pocketmachin\stepmotor.d)
+F (..\Middleware\Device\tirpod\stepmotor.c)(0x659594A0)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\stepmotor.o --depend stm32f4_pocketmachin\stepmotor.d)
 I (..\Middleware\Device\tirpod\stepmotor.h)(0x65924B0F)
 I (../Core/Inc/main.h)(0x658FC9B9)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x65573977)
@@ -1456,7 +1546,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x65573978)
-I (../Middleware/Library/.\MALLOC\malloc.h)(0x658F08F8)
+I (../Middleware/Library/.\MALLOC\malloc.h)(0x6596DE9A)
 I (../Core/Inc/tim.h)(0x658D1F48)
 I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (D:\Program Files\Keil_v5\ARM\ARMCC\include\math.h)(0x60252378)
@@ -1496,9 +1586,9 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x65573978)
 I (..\Middleware\Device\tirpod\stepmotor.h)(0x65924B0F)
-I (../Middleware/Library/.\MALLOC\malloc.h)(0x658F08F8)
-F (..\Middleware\Device\vision\vision.c)(0x65930173)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\vision.o --depend stm32f4_pocketmachin\vision.d)
-I (..\Middleware\Device\vision\vision.h)(0x6592F4AA)
+I (../Middleware/Library/.\MALLOC\malloc.h)(0x6596DE9A)
+F (..\Middleware\App\_Debug.c)(0x6590D832)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\_debug.o --depend stm32f4_pocketmachin\_debug.d)
+I (..\Middleware\App\_Debug.h)(0x6597F05B)
 I (../Core/Inc/main.h)(0x658FC9B9)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x65573977)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x6585248F)
@@ -1531,17 +1621,24 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x65573978)
-I (../Middleware/Library/.\lwrb\lwrb.h)(0x658A2F1E)
-I (D:\Program Files\Keil_v5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (../Middleware/Library/.\list\list.h)(0x658A8B1D)
-I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60252374)
-I (../Middleware/Library/.\MALLOC\malloc.h)(0x658F08F8)
-I (../Core/Inc/usart.h)(0x658FC9F0)
-I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (../Middleware/App/_Debug.h)(0x65926E7B)
 I (../Middleware/Library/.\letter-shell\src\shell.h)(0x616BB7DC)
 I (../Middleware/Library/.\letter-shell\src\shell_cfg.h)(0x659015BF)
-F (..\Middleware\App\app.c)(0x6592F601)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\app.o --depend stm32f4_pocketmachin\app.d)
+I (../Middleware/Library/.\MALLOC\malloc.h)(0x6596DE9A)
+I (../Middleware/Device/.\diwenlcd\diwenlcd.h)(0x6597A20F)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60252374)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\string.h)(0x6025237E)
+I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x60252376)
+I (../Core/Inc/usart.h)(0x658FC9F0)
+I (../Middleware/Library/.\libdgus_ii\dgus.h)(0x65890B97)
+I (../Middleware/Library/.\libdgus_ii\dgus_reg.h)(0x65857948)
+I (../Middleware/Library/.\libdgus_ii\dgus_util.h)(0x65857F2F)
+I (../Middleware/Library/.\libdgus_ii\dgus_control_text.h)(0x65857948)
+I (../Middleware/Library/.\libdgus_ii\dgus_config.h)(0x65857948)
+I (../Middleware/Library/.\lwrb\lwrb.h)(0x658A2F1E)
+I (../Middleware/Device/.\tirpod\tirpod.h)(0x658DB5BB)
+I (../Middleware/Device/.\tirpod\relay.h)(0x658D7339)
+I (../Middleware/Device/.\tirpod\stepmotor.h)(0x65924B0F)
+F (..\Middleware\App\app.c)(0x6597F5BB)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\app.o --depend stm32f4_pocketmachin\app.d)
 I (..\Middleware\App\app.h)(0x65890B97)
 I (../Core/Inc/main.h)(0x658FC9B9)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x65573977)
@@ -1575,21 +1672,11 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x65573978)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x65573978)
-I (../Core/Inc/tim.h)(0x658D1F48)
-I (..\Middleware\App\_Debug.h)(0x65926E7B)
+I (..\Middleware\App\_Debug.h)(0x6597F05B)
 I (../Middleware/Library/.\letter-shell\src\shell.h)(0x616BB7DC)
 I (../Middleware/Library/.\letter-shell\src\shell_cfg.h)(0x659015BF)
-I (../Middleware/Library/.\MALLOC\malloc.h)(0x658F08F8)
-I (../Middleware/Library/.\SmartTimer\smarttimer.h)(0x658A31C2)
-I (../Middleware/Device/.\power\power.h)(0x657BAC38)
-I (../Middleware/Device/.\led\led.h)(0x6582CB3E)
-I (../Middleware/Device/.\beep\beep.h)(0x6582CB4A)
-I (../Middleware/Device/.\touchkey\touchkey.h)(0x65845D59)
-I (../Middleware/Library/.\FlexibleButton\flexible_button.h)(0x5E92E09E)
-I (../Middleware/Device/.\matrixkey\matrixkey.h)(0x658D7BC5)
-I (../Middleware/Device/.\tftlcd\st7789.h)(0x65890C37)
-I (../Middleware/Device/.\tftlcd\fonts.h)(0x6582B858)
-I (../Middleware/Device/.\diwenlcd\diwenlcd.h)(0x658FEF37)
+I (../Middleware/Library/.\MALLOC\malloc.h)(0x6596DE9A)
+I (../Middleware/Device/.\diwenlcd\diwenlcd.h)(0x6597A20F)
 I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (D:\Program Files\Keil_v5\ARM\ARMCC\include\string.h)(0x6025237E)
 I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x60252376)
@@ -1600,53 +1687,20 @@ I (../Middleware/Library/.\libdgus_ii\dgus_util.h)(0x65857F2F)
 I (../Middleware/Library/.\libdgus_ii\dgus_control_text.h)(0x65857948)
 I (../Middleware/Library/.\libdgus_ii\dgus_config.h)(0x65857948)
 I (../Middleware/Library/.\lwrb\lwrb.h)(0x658A2F1E)
+I (../Middleware/Library/.\SmartTimer\smarttimer.h)(0x658A31C2)
+I (../Middleware/Device/.\power\power.h)(0x657BAC38)
+I (../Middleware/Device/.\led\led.h)(0x6582CB3E)
+I (../Middleware/Device/.\beep\beep.h)(0x6582CB4A)
+I (../Middleware/Device/.\touchkey\touchkey.h)(0x65845D59)
+I (../Middleware/Library/.\FlexibleButton\flexible_button.h)(0x5E92E09E)
+I (../Middleware/Device/.\matrixkey\matrixkey.h)(0x658D7BC5)
+I (../Middleware/Device/.\tftlcd\tftlcd.h)(0x6597A201)
+I (../Middleware/Device/.\tftlcd\st7789.h)(0x65890C37)
+I (../Middleware/Device/.\tftlcd\fonts.h)(0x6582B858)
 I (../Middleware/Device/.\tirpod\tirpod.h)(0x658DB5BB)
 I (../Middleware/Device/.\tirpod\relay.h)(0x658D7339)
 I (../Middleware/Device/.\tirpod\stepmotor.h)(0x65924B0F)
 I (../Middleware/Device/.\voice\voice.h)(0x658FD823)
-I (../Middleware/Device/.\vision\vision.h)(0x6592F4AA)
+I (../Middleware/Device/.\vision\vision.h)(0x6597EE48)
 I (../Middleware/Library/.\list\list.h)(0x658A8B1D)
 I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x60252374)
-F (..\Middleware\App\_Debug.c)(0x6590D832)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middleware/Library -I ../Middleware/Device -I ../Middleware/App-I.\RTE\_STM32F4_PocketMachin-ID:\Users\admin\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Users\admin\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o stm32f4_pocketmachin\_debug.o --depend stm32f4_pocketmachin\_debug.d)
-I (..\Middleware\App\_Debug.h)(0x65926E7B)
-I (../Core/Inc/main.h)(0x658FC9B9)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x65573977)
-I (../Core/Inc/stm32f4xx_hal_conf.h)(0x6585248F)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x65573978)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h)(0x65573977)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x65573941)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x65573941)
-I (../Drivers/CMSIS/Include/core_cm4.h)(0x65573947)
-I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Drivers/CMSIS/Include/cmsis_version.h)(0x65573947)
-I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x65573947)
-I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x65573947)
-I (../Drivers/CMSIS/Include/mpu_armv7.h)(0x65573947)
-I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h)(0x65573941)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x65573977)
-I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stddef.h)(0x6025237E)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h)(0x65573978)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h)(0x65573977)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h)(0x65573977)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h)(0x65573977)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h)(0x65573977)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h)(0x65573977)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h)(0x65573977)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h)(0x65573977)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h)(0x65573977)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x65573977)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x65573978)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x65573978)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x65573978)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x65573978)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x65573978)
-I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x65573978)
-I (../Middleware/Library/.\letter-shell\src\shell.h)(0x616BB7DC)
-I (../Middleware/Library/.\letter-shell\src\shell_cfg.h)(0x659015BF)
-I (../Middleware/Library/.\MALLOC\malloc.h)(0x658F08F8)
-I (../Core/Inc/usart.h)(0x658FC9F0)
-I (D:\Program Files\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60252374)
-I (D:\Program Files\Keil_v5\ARM\ARMCC\include\string.h)(0x6025237E)
-I (../Middleware/Device/.\tirpod\tirpod.h)(0x658DB5BB)
-I (../Middleware/Device/.\tirpod\relay.h)(0x658D7339)
-I (../Middleware/Device/.\tirpod\stepmotor.h)(0x65924B0F)

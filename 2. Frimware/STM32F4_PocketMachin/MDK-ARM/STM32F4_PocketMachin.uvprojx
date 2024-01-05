@@ -866,6 +866,11 @@
               <FilePath>..\Middleware\Library\list\list_node.c</FilePath>
             </File>
             <File>
+              <FileName>lwrb.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Middleware\Library\lwrb\lwrb.c</FilePath>
+            </File>
+            <File>
               <FileName>smarttimer.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Middleware\Library\SmartTimer\smarttimer.c</FilePath>
@@ -889,11 +894,6 @@
               <FileName>shell_ext.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Middleware\Library\letter-shell\src\shell_ext.c</FilePath>
-            </File>
-            <File>
-              <FileName>shell_cfg.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Middleware\Library\letter-shell\src\shell_cfg.h</FilePath>
             </File>
             <File>
               <FileName>flexible_button.c</FileName>
@@ -920,11 +920,6 @@
               <FileType>1</FileType>
               <FilePath>..\Middleware\Library\libdgus_ii\dgus_util.c</FilePath>
             </File>
-            <File>
-              <FileName>lwrb.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Middleware\Library\lwrb\lwrb.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -946,11 +941,6 @@
               <FilePath>..\Middleware\Device\touchkey\touchkey.c</FilePath>
             </File>
             <File>
-              <FileName>matrixkey.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Middleware\Device\matrixkey\matrixkey.c</FilePath>
-            </File>
-            <File>
               <FileName>fonts.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Middleware\Device\tftlcd\fonts.c</FilePath>
@@ -961,6 +951,16 @@
               <FilePath>..\Middleware\Device\tftlcd\st7789.c</FilePath>
             </File>
             <File>
+              <FileName>tftlcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Middleware\Device\tftlcd\tftlcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>matrixkey.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Middleware\Device\matrixkey\matrixkey.c</FilePath>
+            </File>
+            <File>
               <FileName>dewenlcd.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Middleware\Device\diwenlcd\dewenlcd.c</FilePath>
@@ -969,6 +969,11 @@
               <FileName>voice.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Middleware\Device\voice\voice.c</FilePath>
+            </File>
+            <File>
+              <FileName>vision.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Middleware\Device\vision\vision.c</FilePath>
             </File>
             <File>
               <FileName>relay.c</FileName>
@@ -985,25 +990,20 @@
               <FileType>1</FileType>
               <FilePath>..\Middleware\Device\tirpod\tirpod.c</FilePath>
             </File>
-            <File>
-              <FileName>vision.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Middleware\Device\vision\vision.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Middleware/App</GroupName>
           <Files>
             <File>
-              <FileName>app.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Middleware\App\app.c</FilePath>
-            </File>
-            <File>
               <FileName>_Debug.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Middleware\App\_Debug.c</FilePath>
+            </File>
+            <File>
+              <FileName>app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Middleware\App\app.c</FilePath>
             </File>
           </Files>
         </Group>

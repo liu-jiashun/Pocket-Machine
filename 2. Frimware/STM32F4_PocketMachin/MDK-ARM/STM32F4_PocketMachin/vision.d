@@ -39,7 +39,14 @@ stm32f4_pocketmachin\vision.o: ../Middleware/Library/.\list\list.h
 stm32f4_pocketmachin\vision.o: D:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 stm32f4_pocketmachin\vision.o: ../Middleware/Library/.\MALLOC\malloc.h
 stm32f4_pocketmachin\vision.o: ../Core/Inc/usart.h
-stm32f4_pocketmachin\vision.o: D:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 stm32f4_pocketmachin\vision.o: ../Middleware/App/_Debug.h
 stm32f4_pocketmachin\vision.o: ../Middleware/Library/.\letter-shell\src\shell.h
 stm32f4_pocketmachin\vision.o: ../Middleware/Library/.\letter-shell\src\shell_cfg.h
+stm32f4_pocketmachin\vision.o: ../Middleware/Device/.\diwenlcd\diwenlcd.h
+stm32f4_pocketmachin\vision.o: D:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+stm32f4_pocketmachin\vision.o: D:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+stm32f4_pocketmachin\vision.o: ../Middleware/Library/.\libdgus_ii\dgus.h
+stm32f4_pocketmachin\vision.o: ../Middleware/Library/.\libdgus_ii\dgus_reg.h
+stm32f4_pocketmachin\vision.o: ../Middleware/Library/.\libdgus_ii\dgus_util.h
+stm32f4_pocketmachin\vision.o: ../Middleware/Library/.\libdgus_ii\dgus_control_text.h
+stm32f4_pocketmachin\vision.o: ../Middleware/Library/.\libdgus_ii\dgus_config.h

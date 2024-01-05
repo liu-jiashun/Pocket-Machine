@@ -34,7 +34,7 @@
 __asm(".global __use_no_semihosting\n\t"); /* 声明不使用半主机模式 */
 __asm(".global __ARM_use_no_argv \n\t");   /* AC6下需要声明main函数为无参数格式，否则部分例程可能出现半主机模式 */
 #else                                      /* 使用AC5 */
-// #pragma import(__use_no_semihosting)       /* 定义不使用半主机模式 */
+#pragma import(__use_no_semihosting)       /* 定义不使用半主机模式 */
 struct __FILE /* 定义__FILE结构体  */
 {
   int handle;
@@ -69,7 +69,9 @@ FILE __stdout;
  */
 int fputc(int ch, FILE *f)
 {
+#ifdef VISION_DEBUG // (由于串口模组占用的串口1，调试模式下启用 printf 打印)
   HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xffff);
+#endif
   return ch;
 }
 
@@ -351,8 +353,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
   {
 #ifdef __Debug // 串口调试 shell 打开
     // 调用shell处理数据的接口
-    // shell_recv_buf = vision_recv_byte;
-    // shellHandler(&shell, shell_recv_buf);
+    shell_recv_buf = vision_recv_byte;
+    shellHandler(&shell, shell_recv_buf);
 #endif
     lwrb_write(&vision_uart_buff, (uint8_t *)&vision_recv_byte, 1);
     HAL_UART_Receive_IT(&huart1, (uint8_t *)&vision_recv_byte, 1); // usart1 receive re-enable

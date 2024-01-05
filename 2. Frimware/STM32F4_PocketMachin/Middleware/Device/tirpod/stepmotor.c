@@ -19,7 +19,8 @@ uint8_t g_run_flag2 = 0;   /* 标志位 */
  */
 void stepper_init(void)
 {
-  // 引脚初始化，gpio.c 文件中已完成
+  /* 引脚初始化，gpio.c 文件中已完成 */
+  /* 定时器初始化，tim.c 文件中已完成 */
 
   /* 启动电机定时器 */
   HAL_TIM_Base_Start(&htim1);

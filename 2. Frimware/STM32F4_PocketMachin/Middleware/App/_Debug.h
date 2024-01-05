@@ -4,8 +4,9 @@
 #include "main.h"
 #include ".\letter-shell\src\shell.h"
 #include ".\MALLOC\malloc.h"
+#include ".\diwenlcd\diwenlcd.h"
 
-#define __Debug // 调试模式是否开启（注释该行，关闭调试接口）
+// #define __Debug // 调试模式是否开启（注释该行，关闭调试接口）
 
 extern Shell shell;
 

@@ -10,8 +10,8 @@ uint8_t diwenlcd_buff_data[64]; // 开辟一块内存用于缓冲区
  */
 void max485_init(void)
 {
-  // 引脚初始化，gpio.c 文件中已完成
-  // 串口5初始化，usart.c 文件中完成
+  /* 引脚初始化，gpio.c 文件中已完成 */
+  /* 串口5初始化，usart.c 文件中完成 */
 }
 
 /**
@@ -66,6 +66,7 @@ uint8_t _serial_bytes_available()
 {
   return lwrb_get_full(&diwenlcd_uart_buff);
 }
+
 /**
  * @brief     :串口接收回调
  * @return    :char 接收字节
@@ -77,6 +78,7 @@ char _serial_recv_byte()
   max485_receive((uint8_t *)&c, 1);
   return c;
 }
+
 /**
  * @brief     :串口发送回调
  * @param     data :发送字节
@@ -87,6 +89,7 @@ void _serial_send_data(char *data, size_t len)
 {
   max485_send((uint8_t *)data, len);
 }
+
 /**
  * @brief     :接收处理回调
  * @param     data :接收数据
@@ -176,8 +179,8 @@ void diwenlcd_write(char *str, int len)
 }
 /**
  * @brief     :迪文屏打印函数
- * @param     fmt :Variable
- * @param     ... :Variable
+ * @param     fmt :格式化字符
+ * @param     ... :参数
  * @return    :int
  * @attention :
  */

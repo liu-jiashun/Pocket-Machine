@@ -176,7 +176,7 @@ int dgus_recv_data()
   static int recv_cnt = 0;
   static uint8_t _recv_state = 0;
 
-  if (!_ser_avail_handler /* || ! _ser_recv_handler */)
+  if (!_ser_avail_handler || !_ser_recv_handler)
     return -1;
 
   while (_ser_avail_handler())
@@ -436,7 +436,9 @@ static int _handle_packet(char *data, uint8_t cmd, uint8_t len)
 
   if (len == 0x02 && (cmd == DGUS_CMD_VAR_W || cmd == DGUS_CMD_REG_W) && (data[0] == 'O') && (data[1] == 'K'))
   { // response for writing byte
+#ifdef DIWEN_DEBUG
     DEBUG_PRINTF("OK\n");
+#endif
     return PACKET_OK;
   }
   else if (cmd == DGUS_CMD_VAR_R)

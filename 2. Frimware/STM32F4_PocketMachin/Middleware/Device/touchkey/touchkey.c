@@ -10,7 +10,7 @@ static flex_button_t touch_button[TOUCH_BUTTON_MAX];
  */
 void touchkey_init(void)
 {
-  // 引脚初始化，gpio.c 文件中已完成
+  /* 引脚初始化，gpio.c 文件中已完成 */
 
   int i;
 
@@ -74,15 +74,19 @@ static uint8_t touch_btn_read(void *arg)
   return value;
 }
 
-// 按键事件回调函数
+/**
+ * @brief     :按键事件回调函数
+ * @param     arg :Variable
+ * @attention :
+ */
 static void touch_btn_evt_cb(void *arg)
 {
   flex_button_t *btn = (flex_button_t *)arg;
 
-  // 非组合按键事件处理
+  /* 非组合按键事件处理 */
   touch_combination_btn_event(btn);
 
-  // // 组合按键事件处理
+  // /* 组合按键事件处理 */
   // if ((flex_button_event_read(&touch_button[TOUCH_BUTTON_UP]) == FLEX_BTN_PRESS_CLICK) &&
   //     (flex_button_event_read(&touch_button[TOUCH_BUTTON_DOWN]) == FLEX_BTN_PRESS_CLICK))
   // {
@@ -118,17 +122,17 @@ static void touch_combination_btn_event(flex_button_t *btn)
     case FLEX_BTN_PRESS_DOWN:
       break;
     case FLEX_BTN_PRESS_CLICK:
-      printf("TOUCH_BUTTON_UP\n");
+      // printf("TOUCH_BUTTON_UP\n");
       break;
     case FLEX_BTN_PRESS_DOUBLE_CLICK:
-      printf("TOUCH_BUTTON_UP x2\n");
+      // printf("TOUCH_BUTTON_UP x2\n");
       break;
 
     case FLEX_BTN_PRESS_SHORT_START:
-      printf("FLEX_BTN_PRESS_SHORT_START\n");
+      // printf("FLEX_BTN_PRESS_SHORT_START\n");
       break;
     case FLEX_BTN_PRESS_SHORT_UP:
-      printf("FLEX_BTN_PRESS_SHORT_UP\n");
+      // printf("FLEX_BTN_PRESS_SHORT_UP\n");
       break;
     }
     break;

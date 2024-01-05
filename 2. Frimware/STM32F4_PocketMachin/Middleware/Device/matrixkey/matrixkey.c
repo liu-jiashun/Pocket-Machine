@@ -11,7 +11,7 @@ static flex_button_t matrix_button[MATRIX_BUTTON_MAX];
  */
 void matrixkey_init(void)
 {
-  // 引脚初始化，gpio.c 文件中已完成
+  /* 引脚初始化，gpio.c 文件中已完成 */
 
   int i;
 
@@ -183,15 +183,19 @@ static uint8_t matrix_btn_read(void *arg)
   return value;
 }
 
-// 按键事件回调函数
+/**
+ * @brief     :按键事件回调函数
+ * @param     arg :Variable
+ * @attention :
+ */
 static void matrix_btn_evt_cb(void *arg)
 {
   flex_button_t *btn = (flex_button_t *)arg;
 
-  // 非组合按键事件处理
+  /* 非组合按键事件处理 */
   matrix_combination_btn_event(btn);
 
-  // // 组合按键事件处理
+  // /* 组合按键事件处理 */
   // if ((flex_button_event_read(&touch_button[TOUCH_BUTTON_UP]) == FLEX_BTN_PRESS_CLICK) &&
   //     (flex_button_event_read(&touch_button[TOUCH_BUTTON_DOWN]) == FLEX_BTN_PRESS_CLICK))
   // {
@@ -242,8 +246,6 @@ static void matrix_combination_btn_event(flex_button_t *btn)
     case FLEX_BTN_PRESS_DOWN:
       break;
     case FLEX_BTN_PRESS_CLICK:
-      printf("MATRIX_KEY_UP\n");
-
       // g_step_angle = g_step_angle + 1;
       // if (g_step_angle >= 50)
       //   g_step_angle = 1;
@@ -252,8 +254,6 @@ static void matrix_combination_btn_event(flex_button_t *btn)
 
       break;
     case FLEX_BTN_PRESS_DOUBLE_CLICK:
-      printf("MATRIX_KEY_UP x2\n");
-
       /* 开启电机S型加减速 */
       // if (g_motor_sta == STATE_IDLE)
       // {
@@ -265,10 +265,8 @@ static void matrix_combination_btn_event(flex_button_t *btn)
       break;
 
     case FLEX_BTN_PRESS_LONG_START:
-      printf("FLEX_BTN_PRESS_LONG_START\n");
       break;
     case FLEX_BTN_PRESS_LONG_UP:
-      printf("FLEX_BTN_PRESS_LONG_UP\n");
       break;
     }
     break;
@@ -282,7 +280,6 @@ static void matrix_combination_btn_event(flex_button_t *btn)
     case FLEX_BTN_PRESS_DOWN:
       break;
     case FLEX_BTN_PRESS_CLICK:
-      printf("MATRIX_KEY_7\r\n");
 
       // g_step_angle = g_step_angle - 1;
       // if (g_step_angle <= 1)
@@ -292,7 +289,6 @@ static void matrix_combination_btn_event(flex_button_t *btn)
 
       break;
     case FLEX_BTN_PRESS_DOUBLE_CLICK:
-      printf("MATRIX_KEY_7 x2\r\n");
 
       stepper_stop(STEPPER_MOTOR_1);
       ST1_EN(EN_OFF);
@@ -311,10 +307,8 @@ static void matrix_combination_btn_event(flex_button_t *btn)
     case FLEX_BTN_PRESS_DOWN:
       break;
     case FLEX_BTN_PRESS_CLICK:
-      printf("MATRIX_KEY_8\r\n");
       break;
     case FLEX_BTN_PRESS_DOUBLE_CLICK:
-      printf("MATRIX_KEY_8 x2\r\n");
       break;
     }
     break;
@@ -328,7 +322,6 @@ static void matrix_combination_btn_event(flex_button_t *btn)
     case FLEX_BTN_PRESS_DOWN:
       break;
     case FLEX_BTN_PRESS_CLICK:
-      printf("MATRIX_KEY_9\r\n");
 
       // g_ccr_val -= 20;
       // if (g_ccr_val <= 20)
@@ -338,7 +331,6 @@ static void matrix_combination_btn_event(flex_button_t *btn)
 
       break;
     case FLEX_BTN_PRESS_DOUBLE_CLICK:
-      printf("MATRIX_KEY_9 x2\r\n");
 
       // g_ccr_val += 20;
       // if (g_ccr_val >= 1000)
@@ -359,7 +351,6 @@ static void matrix_combination_btn_event(flex_button_t *btn)
     case FLEX_BTN_PRESS_DOWN:
       break;
     case FLEX_BTN_PRESS_CLICK:
-      printf("MATRIX_KEY_DOWN\r\n");
 
       // if (g_run_flag == 0)
       // {
@@ -379,7 +370,6 @@ static void matrix_combination_btn_event(flex_button_t *btn)
 
       break;
     case FLEX_BTN_PRESS_DOUBLE_CLICK:
-      printf("MATRIX_KEY_DOWN x2\r\n");
 
       // if (g_run_flag == 0)
       // {
@@ -410,7 +400,6 @@ static void matrix_combination_btn_event(flex_button_t *btn)
     case FLEX_BTN_PRESS_DOWN:
       break;
     case FLEX_BTN_PRESS_CLICK:
-      printf("MATRIX_KEY_4\r\n");
 
       // if (g_run_flag == 0)
       // {
@@ -422,7 +411,6 @@ static void matrix_combination_btn_event(flex_button_t *btn)
 
       break;
     case FLEX_BTN_PRESS_DOUBLE_CLICK:
-      printf("MATRIX_KEY_4 x2\r\n");
 
       break;
     }

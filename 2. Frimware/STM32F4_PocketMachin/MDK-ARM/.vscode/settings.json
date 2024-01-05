@@ -34,6 +34,10 @@
     "time.h": "c",
     "tim.h": "c",
     "usart.h": "c",
-    "led.h": "c"
+    "led.h": "c",
+    "stdio.h": "c",
+    "power.h": "c",
+    "tftlcd.h": "c",
+    "cstdio": "c"
   }
 }

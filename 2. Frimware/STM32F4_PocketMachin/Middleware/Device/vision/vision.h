@@ -5,19 +5,22 @@
 #include ".\lwrb\lwrb.h"
 #include ".\list\list.h"
 
-extern lwrb_t vision_uart_buff;      // 迪文屏接收缓冲区句柄
-extern char vision_recv_byte;        // 接收字节
-extern uint8_t vision_buff_data[64]; // 开辟一块内存用于缓冲区
+extern lwrb_t vision_uart_buff;       // 视觉识别接收缓冲区句柄
+extern char vision_recv_byte;         // 接收字节
+extern uint8_t vision_buff_data[128]; // 接收缓冲区
+extern list_t *vision_coord_list;     // 物品坐标存储链表
 
-extern list_t *vision_coord_list; // 物品坐标存储链表
+#define VSISION_MAX_COORDS 16 // 当前视图下最大图像坐标个数
 
 #define VISION_HEAD0 0x5A // 帧头
 #define VISION_HEAD1 0xA5
 #define VISION_TAIL0 0x9F // 帧尾
 #define VISION_TAIL1 0xF9
 
+#define VISION_DEBUG // 视觉识别调试模式标志
+
 /**
- * @brief     :物品特征
+ * @brief     :物品特征描述
  * @attention :
  */
 typedef struct VISION_ITEM
@@ -48,8 +51,9 @@ typedef struct VISION_OBJECT
   void *desc;          // 物品其他特征
 } vision_obj_typdef;
 
-void vision_init(void);
-void vision_requst(char *name); // 请求识别的物品
-int8_t vision_recv_data(void);  // 接收识别到的数据
+void vision_init(void);                         // 视觉识别初始化
+void vision_requst(char *name);                 // 请求识别的物品
+int8_t vision_recv_data(void);                  // 接收识别到的数据
+int8_t vision_get_coords(vision_coord *coords); // 获取当视图下的物品坐标
 
 #endif

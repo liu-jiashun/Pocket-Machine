@@ -6,7 +6,7 @@
  */
 void beep_init(void)
 {
-  // 引脚初始化，gpio.c 文件中已完成
+  /*引脚初始化，gpio.c 文件中已完成 */
 }
 
 /**

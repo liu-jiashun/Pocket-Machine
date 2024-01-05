@@ -33,20 +33,10 @@ stm32f4_pocketmachin\app.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_sp
 stm32f4_pocketmachin\app.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 stm32f4_pocketmachin\app.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 stm32f4_pocketmachin\app.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
-stm32f4_pocketmachin\app.o: ../Core/Inc/tim.h
 stm32f4_pocketmachin\app.o: ..\Middleware\App\_Debug.h
 stm32f4_pocketmachin\app.o: ../Middleware/Library/.\letter-shell\src\shell.h
 stm32f4_pocketmachin\app.o: ../Middleware/Library/.\letter-shell\src\shell_cfg.h
 stm32f4_pocketmachin\app.o: ../Middleware/Library/.\MALLOC\malloc.h
-stm32f4_pocketmachin\app.o: ../Middleware/Library/.\SmartTimer\smarttimer.h
-stm32f4_pocketmachin\app.o: ../Middleware/Device/.\power\power.h
-stm32f4_pocketmachin\app.o: ../Middleware/Device/.\led\led.h
-stm32f4_pocketmachin\app.o: ../Middleware/Device/.\beep\beep.h
-stm32f4_pocketmachin\app.o: ../Middleware/Device/.\touchkey\touchkey.h
-stm32f4_pocketmachin\app.o: ../Middleware/Library/.\FlexibleButton\flexible_button.h
-stm32f4_pocketmachin\app.o: ../Middleware/Device/.\matrixkey\matrixkey.h
-stm32f4_pocketmachin\app.o: ../Middleware/Device/.\tftlcd\st7789.h
-stm32f4_pocketmachin\app.o: ../Middleware/Device/.\tftlcd\fonts.h
 stm32f4_pocketmachin\app.o: ../Middleware/Device/.\diwenlcd\diwenlcd.h
 stm32f4_pocketmachin\app.o: D:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 stm32f4_pocketmachin\app.o: D:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
@@ -58,6 +48,16 @@ stm32f4_pocketmachin\app.o: ../Middleware/Library/.\libdgus_ii\dgus_util.h
 stm32f4_pocketmachin\app.o: ../Middleware/Library/.\libdgus_ii\dgus_control_text.h
 stm32f4_pocketmachin\app.o: ../Middleware/Library/.\libdgus_ii\dgus_config.h
 stm32f4_pocketmachin\app.o: ../Middleware/Library/.\lwrb\lwrb.h
+stm32f4_pocketmachin\app.o: ../Middleware/Library/.\SmartTimer\smarttimer.h
+stm32f4_pocketmachin\app.o: ../Middleware/Device/.\power\power.h
+stm32f4_pocketmachin\app.o: ../Middleware/Device/.\led\led.h
+stm32f4_pocketmachin\app.o: ../Middleware/Device/.\beep\beep.h
+stm32f4_pocketmachin\app.o: ../Middleware/Device/.\touchkey\touchkey.h
+stm32f4_pocketmachin\app.o: ../Middleware/Library/.\FlexibleButton\flexible_button.h
+stm32f4_pocketmachin\app.o: ../Middleware/Device/.\matrixkey\matrixkey.h
+stm32f4_pocketmachin\app.o: ../Middleware/Device/.\tftlcd\tftlcd.h
+stm32f4_pocketmachin\app.o: ../Middleware/Device/.\tftlcd\st7789.h
+stm32f4_pocketmachin\app.o: ../Middleware/Device/.\tftlcd\fonts.h
 stm32f4_pocketmachin\app.o: ../Middleware/Device/.\tirpod\tirpod.h
 stm32f4_pocketmachin\app.o: ../Middleware/Device/.\tirpod\relay.h
 stm32f4_pocketmachin\app.o: ../Middleware/Device/.\tirpod\stepmotor.h
