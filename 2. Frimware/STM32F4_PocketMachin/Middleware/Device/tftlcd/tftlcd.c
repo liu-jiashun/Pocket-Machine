@@ -13,13 +13,39 @@ void tftlcd_init(void)
 }
 
 /**
- * @brief     :向迪文屏写入字符串
+ * @brief     :向TFTLCD写入字符串
  * @param     str :字符串
  * @param     len :长度
+ * @return    :int
  * @attention :
  */
-void tftlcd_write(char *str, int len)
+int tftlcd_write(char *str, int len)
 {
+  /* 坐标 */
+  static uint16_t x = 0, y = 0;
+
+  /* 循环打印 */
+  for (int i = 0; i < len; i++)
+  {
+    if (str[i] == '\n')
+    {
+      x = 0;
+      return str[i];
+    }
+    if (x > ST7789_WIDTH - 7)
+    {
+      x = 0;
+      y += 10;
+    }
+    if (y > ST7789_HEIGHT - 10)
+    {
+      return str[i];
+    }
+    ST7789_WriteChar(x, y, str[i], Font_7x10, WHITE, BLACK);
+    x += 7;
+  }
+
+  return 0;
 }
 /**
  * @brief     :TFTLCD打印函数
